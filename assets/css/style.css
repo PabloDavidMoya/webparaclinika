@@ -190,14 +190,32 @@ section[id]{ scroll-margin-top:96px; }
   transition:color .4s var(--expoOut);
 }
 .dock__item > a:hover, .dock__item.is-active > a{ color:var(--light); }
-.dock__item span{
-  font-family:var(--font-mono); font-size:9.5px;
+.dock__item i{
+  font-family:var(--font-mono); font-size:9.5px; font-style:normal;
   color:var(--sand); transform:translateY(-4px);
 }
 
+/* — selector de idioma — */
+.lang{
+  display:flex; align-items:center; gap:5px;
+  margin-left:6px; padding-left:12px;
+  border-left:1px solid var(--light-10);
+}
+.lang__btn{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.08em;
+  color:var(--light-40); padding:4px 2px;
+  transition:color .4s var(--expoOut);
+}
+.lang__btn:hover{ color:var(--light-60); }
+.lang__btn.is-on{ color:var(--sand); }
+.lang__sep{ font-family:var(--font-mono); font-size:10px; color:var(--light-20); }
+
 @media (max-width:720px){
-  .dock__item > a{ padding:9px 10px; font-size:12px; }
-  .dock__item span{ display:none; }
+  .dock__item > a{ padding:9px 8px; font-size:12px; }
+  .dock__item i{ display:none; }
+  .dock__brand{ display:none; }
+  .lang{ margin-left:2px; padding-left:8px; }
+  .lang__btn{ font-size:10px; }
 }
 
 /* ============================================================

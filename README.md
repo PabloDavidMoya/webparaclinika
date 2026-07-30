@@ -3,6 +3,8 @@
 Sitio estático de una sola página para **Policlínica NutriSlim** (Asunción, Paraguay).
 Sin dependencias, sin build, sin framework: se abre `index.html` y funciona.
 
+**Inglés por defecto**, con selector a español en la barra de navegación.
+
 ---
 
 ## Ver el sitio
@@ -31,12 +33,60 @@ Queda en `https://<usuario>.github.io/nutrislim-web/`.
 ## Estructura
 
 ```
-index.html
+index.html          ← contenido en INGLÉS, como texto real
 assets/
   css/style.css     ← sistema de diseño completo, comentado por secciones
-  js/app.js         ← telón, cursor, dock, slider, tabla, acordeón
+  js/i18n.js        ← diccionario español (sólo lo que cambia)
+  js/app.js         ← idioma, telón, cursor, dock, slider, tabla, acordeón
   img/              ← acá van las fotos reales
 ```
+
+---
+
+## Idiomas
+
+El **inglés vive dentro del HTML como texto real**, no en el JavaScript.
+Eso importa por dos razones: si el JS falla o tarda, la página igual se ve
+completa; y Google indexa el inglés directamente del HTML, sin depender de
+que ejecute scripts.
+
+`assets/js/i18n.js` contiene **sólo el español** — lo que cambia cuando el
+visitante toca `ES`. Cada elemento traducible lleva una clave:
+
+```html
+<p data-i18n="hero.eyebrow">Reset-Your-Metabolism®</p>
+```
+
+También se traducen atributos:
+
+| Atributo | Para qué |
+|---|---|
+| `data-i18n` | el contenido del elemento (acepta HTML, ej. `<em>`) |
+| `data-i18n-label` | la etiqueta de los espacios de foto |
+| `data-i18n-cursor` | el texto que aparece dentro del cursor |
+
+El idioma elegido se guarda en `localStorage` y queda en la URL (`?lang=es`),
+así se puede compartir un enlace directo a la versión en español.
+
+**Para agregar portugués**: duplicar el bloque `es` de `i18n.js` como `pt`,
+traducir los valores, y sumar el botón en el dock:
+
+```html
+<span class="lang__sep">/</span>
+<button class="lang__btn" data-lang="pt" lang="pt">PT</button>
+```
+
+**Detección automática del navegador**: está desactivada a propósito, para que
+la primera impresión sea siempre en inglés. Para activarla, poner `AUTO = true`
+en `app.js` (sección 2).
+
+### Cuando el sitio crezca
+
+Este esquema es el correcto para una página. Cuando haya varias páginas y se
+empiece a pelear posicionamiento en Google en inglés y en español, conviene
+pasar a **URLs separadas** (`/en/` y `/es/`) generadas desde este mismo
+diccionario. Los `hreflang` del `<head>` ya están puestos y sólo habría que
+apuntarlos a las nuevas rutas.
 
 ---
 

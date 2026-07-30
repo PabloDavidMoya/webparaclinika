@@ -43,7 +43,7 @@
           });
 
           node.replaceChild(frag, child);
-        } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+        } else if (child.nodeType === 1 && child.tagName !== 'BR' && !child.classList.contains('word')) {
           walk(child);
         }
       });
@@ -52,10 +52,105 @@
     walk(el);
   }
 
-  $$('.split').forEach(split);
+  /* ==========================================================
+     2 · IDIOMA
+     El inglés está en el HTML como texto real; el diccionario
+     sólo trae lo que cambia. Sin JS, la página queda en inglés
+     y funcional. La elección se guarda y se refleja en la URL.
+     ========================================================== */
+
+  var DICT      = window.NS_I18N || {};
+  var LANGS     = ['en'].concat(Object.keys(DICT));
+  var AUTO      = false;   /* ponerlo en true para detectar el idioma del navegador */
+  var originals = [];
+
+  /* Se guarda el HTML original (inglés) antes de tocar nada */
+  $$('[data-i18n], [data-i18n-label], [data-i18n-cursor]').forEach(function (el) {
+    originals.push({
+      el:    el,
+      html:  el.hasAttribute('data-i18n') ? el.innerHTML : null,
+      label: el.getAttribute('data-label'),
+      curs:  el.getAttribute('data-cursor')
+    });
+  });
+
+  function readLang() {
+    var q = new URLSearchParams(location.search).get('lang');
+    if (q && LANGS.indexOf(q) > -1) return q;
+
+    var saved = null;
+    try { saved = localStorage.getItem('ns-lang'); } catch (e) {}
+    if (saved && LANGS.indexOf(saved) > -1) return saved;
+
+    if (AUTO) {
+      var nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
+      if (LANGS.indexOf(nav) > -1) return nav;
+    }
+    return 'en';
+  }
+
+  function applyLang(lang, push) {
+    var d = DICT[lang] || null;
+
+    originals.forEach(function (o) {
+      var el = o.el;
+
+      if (o.html !== null) {
+        var k = el.getAttribute('data-i18n');
+        var v = (d && d[k] !== undefined) ? d[k] : o.html;
+        if (el.innerHTML !== v) el.innerHTML = v;
+        if (el.classList.contains('split')) split(el);
+      }
+
+      if (o.label !== null) {
+        var kl = el.getAttribute('data-i18n-label');
+        el.setAttribute('data-label', (d && d[kl] !== undefined) ? d[kl] : o.label);
+      }
+
+      if (o.curs !== null) {
+        var kc = el.getAttribute('data-i18n-cursor');
+        if (kc) el.setAttribute('data-cursor', (d && d[kc] !== undefined) ? d[kc] : o.curs);
+      }
+    });
+
+    document.documentElement.lang = lang;
+
+    if (d && d['meta.title']) document.title = d['meta.title'];
+    else if (lang === 'en')   document.title = 'NutriSlim — Functional medicine, metabolism and longevity';
+
+    var meta = $('#metaDesc');
+    if (meta && d && d['meta.desc']) meta.setAttribute('content', d['meta.desc']);
+
+    $$('.lang__btn').forEach(function (b) {
+      b.classList.toggle('is-on', b.dataset.lang === lang);
+      b.setAttribute('aria-pressed', b.dataset.lang === lang);
+    });
+
+    try { localStorage.setItem('ns-lang', lang); } catch (e) {}
+
+    if (push) {
+      var url = new URL(location.href);
+      if (lang === 'en') url.searchParams.delete('lang');
+      else url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+    }
+
+    document.dispatchEvent(new CustomEvent('ns:lang', { detail: { lang: lang } }));
+  }
+
+  applyLang(readLang(), false);
+
+  $$('.lang__btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { applyLang(btn.dataset.lang, true); });
+  });
+
+  /* Los titulares que no llevan traducción también se parten */
+  $$('.split').forEach(function (el) {
+    if (!el.querySelector('.word')) split(el);
+  });
 
   /* ==========================================================
-     2 · REVELADOS al entrar en pantalla
+     3 · REVELADOS al entrar en pantalla
      ========================================================== */
 
   var targets = $$('.reveal, .split');
@@ -78,7 +173,7 @@
   }
 
   /* ==========================================================
-     3 · TELÓN DE APERTURA
+     4 · TELÓN DE APERTURA
      Nunca espera a los assets: dura lo que dura y se corre.
      En la segunda visita de la sesión, no aparece.
      ========================================================== */
@@ -88,14 +183,10 @@
 
   function openDock() { if (dock) dock.classList.add('is-in'); }
 
-  function skipLoader() {
+  if (!loader || REDUCED || sessionStorage.getItem('ns-seen')) {
     document.documentElement.classList.remove('is-loading');
     if (loader) loader.classList.add('is-gone');
     openDock();
-  }
-
-  if (!loader || REDUCED || sessionStorage.getItem('ns-seen')) {
-    skipLoader();
   } else {
     document.documentElement.classList.add('is-loading');
 
@@ -120,7 +211,7 @@
   }
 
   /* ==========================================================
-     4 · CURSOR
+     5 · CURSOR
      El punto es crema; la capa madre invierte con difference.
      ========================================================== */
 
@@ -158,7 +249,7 @@
   }
 
   /* ==========================================================
-     5 · DOCK — la máscara que se desliza
+     6 · DOCK — la máscara que se desliza
      ========================================================== */
 
   var menu = $('#dockMenu');
@@ -167,17 +258,17 @@
   if (menu && mask) {
     var items = $$('.dock__item', menu);
 
-    function moveMask(li) {
+    var moveMask = function (li) {
       if (!li) { mask.style.opacity = '0'; return; }
       var a = li.querySelector('a') || li;
       mask.style.opacity   = '1';
       mask.style.width     = a.offsetWidth + 'px';
-      mask.style.transform = 'translateX(' + (a.offsetLeft) + 'px)';
-    }
+      mask.style.transform = 'translateX(' + a.offsetLeft + 'px)';
+    };
 
-    function activeItem() {
+    var activeItem = function () {
       return items.find(function (li) { return li.classList.contains('is-active'); });
-    }
+    };
 
     items.forEach(function (li) {
       li.addEventListener('mouseenter', function () { moveMask(li); });
@@ -203,13 +294,18 @@
       });
     }
 
+    /* el ancho de los ítems cambia con el idioma */
+    document.addEventListener('ns:lang', function () {
+      setTimeout(function () { moveMask(activeItem()); }, 60);
+    });
+
     window.addEventListener('load',   function () { moveMask(activeItem()); });
     window.addEventListener('resize', function () { moveMask(activeItem()); });
     setTimeout(function () { moveMask(activeItem()); }, 300);
   }
 
   /* ==========================================================
-     6 · SLIDER DE CASOS
+     7 · SLIDER DE CASOS
      ========================================================== */
 
   var track = $('#casesTrack');
@@ -222,11 +318,11 @@
 
     if (elTot) elTot.textContent = pad(slides.length, 4);
 
-    function go(n) {
+    var go = function (n) {
       idx = (n + slides.length) % slides.length;
       track.style.transform = 'translateX(' + (-idx * 100) + '%)';
       if (elIdx) elIdx.textContent = pad(idx + 1, 4);
-    }
+    };
 
     var next = $('#caseNext');
     var prev = $('#casePrev');
@@ -252,7 +348,7 @@
   }
 
   /* ==========================================================
-     7 · TABLA DE ÁREAS — la foto que sigue al mouse
+     8 · TABLA DE ÁREAS — la foto que sigue al mouse
      ========================================================== */
 
   var preview = $('#tablePreview');
@@ -290,13 +386,13 @@
     (function follow() {
       px += (tx - px) * 0.12;
       py += (ty - py) * 0.12;
-      if (live) preview.style.top = py + 'px', preview.style.left = px + 'px';
+      if (live) { preview.style.top = py + 'px'; preview.style.left = px + 'px'; }
       requestAnimationFrame(follow);
     })();
   }
 
   /* ==========================================================
-     8 · MÉTODO — acordeón de las 6 R
+     9 · MÉTODO — acordeón de las 6 R
      ========================================================== */
 
   var steps = $$('#steps .step');
@@ -312,7 +408,7 @@
   });
 
   /* ==========================================================
-     9 · AÑO
+     10 · AÑO
      ========================================================== */
 
   var year = $('#year');
