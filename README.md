@@ -207,6 +207,26 @@ Si alguna foto ya viene graduada y no hay que tocarla, se le agrega la clase
 
 ---
 
+## La apertura
+
+1. Sube el telón oscuro (1 s).
+2. La foto queda **sola en pantalla completa**, con el velo apenas insinuado.
+3. A los ~2,6 s el velo termina de bajar y el título entra palabra por palabra.
+
+El tiempo que la foto se sostiene sola se cambia en `app.js`, sección 4:
+
+```js
+var HERO_HOLD = REDUCED ? 0 : (seen ? 1100 : 2600);
+```
+
+En la segunda visita de la sesión se acorta a 1,1 s — el efecto ya lo vieron y
+esperar de nuevo molesta. Con `prefers-reduced-motion` el texto aparece de una.
+
+El encuadre del hero está en `--pos:72% 26%`: corre a la persona hacia la
+derecha para dejar la izquierda libre para el texto. El velo (`.hero__scrim`)
+son dos degradados cruzados —uno lateral, uno inferior— que garantizan que el
+texto se lea sea cual sea la foto que se ponga.
+
 ## Sistema de diseño
 
 **Color** — cuatro, nada más:

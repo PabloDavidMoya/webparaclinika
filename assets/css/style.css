@@ -375,6 +375,8 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 .btn--solid:hover{ background:var(--olive); border-color:var(--olive); }
 .btn--light{ border-color:var(--light-20); color:var(--light); }
 .btn--light:hover{ background:var(--light); color:var(--dark); border-color:var(--light); }
+.btn--fill{ background:var(--light); color:var(--dark); border-color:var(--light); }
+.btn--fill:hover{ background:var(--lime); border-color:var(--lime); color:var(--overlay); }
 
 .round{
   width:48px; height:48px; border-radius:50%;
@@ -433,31 +435,95 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
    6 · HERO
    ============================================================ */
 
-.hero{ padding-top:clamp(140px,17vh,210px); }
+.hero{
+  position:relative; overflow:hidden;
+  min-height:100vh; min-height:100svh;
+  display:flex; align-items:flex-end;
+  padding-bottom:clamp(44px, 7vh, 92px);
+  color:var(--light);
+}
+
+.hero__bg{
+  position:absolute; inset:0;
+  border-radius:0; z-index:0;
+  transform:scale(1.06);
+  animation:heroDrift 14s var(--expoOut) forwards;
+}
+/* acá el degradado lo pone .hero__scrim; el tratamiento de color queda */
+.hero__bg.has-img::before{ background:none; }
+/* un movimiento apenas perceptible: la foto respira mientras se sostiene sola */
+@keyframes heroDrift{ to{ transform:scale(1); } }
+
+/* Dos degradados cruzados: uno lateral que da fondo al texto y deja la foto
+   respirar a la derecha, otro inferior que ancla el bloque. El texto se lee
+   siempre, sin importar qué foto se ponga. */
+.hero__scrim{
+  position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(to right,
+      rgba(18,26,17,.90) 0%,
+      rgba(18,26,17,.74) 30%,
+      rgba(18,26,17,.34) 58%,
+      rgba(18,26,17,.06) 82%,
+      rgba(18,26,17,.02) 100%),
+    linear-gradient(to top,
+      rgba(18,26,17,.60) 0%,
+      rgba(18,26,17,.10) 42%,
+      rgba(18,26,17,.00) 62%,
+      rgba(18,26,17,.30) 100%);
+}
+
+/* El velo arranca suave —para que la foto se luzca sola— y termina de bajar
+   justo cuando entra el texto. */
+.hero__scrim{ opacity:.42; transition:opacity 1.6s var(--expoOut); }
+.hero.is-ready .hero__scrim{ opacity:1; }
+
+/* .shell centra el contenedor de 1440; el texto se limita adentro,
+   pegado al margen izquierdo. */
+.hero__content{ position:relative; z-index:2; }
+.hero__content > *{ max-width:min(66%, 880px); }
 
 .hero__title{
   font-family:var(--font-display);
-  font-size:clamp(36px, 5.9vw, 88px);
-  font-weight:300; line-height:1.02;
-  letter-spacing:-.025em;
-  max-width:19ch; margin:0 0 clamp(38px,5vw,58px);
+  font-size:clamp(31px, 4.3vw, 63px);
+  font-weight:300; line-height:1.06;
+  letter-spacing:-.022em;
+  max-width:19ch; margin:0 0 clamp(28px,3.4vw,42px);
+  text-shadow:0 1px 40px rgba(18,26,17,.45);
 }
+
+@media (max-width:900px){
+  .hero__content > *{ max-width:100%; }
+  .hero__scrim{
+    background:linear-gradient(to top,
+      rgba(18,26,17,.92) 0%, rgba(18,26,17,.72) 34%,
+      rgba(18,26,17,.34) 62%, rgba(18,26,17,.30) 100%);
+  }
+}
+.hero__title em{ color:var(--lime); }
 
 .hero__actions{ display:flex; flex-wrap:wrap; gap:12px; }
 
 .hero__meta{
   display:flex; flex-wrap:wrap; gap:8px 34px;
-  margin:clamp(54px,7vw,90px) 0 clamp(28px,4vw,44px);
-  padding-top:20px; border-top:1px solid var(--dark-10);
+  margin:clamp(34px,4.5vw,58px) 0 0;
+  padding-top:18px; border-top:1px solid var(--light-20);
   font-family:var(--font-mono); font-size:10.5px;
-  letter-spacing:.18em; color:var(--dark-40);
+  letter-spacing:.18em; color:var(--light-40);
 }
 
-.hero__media{
-  height:clamp(300px, 68vh, 720px);
-  margin-inline:var(--gut);
-  border-radius:6px;
+.hero__cue{
+  position:absolute; z-index:2;
+  right:var(--gut); bottom:clamp(44px,7vh,92px);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  font-family:var(--font-mono); font-size:9.5px;
+  letter-spacing:.22em; color:var(--light-40);
 }
+.hero__cue i{
+  width:1px; height:46px;
+  background:linear-gradient(to bottom, var(--light-40), transparent);
+}
+@media (max-width:900px){ .hero__cue{ display:none; } }
 
 /* ============================================================
    7 · CASOS

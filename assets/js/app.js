@@ -211,8 +211,12 @@
     if (el.dataset.delay) el.style.setProperty('--d', el.dataset.delay);
   });
 
+  /* Los del hero no los maneja el observador: esperan al temporizador */
+  var held = $$('[data-hold="hero"]');
+  targets = targets.filter(function (el) { return el.dataset.hold !== 'hero'; });
+
   if (REDUCED || !('IntersectionObserver' in window)) {
-    targets.forEach(function (el) { el.classList.add('is-in'); });
+    targets.concat(held).forEach(function (el) { el.classList.add('is-in'); });
   } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -233,13 +237,25 @@
 
   var loader = $('#loader');
   var dock   = $('#dock');
+  var seen   = sessionStorage.getItem('ns-seen');
+
+  /* Cuánto se sostiene sola la foto del hero antes de que entre el texto.
+     En la segunda visita de la sesión se acorta: el efecto ya lo vieron. */
+  var HERO_HOLD = REDUCED ? 0 : (seen ? 1100 : 2600);
 
   function openDock() { if (dock) dock.classList.add('is-in'); }
 
-  if (!loader || REDUCED || sessionStorage.getItem('ns-seen')) {
+  function revealHero() {
+    var hero = $('.hero');
+    if (hero) hero.classList.add('is-ready');
+    held.forEach(function (el) { el.classList.add('is-in'); });
+  }
+
+  if (!loader || REDUCED || seen) {
     document.documentElement.classList.remove('is-loading');
     if (loader) loader.classList.add('is-gone');
     openDock();
+    setTimeout(revealHero, HERO_HOLD);
   } else {
     document.documentElement.classList.add('is-loading');
 
@@ -260,6 +276,8 @@
       openDock();
       sessionStorage.setItem('ns-seen', '1');
       setTimeout(function () { loader.classList.add('is-gone'); }, 1100);
+      /* el telón tarda 1 s en subir; recién ahí empieza a contar la foto */
+      setTimeout(revealHero, 1000 + HERO_HOLD);
     }, DUR + 180);
   }
 
