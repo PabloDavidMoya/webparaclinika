@@ -3,7 +3,8 @@
 Sitio estático de una sola página para **Policlínica NutriSlim** (Asunción, Paraguay).
 Sin dependencias, sin build, sin framework: se abre `index.html` y funciona.
 
-**Inglés por defecto**, con selector a español en la barra de navegación.
+**Inglés por defecto**, con selector de idioma —y banderita— en la barra de navegación.
+Siete idiomas: inglés, español, portugués, italiano, alemán, ruso y coreano.
 
 ---
 
@@ -65,20 +66,67 @@ También se traducen atributos:
 | `data-i18n-label` | la etiqueta de los espacios de foto |
 | `data-i18n-cursor` | el texto que aparece dentro del cursor |
 
-El idioma elegido se guarda en `localStorage` y queda en la URL (`?lang=es`),
-así se puede compartir un enlace directo a la versión en español.
+El idioma elegido se guarda en `localStorage` y queda en la URL (`?lang=de`),
+así se puede compartir un enlace directo a cualquier versión.
 
-**Para agregar portugués**: duplicar el bloque `es` de `i18n.js` como `pt`,
-traducir los valores, y sumar el botón en el dock:
+### Las banderas
 
-```html
-<span class="lang__sep">/</span>
-<button class="lang__btn" data-lang="pt" lang="pt">PT</button>
-```
+Están dibujadas a mano en SVG dentro del propio `index.html`, como un sprite de
+`<symbol>` al principio del `<body>`. No son emojis (que cambian según el
+sistema operativo y en Windows salen en blanco y negro) ni imágenes externas:
+se ven idénticas en todos lados y no cuestan una sola petición al servidor.
+
+Para usar una: `<svg class="flag"><use href="#fl-de"></use></svg>`
+
+> La bandera del inglés es la del Reino Unido. Si preferís la de Estados Unidos
+> por el mercado al que apuntamos, se cambia sólo el `<symbol id="fl-en">`.
+
+### Tipografías por sistema de escritura
+
+Fraunces y Space Mono **sólo tienen alfabeto latino**. Si no se hiciera nada, el
+ruso y el coreano caerían en la fuente por defecto del sistema y el sitio
+perdería justamente lo que lo hace ver caro. Por eso:
+
+| Idioma | Titulares | Cuerpo | Monoespaciada |
+|---|---|---|---|
+| en · es · pt · it · de | Fraunces | Inter | Space Mono |
+| ru | Playfair Display | Inter | JetBrains Mono |
+| ko | Noto Serif KR | Noto Sans KR | Noto Sans KR |
+
+Se cargan **sólo cuando el visitante elige ese idioma** (`loadFont()` en
+`app.js`), así nadie paga el peso de una tipografía que no va a usar.
+Los ajustes finos de interletrado y cuerpo están en `style.css`, sección 3-BIS:
+el hangul ocupa más alto y no tolera el tracking ancho; el cirílico en
+versalitas necesita algo menos de espaciado.
+
+### Agregar otro idioma
+
+1. Duplicar un bloque en `i18n.js` y traducir los valores.
+2. Sumarlo a `NS_LANGS` con su código, etiqueta y sigla.
+3. Dibujar la bandera como `<symbol id="fl-xx">` en `index.html`.
+4. Agregar la opción en `#langMenu` y el `<link rel="alternate" hreflang="xx">`.
+
+Si el idioma usa otro sistema de escritura (árabe, chino, japonés, hebreo),
+además hay que sumar sus tipografías a `NS_FONTS` y marcarlo con `font:` en
+`NS_LANGS`. **Árabe y hebreo se escriben de derecha a izquierda** y eso no está
+resuelto: harían falta ajustes de dirección en todo el layout.
 
 **Detección automática del navegador**: está desactivada a propósito, para que
 la primera impresión sea siempre en inglés. Para activarla, poner `AUTO = true`
 en `app.js` (sección 2).
+
+### ⚠ Las traducciones necesitan revisión nativa
+
+Están escritas con criterio, pero es copy médico y hay que hacerlo bien:
+
+- **Alemán**: Alemania tiene la ley de publicidad sanitaria más estricta de
+  Europa (Heilmittelwerbegesetz). La diferencia entre *begleiten* (acompañar) y
+  *behandeln* (tratar) no es de estilo, es legal.
+- **Ruso y coreano**: revisar con un hablante nativo antes de publicar. Una
+  preposición mal puesta en un texto de salud destruye la credibilidad que el
+  diseño construyó.
+- En los seis idiomas se respetó el criterio de **evaluar y acompañar, nunca
+  curar ni garantizar**. Si alguien retoca una traducción, tiene que mantenerlo.
 
 ### Cuando el sitio crezca
 

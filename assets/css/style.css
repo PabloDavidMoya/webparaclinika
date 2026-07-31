@@ -196,27 +196,109 @@ section[id]{ scroll-margin-top:96px; }
 }
 
 /* — selector de idioma — */
+.flag-sprite{ position:absolute; width:0; height:0; overflow:hidden; }
+
+.flag{
+  width:18px; height:12px; flex:none;
+  border-radius:2px; overflow:hidden;
+  box-shadow:0 0 0 1px rgba(0,0,0,.18) inset;
+}
+
 .lang{
-  display:flex; align-items:center; gap:5px;
-  margin-left:6px; padding-left:12px;
+  position:relative;
+  margin-left:6px; padding-left:10px;
   border-left:1px solid var(--light-10);
 }
-.lang__btn{
-  font-family:var(--font-mono); font-size:11px; letter-spacing:.08em;
-  color:var(--light-40); padding:4px 2px;
+
+.lang__toggle{
+  display:flex; align-items:center; gap:7px;
+  padding:8px 6px; color:var(--light-60);
   transition:color .4s var(--expoOut);
 }
-.lang__btn:hover{ color:var(--light-60); }
-.lang__btn.is-on{ color:var(--sand); }
-.lang__sep{ font-family:var(--font-mono); font-size:10px; color:var(--light-20); }
+.lang__toggle:hover, .lang.is-open .lang__toggle{ color:var(--light); }
+.lang__code{ font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; }
+.lang__chev{
+  width:9px; height:6px;
+  transition:transform .45s var(--expoOut);
+}
+.lang.is-open .lang__chev{ transform:rotate(180deg); }
+
+.lang__menu{
+  position:absolute; top:calc(100% + 10px); right:0;
+  min-width:186px; padding:6px;
+  border-radius:10px;
+  background:rgba(18,26,17,.82);
+  backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--light-10);
+  box-shadow:0 24px 48px rgba(0,0,0,.32);
+  opacity:0; visibility:hidden;
+  transform:translateY(-8px) scale(.97); transform-origin:top right;
+  transition:opacity .4s var(--expoOut), transform .5s var(--expoOut), visibility .4s;
+}
+.lang.is-open .lang__menu{
+  opacity:1; visibility:visible; transform:none;
+}
+
+.lang__opt{
+  display:flex; align-items:center; gap:11px;
+  width:100%; padding:9px 11px; border-radius:6px;
+  font-size:13.5px; color:var(--light-60); text-align:left;
+  transition:background .35s var(--expoOut), color .35s var(--expoOut);
+}
+.lang__opt:hover{ background:var(--light-10); color:var(--light); }
+.lang__opt.is-on{ background:var(--light-20); color:var(--light); }
 
 @media (max-width:720px){
-  .dock__item > a{ padding:9px 8px; font-size:12px; }
+  .dock__item > a{ padding:9px 7px; font-size:12px; }
   .dock__item i{ display:none; }
   .dock__brand{ display:none; }
-  .lang{ margin-left:2px; padding-left:8px; }
-  .lang__btn{ font-size:10px; }
+  .lang{ margin-left:2px; padding-left:7px; }
+  .lang__code, .lang__chev{ display:none; }
+  .lang__toggle{ padding:8px 4px; }
 }
+
+/* ============================================================
+   3-BIS · TIPOGRAFÍA POR SISTEMA DE ESCRITURA
+   Fraunces y Space Mono sólo tienen alfabeto latino. Para que
+   el ruso y el coreano no caigan en la fuente del sistema, cada
+   uno usa familias que sí cubren su escritura. Se cargan solas
+   cuando el visitante elige ese idioma (ver app.js).
+   ============================================================ */
+
+html[lang="ru"]{
+  --font-display:"Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono:"JetBrains Mono", "Courier New", monospace;
+}
+
+html[lang="ko"]{
+  --font-display:"Noto Serif KR", serif;
+  --font-body:"Noto Sans KR", "Inter", sans-serif;
+  --font-mono:"Noto Sans KR", monospace;
+}
+/* el hangul no tiene mayúsculas ni tolera el tracking ancho */
+html[lang="ko"] .eyebrow,
+html[lang="ko"] .case__tag,
+html[lang="ko"] .table__head,
+html[lang="ko"] .readout dt,
+html[lang="ko"] .panel__list li,
+html[lang="ko"] .foot__h{ letter-spacing:.06em; }
+html[lang="ko"] .hero__meta{ letter-spacing:.08em; }
+html[lang="ko"] .h2, html[lang="ko"] .hero__title,
+html[lang="ko"] .cta__title{ letter-spacing:0; line-height:1.28; }
+/* el hangul ocupa más alto: el mismo cuerpo se desborda */
+html[lang="ko"] .hero__title{ font-size:clamp(27px, 4.2vw, 58px); max-width:22ch; }
+html[lang="ko"] .h2{ font-size:clamp(27px, 4vw, 54px); }
+html[lang="ko"] .cta__title{ font-size:clamp(29px, 4.8vw, 68px); max-width:20ch; }
+html[lang="ko"] .case__title{ font-size:clamp(26px, 3vw, 42px); }
+html[lang="ko"] .row__name, html[lang="ko"] .step__name,
+html[lang="ko"] .case__title{ letter-spacing:0; }
+
+/* el cirílico en versalitas necesita algo menos de tracking */
+html[lang="ru"] .eyebrow,
+html[lang="ru"] .case__tag,
+html[lang="ru"] .table__head{ letter-spacing:.14em; }
+html[lang="ru"] .h2, html[lang="ru"] .hero__title,
+html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 
 /* ============================================================
    4 · TIPOGRAFÍA COMPARTIDA

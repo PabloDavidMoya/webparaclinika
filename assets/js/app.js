@@ -59,10 +59,28 @@
      y funcional. La elección se guarda y se refleja en la URL.
      ========================================================== */
 
-  var DICT      = window.NS_I18N || {};
-  var LANGS     = ['en'].concat(Object.keys(DICT));
+  var DICT      = window.NS_I18N  || {};
+  var LIST      = window.NS_LANGS || [{ code: 'en', short: 'EN' }];
+  var FONTS     = window.NS_FONTS || {};
+  var LANGS     = LIST.map(function (l) { return l.code; });
   var AUTO      = false;   /* ponerlo en true para detectar el idioma del navegador */
   var originals = [];
+  var loaded    = {};
+
+  function meta(code) {
+    return LIST.filter(function (l) { return l.code === code; })[0] || LIST[0];
+  }
+
+  /* Las tipografías de cirílico y hangul se bajan sólo si hacen falta */
+  function loadFont(code) {
+    var need = meta(code).font;
+    if (!need || loaded[need] || !FONTS[need]) return;
+    loaded[need] = true;
+    var link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = FONTS[need];
+    document.head.appendChild(link);
+  }
 
   /* Se guarda el HTML original (inglés) antes de tocar nada */
   $$('[data-i18n], [data-i18n-label], [data-i18n-cursor]').forEach(function (el) {
@@ -92,6 +110,8 @@
   function applyLang(lang, push) {
     var d = DICT[lang] || null;
 
+    loadFont(lang);
+
     originals.forEach(function (o) {
       var el = o.el;
 
@@ -118,13 +138,18 @@
     if (d && d['meta.title']) document.title = d['meta.title'];
     else if (lang === 'en')   document.title = 'NutriSlim — Functional medicine, metabolism and longevity';
 
-    var meta = $('#metaDesc');
-    if (meta && d && d['meta.desc']) meta.setAttribute('content', d['meta.desc']);
+    var metaEl = $('#metaDesc');
+    if (metaEl && d && d['meta.desc']) metaEl.setAttribute('content', d['meta.desc']);
 
-    $$('.lang__btn').forEach(function (b) {
+    $$('.lang__opt').forEach(function (b) {
       b.classList.toggle('is-on', b.dataset.lang === lang);
-      b.setAttribute('aria-pressed', b.dataset.lang === lang);
+      b.setAttribute('aria-current', b.dataset.lang === lang);
     });
+
+    var code = $('#langCode');
+    var flag = $('#langFlag use');
+    if (code) code.textContent = meta(lang).short;
+    if (flag) flag.setAttribute('href', '#fl-' + lang);
 
     try { localStorage.setItem('ns-lang', lang); } catch (e) {}
 
@@ -140,8 +165,36 @@
 
   applyLang(readLang(), false);
 
-  $$('.lang__btn').forEach(function (btn) {
-    btn.addEventListener('click', function () { applyLang(btn.dataset.lang, true); });
+  /* — menú desplegable de idiomas — */
+  var langBox = $('#lang');
+  var langBtn = $('#langToggle');
+
+  function closeLang() {
+    if (!langBox) return;
+    langBox.classList.remove('is-open');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  if (langBox && langBtn) {
+    langBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = langBox.classList.toggle('is-open');
+      langBtn.setAttribute('aria-expanded', open);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!langBox.contains(e.target)) closeLang();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLang();
+    });
+  }
+
+  $$('.lang__opt').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyLang(btn.dataset.lang, true);
+      closeLang();
+    });
   });
 
   /* Los titulares que no llevan traducción también se parten */
