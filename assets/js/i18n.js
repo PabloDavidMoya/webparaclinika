@@ -53,7 +53,7 @@ es: {
   'hero.m1':'MEDICINA ORTOMOLECULAR', 'hero.m2':'METABOLISMO', 'hero.m3':'CIENCIA DE LA LONGEVIDAD',
 
   'cases.eyebrow':'Casos',
-  'cases.disclaimer':'Testimonios individuales publicados con autorización de cada paciente. Los resultados varían según cada caso. NutriSlim evalúa y acompaña; no reemplaza el tratamiento indicado por el médico tratante.',
+  'cases.disclaimer':'Testimonios individuales publicados con autorización de cada paciente. Los resultados varían según cada caso. Las fotografías son ilustrativas y no corresponden a los pacientes citados. NutriSlim evalúa y acompaña; no reemplaza el tratamiento indicado por el médico tratante.',
   'c1.tag':'DIABETES TIPO 1 · 12 AÑOS',
   'c1.text':'Llegó con registros de glucemia que alcanzaban los 584&nbsp;mg/dL. Durante las primeras semanas de acompañamiento los valores descendieron de forma progresiva y sostenida, con controles documentados por su equipo tratante.',
   'c1.k1':'INGRESO', 'c1.k2':'INTERMEDIO', 'c1.k3':'ACTUAL',
@@ -121,7 +121,7 @@ pt: {
   'hero.m1':'MEDICINA ORTOMOLECULAR', 'hero.m2':'METABOLISMO', 'hero.m3':'CIÊNCIA DA LONGEVIDADE',
 
   'cases.eyebrow':'Casos',
-  'cases.disclaimer':'Depoimentos individuais publicados com autorização de cada paciente. Os resultados variam de caso para caso. A NutriSlim avalia e acompanha; não substitui o tratamento indicado pelo médico responsável.',
+  'cases.disclaimer':'Depoimentos individuais publicados com autorização de cada paciente. Os resultados variam de caso para caso. As fotografias são ilustrativas e não correspondem aos pacientes citados. A NutriSlim avalia e acompanha; não substitui o tratamento indicado pelo médico responsável.',
   'c1.tag':'DIABETES TIPO 1 · 12 ANOS',
   'c1.text':'Chegou com registros de glicemia que atingiam 584&nbsp;mg/dL. Nas primeiras semanas de acompanhamento os valores caíram de forma progressiva e sustentada, com controles documentados pela sua equipe médica.',
   'c1.k1':'NA CHEGADA', 'c1.k2':'INTERMEDIÁRIO', 'c1.k3':'ATUAL',
@@ -189,7 +189,7 @@ fr: {
   'hero.m1':'MÉDECINE ORTHOMOLÉCULAIRE', 'hero.m2':'MÉTABOLISME', 'hero.m3':'SCIENCE DE LA LONGÉVITÉ',
 
   'cases.eyebrow':'Cas',
-  'cases.disclaimer':'Témoignages individuels publiés avec l’autorisation de chaque patient. Les résultats varient d’un cas à l’autre. NutriSlim évalue et accompagne ; nous ne remplaçons pas le traitement prescrit par votre médecin traitant.',
+  'cases.disclaimer':'Témoignages individuels publiés avec l’autorisation de chaque patient. Les résultats varient d’un cas à l’autre. Les photographies sont illustratives et ne représentent pas les patients cités. NutriSlim évalue et accompagne ; nous ne remplaçons pas le traitement prescrit par votre médecin traitant.',
   'c1.tag':'DIABÈTE DE TYPE 1 · 12 ANS',
   'c1.text':'Il est arrivé avec des glycémies atteignant 584&nbsp;mg/dL. Au cours des premières semaines d’accompagnement, les valeurs ont baissé de façon progressive et durable, avec des relevés documentés par son équipe soignante.',
   'c1.k1':'À L’ARRIVÉE', 'c1.k2':'INTERMÉDIAIRE', 'c1.k3':'ACTUEL',
@@ -257,7 +257,7 @@ fr: {
   'hero.m1':'正分子醫學', 'hero.m2':'代謝', 'hero.m3':'長壽科學',
 
   'cases.eyebrow':'案例',
-  'cases.disclaimer':'個別患者見證，均經本人同意後刊登。療效因人而異。NutriSlim 提供評估與陪伴，不能取代主治醫師開立的治療。',
+  'cases.disclaimer':'個別患者見證，均經本人同意後刊登。療效因人而異。照片為示意用途，並非文中所述患者本人。NutriSlim 提供評估與陪伴，不能取代主治醫師開立的治療。',
   'c1.tag':'第一型糖尿病 · 12 歲',
   'c1.text':'初診時血糖值一度高達 584&nbsp;mg/dL。在陪伴的前幾週，數值逐步而穩定地下降，並由其主治團隊記錄在案。',
   'c1.k1':'初診時', 'c1.k2':'中期', 'c1.k3':'目前',
@@ -325,7 +325,7 @@ it: {
   'hero.m1':'MEDICINA ORTOMOLECOLARE', 'hero.m2':'METABOLISMO', 'hero.m3':'SCIENZA DELLA LONGEVITÀ',
 
   'cases.eyebrow':'Casi',
-  'cases.disclaimer':'Testimonianze individuali pubblicate con l’autorizzazione di ciascun paziente. I risultati variano da caso a caso. NutriSlim valuta e accompagna; non sostituisce il trattamento prescritto dal medico curante.',
+  'cases.disclaimer':'Testimonianze individuali pubblicate con l’autorizzazione di ciascun paziente. I risultati variano da caso a caso. Le fotografie sono illustrative e non ritraggono i pazienti citati. NutriSlim valuta e accompagna; non sostituisce il trattamento prescritto dal medico curante.',
   'c1.tag':'DIABETE TIPO 1 · 12 ANNI',
   'c1.text':'È arrivato con valori glicemici che raggiungevano i 584&nbsp;mg/dL. Nelle prime settimane di percorso i valori sono scesi in modo progressivo e costante, con controlli documentati dalla sua équipe medica.',
   'c1.k1':'ALL’ARRIVO', 'c1.k2':'INTERMEDIO', 'c1.k3':'ATTUALE',
@@ -393,7 +393,7 @@ de: {
   'hero.m1':'ORTHOMOLEKULARE MEDIZIN', 'hero.m2':'STOFFWECHSEL', 'hero.m3':'LONGEVITY-WISSENSCHAFT',
 
   'cases.eyebrow':'Fälle',
-  'cases.disclaimer':'Einzelne Erfahrungsberichte, veröffentlicht mit Einwilligung der jeweiligen Patientin bzw. des Patienten. Die Ergebnisse sind von Fall zu Fall verschieden. NutriSlim beurteilt und begleitet; wir ersetzen keine ärztlich verordnete Behandlung.',
+  'cases.disclaimer':'Einzelne Erfahrungsberichte, veröffentlicht mit Einwilligung der jeweiligen Patientin bzw. des Patienten. Die Ergebnisse sind von Fall zu Fall verschieden. Die Fotos sind Illustrationen und zeigen nicht die genannten Patientinnen und Patienten. NutriSlim beurteilt und begleitet; wir ersetzen keine ärztlich verordnete Behandlung.',
   'c1.tag':'TYP-1-DIABETES · 12 JAHRE',
   'c1.text':'Er kam mit Blutzuckerwerten von bis zu 584&nbsp;mg/dL. In den ersten Wochen der Begleitung gingen die Werte schrittweise und anhaltend zurück, dokumentiert durch sein behandelndes Team.',
   'c1.k1':'BEI ANKUNFT', 'c1.k2':'ZWISCHENWERT', 'c1.k3':'AKTUELL',
@@ -461,7 +461,7 @@ ru: {
   'hero.m1':'ОРТОМОЛЕКУЛЯРНАЯ МЕДИЦИНА', 'hero.m2':'МЕТАБОЛИЗМ', 'hero.m3':'НАУКА О ДОЛГОЛЕТИИ',
 
   'cases.eyebrow':'Случаи',
-  'cases.disclaimer':'Индивидуальные отзывы, опубликованные с согласия каждого пациента. Результаты различаются в каждом случае. NutriSlim проводит оценку и сопровождение; мы не заменяем лечение, назначенное лечащим врачом.',
+  'cases.disclaimer':'Индивидуальные отзывы, опубликованные с согласия каждого пациента. Результаты различаются в каждом случае. Фотографии носят иллюстративный характер и не изображают упомянутых пациентов. NutriSlim проводит оценку и сопровождение; мы не заменяем лечение, назначенное лечащим врачом.',
   'c1.tag':'ДИАБЕТ 1 ТИПА · 12 ЛЕТ',
   'c1.text':'Обратился с показателями глюкозы, доходившими до 584&nbsp;мг/дл. За первые недели сопровождения значения снижались постепенно и устойчиво, под контролем его лечащей команды.',
   'c1.k1':'ПРИ ОБРАЩЕНИИ', 'c1.k2':'ПРОМЕЖУТОЧНО', 'c1.k3':'СЕЙЧАС',
@@ -529,7 +529,7 @@ ko: {
   'hero.m1':'정분자의학', 'hero.m2':'대사', 'hero.m3':'장수 과학',
 
   'cases.eyebrow':'사례',
-  'cases.disclaimer':'각 환자의 동의를 받아 게재한 개별 후기입니다. 결과는 사례마다 다릅니다. NutriSlim은 평가하고 동행하며, 주치의가 처방한 치료를 대체하지 않습니다.',
+  'cases.disclaimer':'각 환자의 동의를 받아 게재한 개별 후기입니다. 결과는 사례마다 다릅니다. 사진은 예시이며 언급된 환자 본인이 아닙니다. NutriSlim은 평가하고 동행하며, 주치의가 처방한 치료를 대체하지 않습니다.',
   'c1.tag':'제1형 당뇨 · 12세',
   'c1.text':'혈당 수치가 584&nbsp;mg/dL까지 오른 상태로 내원했습니다. 동행 초기 몇 주 동안 수치는 점진적이고 꾸준하게 내려갔으며, 담당 의료진이 기록으로 확인했습니다.',
   'c1.k1':'내원 시', 'c1.k2':'중간', 'c1.k3':'현재',

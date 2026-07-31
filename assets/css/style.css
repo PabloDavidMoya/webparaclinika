@@ -85,8 +85,10 @@ section[id]{ scroll-margin-top:96px; }
 .loader.is-done .loader__inner{ transform:translateY(-101%); }
 .loader.is-gone{ display:none; }
 
-.loader__mark{ display:flex; flex-direction:column; align-items:center; gap:18px; }
-.loader__mark svg{ width:34px; height:54px; color:var(--sand); }
+.loader__mark{ display:flex; flex-direction:column; align-items:center; gap:16px; }
+/* El logo original venía sobre fondo negro. Se le generó canal alfa a partir
+   de la luminancia (ver README), así que acá va limpio, sin recuadro. */
+.loader__logo{ width:clamp(210px, 26vw, 340px); height:auto; }
 .loader__word{
   font-family:var(--font-mono); font-size:13px;
   letter-spacing:.42em; text-indent:.42em;
@@ -654,6 +656,22 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
   gap:clamp(28px,5vw,80px); align-items:start;
 }
 .method__media{ height:clamp(320px,58vh,620px); position:sticky; top:110px; }
+
+/* Video en loop: mismo tratamiento de color que las fotos, para que no se
+   note el cambio de material entre una sección y otra. */
+.media--video{
+  position:relative; margin:0; overflow:hidden;
+  border-radius:var(--radius); background:#e6e3db;
+}
+.media--video video{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:saturate(.74) contrast(1.04);
+}
+.media--video::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(172deg,
+    rgba(111,128,57,.13) 0%, rgba(26,36,24,.10) 45%, rgba(26,36,24,.26) 100%);
+}
 
 .step{ border-top:1px solid var(--dark-10); }
 .step:last-child{ border-bottom:1px solid var(--dark-10); }

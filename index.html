@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NutriSlim — Functional medicine, metabolism and longevity</title>
 <meta name="description" id="metaDesc" content="Orthomolecular medicine and longevity science. We don't treat the symptom — we assess the cause. Asunción, Paraguay. In-person and online consultations worldwide.">
-<meta name="theme-color" content="#f3f1ec">
+<meta name="theme-color" content="#121a11">
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="NutriSlim — Functional medicine, metabolism and longevity">
@@ -26,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <!-- ?v= : subir el número al publicar cambios, para que nadie quede con la versión vieja en caché -->
-<link rel="stylesheet" href="assets/css/style.css?v=13">
+<link rel="stylesheet" href="assets/css/style.css?v=17">
 </head>
 
 <body>
@@ -106,12 +111,7 @@
 <div class="loader" id="loader" aria-hidden="true">
   <div class="loader__inner">
     <div class="loader__mark">
-      <svg viewBox="0 0 40 64" fill="none" aria-hidden="true">
-        <path d="M9 3c0 12 22 15 22 26S9 49 9 61" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M31 3c0 12-22 15-22 26s22 15 22 32" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M12.5 13h15M9 29h22M12.5 46h15" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".55"/>
-      </svg>
-      <span class="loader__word">NUTRISLIM</span>
+      <img class="loader__logo" src="assets/img/logo-full.webp" alt="NutriSlim Clinic — Reset your metabolism" width="1073" height="731">
     </div>
     <div class="loader__meta">
       <span>POLICLÍNICA NUTRISLIM ® 2O26</span>
@@ -179,7 +179,7 @@
      en app.js (sección 4). -->
 <section class="hero">
   <figure class="hero__bg media has-img"
-          style="background-image:url('assets/img/mujerdeblanco.png'); --pos:72% 26%"
+          style="background-image:url('assets/img/mujerdeblanco.webp'); --pos:72% 26%"
           data-label="WIDE SHOT · CLINIC / DR. LILIAN" data-i18n-label="ph.hero"></figure>
   <div class="hero__scrim"></div>
 
@@ -217,7 +217,7 @@
     <div class="cases__track" id="casesTrack">
 
       <article class="case">
-        <figure class="case__media media media--dark" data-label="PORTRAIT · PATIENT" data-i18n-label="ph.portrait"></figure>
+        <figure class="case__media media media--dark has-img" style="background-image:url('assets/img/glucosa95.webp'); --pos:center 76%" data-label="PORTRAIT · PATIENT" data-i18n-label="ph.portrait"></figure>
         <div class="case__body">
           <p class="case__tag" data-i18n="c1.tag">TYPE 1 DIABETES · AGE 12</p>
           <h2 class="case__title">Joshua Román</h2>
@@ -231,7 +231,7 @@
       </article>
 
       <article class="case">
-        <figure class="case__media media media--dark" data-label="PORTRAIT · PATIENT" data-i18n-label="ph.portrait"></figure>
+        <figure class="case__media media media--dark has-img" style="background-image:url('assets/img/informemedico.webp'); --pos:center 42%" data-label="PORTRAIT · PATIENT" data-i18n-label="ph.portrait"></figure>
         <div class="case__body">
           <p class="case__tag" data-i18n="c2.tag">FERTILITY · AGE 29</p>
           <h2 class="case__title">Carmen Ortellado</h2>
@@ -244,7 +244,7 @@
       </article>
 
       <article class="case">
-        <figure class="case__media media media--dark" data-label="PORTRAIT · PATIENT" data-i18n-label="ph.portrait"></figure>
+        <figure class="case__media media media--dark has-img" style="background-image:url('assets/img/informemedico3.webp'); --pos:center 48%" data-label="PORTRAIT · PATIENT" data-i18n-label="ph.portrait"></figure>
         <div class="case__body">
           <p class="case__tag" data-i18n="c3.tag">DIGESTIVE SYMPTOMS</p>
           <h2 class="case__title">Lourdes Ayala</h2>
@@ -256,7 +256,7 @@
       </article>
 
       <article class="case">
-        <figure class="case__media media media--dark" data-label="PORTRAIT · PATIENT" data-i18n-label="ph.portrait"></figure>
+        <figure class="case__media media media--dark has-img" style="background-image:url('assets/img/glucemianormal.webp'); --pos:center 74%" data-label="PORTRAIT · PATIENT" data-i18n-label="ph.portrait"></figure>
         <div class="case__body">
           <p class="case__tag" data-i18n="c4.tag">HORMONAL HEALTH</p>
           <h2 class="case__title">Alexandra Frutos</h2>
@@ -279,7 +279,7 @@
   </div>
 
   <div class="shell">
-    <p class="disclaimer" data-i18n="cases.disclaimer">Individual testimonials, published with each patient's authorisation. Results vary from case to case. NutriSlim assesses and supports; it does not replace the treatment prescribed by your own physician.</p>
+    <p class="disclaimer" data-i18n="cases.disclaimer">Individual testimonials, published with each patient's authorisation. Results vary from case to case. Photographs are illustrative and do not depict the patients quoted. NutriSlim assesses and supports; it does not replace the treatment prescribed by your own physician.</p>
   </div>
 </section>
 
@@ -294,32 +294,32 @@
         <span>ID</span><span data-i18n="areas.th2">AREA</span><span data-i18n="areas.th3">FOCUS</span>
       </div>
 
-      <a class="row" href="#contacto" data-img="" data-cursor="View" data-i18n-cursor="cur.view">
+      <a class="row" href="#contacto" data-img="assets/img/danzando.webp" data-cursor="View" data-i18n-cursor="cur.view">
         <span class="row__id">OO1</span>
         <span class="row__name" data-i18n="a1.n">Metabolism, obesity and integrative health</span>
         <span class="row__desc" data-i18n="a1.d">Metabolic, digestive, hormonal and inflammatory imbalances</span>
       </a>
-      <a class="row" href="#contacto" data-img="" data-cursor="View" data-i18n-cursor="cur.view">
+      <a class="row" href="#contacto" data-img="assets/img/glucemianormal.webp" data-cursor="View" data-i18n-cursor="cur.view">
         <span class="row__id">OO2</span>
         <span class="row__name" data-i18n="a2.n">Thyroid and hormonal health</span>
         <span class="row__desc" data-i18n="a2.d">Energy, rest, temperature, focus and emotional state</span>
       </a>
-      <a class="row" href="#contacto" data-img="" data-cursor="View" data-i18n-cursor="cur.view">
+      <a class="row" href="#contacto" data-img="assets/img/glucosanormal.webp" data-cursor="View" data-i18n-cursor="cur.view">
         <span class="row__id">OO3</span>
         <span class="row__name" data-i18n="a3.n">Diabetes and metabolic health</span>
         <span class="row__desc" data-i18n="a3.d">Support in type 1, type 2 and gestational diabetes</span>
       </a>
-      <a class="row" href="#contacto" data-img="" data-cursor="View" data-i18n-cursor="cur.view">
+      <a class="row" href="#contacto" data-img="assets/img/informemedico2.webp" data-cursor="View" data-i18n-cursor="cur.view">
         <span class="row__id">OO4</span>
         <span class="row__name" data-i18n="a4.n">Autoimmune and inflammatory conditions</span>
         <span class="row__desc" data-i18n="a4.d">Nutrition and habits aimed at lowering inflammatory load</span>
       </a>
-      <a class="row" href="#contacto" data-img="" data-cursor="View" data-i18n-cursor="cur.view">
+      <a class="row" href="#contacto" data-img="assets/img/meditandoverde.webp" data-cursor="View" data-i18n-cursor="cur.view">
         <span class="row__id">OO5</span>
         <span class="row__name" data-i18n="a5.n">Women's hormonal health</span>
         <span class="row__desc" data-i18n="a5.d">Menopause, hormonal balance and healthy ageing</span>
       </a>
-      <a class="row" href="#contacto" data-img="" data-cursor="View" data-i18n-cursor="cur.view">
+      <a class="row" href="#contacto" data-img="assets/img/mujersanada2.webp" data-cursor="View" data-i18n-cursor="cur.view">
         <span class="row__id">OO6</span>
         <span class="row__name" data-i18n="a6.n">Men's hormonal health and andropause</span>
         <span class="row__desc" data-i18n="a6.d">Energy, vitality, hormonal balance and longevity</span>
@@ -338,7 +338,12 @@
   </div>
 
   <div class="shell method__grid">
-    <figure class="method__media media" data-label="PHOTO · CONSULTATION" data-i18n-label="ph.method"></figure>
+    <figure class="method__media media--video">
+      <video src="assets/video/nutrislim.mp4"
+             poster="assets/video/nutrislim-poster.webp"
+             autoplay muted loop playsinline preload="metadata"
+             aria-label="NutriSlim"></video>
+    </figure>
 
     <ol class="steps" id="steps">
       <li class="step is-open">
@@ -466,7 +471,7 @@
   </div>
 </footer>
 
-<script src="assets/js/i18n.js?v=13"></script>
-<script src="assets/js/app.js?v=13"></script>
+<script src="assets/js/i18n.js?v=17"></script>
+<script src="assets/js/app.js?v=17"></script>
 </body>
 </html>
