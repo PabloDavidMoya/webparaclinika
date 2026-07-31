@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <!-- ?v= : subir el número al publicar cambios, para que nadie quede con la versión vieja en caché -->
-<link rel="stylesheet" href="assets/css/style.css?v=24">
+<link rel="stylesheet" href="assets/css/style.css?v=27">
 </head>
 
 <body>
@@ -40,6 +40,25 @@
      Dibujadas a mano en SVG: no piden nada a ningún servidor,
      no dependen de emojis del sistema y se ven igual en todos lados. -->
 <svg class="flag-sprite" aria-hidden="true" focusable="false"><defs>
+
+  <!-- iconos de redes, dibujados a mano: sin librerías ni pedidos externos -->
+  <symbol id="ic-ig" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <symbol id="ic-fb" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3-.04-1.3-.13-2.46-.13-2.44 0-4.11 1.49-4.11 4.22V9.9H7.4V13h2.73v8Z"/>
+  </symbol>
+  <symbol id="ic-tt" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M16.3 3h-2.7v11.4a2.4 2.4 0 1 1-1.9-2.35V9.3a5.1 5.1 0 1 0 4.6 5.07V8.72a6.1 6.1 0 0 0 3.5 1.1V7.14A3.55 3.55 0 0 1 16.3 3Z"/>
+  </symbol>
+  <symbol id="ic-yt" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M22.2 8.1a2.9 2.9 0 0 0-2-2.06C18.4 5.55 12 5.55 12 5.55s-6.4 0-8.2.49a2.9 2.9 0 0 0-2 2.06A30.4 30.4 0 0 0 1.3 12a30.4 30.4 0 0 0 .5 3.9 2.9 2.9 0 0 0 2 2.06c1.8.49 8.2.49 8.2.49s6.4 0 8.2-.49a2.9 2.9 0 0 0 2-2.06 30.4 30.4 0 0 0 .5-3.9 30.4 30.4 0 0 0-.5-3.9ZM10 15.1V8.9l5.3 3.1Z"/>
+  </symbol>
+  <symbol id="ic-x" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M17.5 3h3.3l-7.2 8.24L22 21h-6.6l-4.32-5.65L6.1 21H2.8l7.7-8.8L2.4 3H9.2l3.9 5.16Zm-1.16 16.05h1.83L7.75 4.86H5.79Z"/>
+  </symbol>
 
   <symbol id="fl-en" viewBox="0 0 24 16">
     <rect width="24" height="16" fill="#012169"/>
@@ -455,12 +474,19 @@
   <div class="shell">
     <div class="foot__grid">
       <div class="foot__col foot__col--brand">
-        <svg class="foot__mark" viewBox="0 0 40 64" fill="none" aria-hidden="true">
-          <path d="M9 3c0 12 22 15 22 26S9 49 9 61" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M31 3c0 12-22 15-22 26s22 15 22 32" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
+        <img class="foot__logo" src="assets/img/logo-full.webp" alt="NutriSlim Clinic — Reset your metabolism" width="1073" height="731">
         <p class="foot__coord">ASU 25°15'49"S 57°34'33"W</p>
         <p class="foot__addr">Coronel Juan César Patiño 1284<br>Asunción · Paraguay</p>
+
+        <!-- ⚠ Sólo Instagram y Facebook están confirmados. Las otras tres
+             esperan las direcciones reales de la clínica. -->
+        <ul class="social" aria-label="Social">
+          <li><a href="https://www.instagram.com/policlinicanutrislim/" target="_blank" rel="noopener" aria-label="Instagram" data-cursor="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-ig"></use></svg></a></li>
+          <li><a href="https://www.facebook.com/NutrislimConsultorio" target="_blank" rel="noopener" aria-label="Facebook" data-cursor="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-fb"></use></svg></a></li>
+          <li><a href="#" aria-label="TikTok" data-cursor="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-tt"></use></svg></a></li>
+          <li><a href="#" aria-label="YouTube" data-cursor="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-yt"></use></svg></a></li>
+          <li><a href="#" aria-label="X" data-cursor="X"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-x"></use></svg></a></li>
+        </ul>
       </div>
 
       <div class="foot__col">
@@ -483,8 +509,7 @@
 
       <div class="foot__col">
         <p class="foot__h" data-i18n="foot.h3">Contact</p>
-        <a href="https://wa.me/595991638194" target="_blank" rel="noopener">+595 991 638194</a>
-        <a href="https://www.instagram.com/policlinicanutrislim/" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a href="https://wa.me/595991638194" target="_blank" rel="noopener" data-cursor="WhatsApp">+595 991 638194</a>
         <p class="foot__hours" data-i18n="foot.hours">Mon to Fri 8:OO–18:OO<br>Saturdays 8:OO–13:OO</p>
       </div>
     </div>
@@ -496,7 +521,7 @@
   </div>
 </footer>
 
-<script src="assets/js/i18n.js?v=24"></script>
-<script src="assets/js/app.js?v=24"></script>
+<script src="assets/js/i18n.js?v=27"></script>
+<script src="assets/js/app.js?v=27"></script>
 </body>
 </html>
