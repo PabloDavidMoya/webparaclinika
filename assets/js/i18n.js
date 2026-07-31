@@ -17,20 +17,23 @@
 /* Orden y etiquetas del menú de idiomas.
    `font` indica si ese idioma necesita cargar tipografías extra. */
 window.NS_LANGS = [
-  { code: 'en', label: 'English',   short: 'EN' },
-  { code: 'es', label: 'Español',   short: 'ES' },
-  { code: 'pt', label: 'Português', short: 'PT' },
-  { code: 'it', label: 'Italiano',  short: 'IT' },
-  { code: 'de', label: 'Deutsch',   short: 'DE' },
-  { code: 'ru', label: 'Русский',   short: 'RU', font: 'cyrillic' },
-  { code: 'ko', label: '한국어',      short: 'KO', font: 'korean'   }
+  { code: 'en',      label: 'English',    short: 'EN' },
+  { code: 'es',      label: 'Español',    short: 'ES' },
+  { code: 'pt',      label: 'Português',  short: 'PT' },
+  { code: 'fr',      label: 'Français',   short: 'FR' },
+  { code: 'it',      label: 'Italiano',   short: 'IT' },
+  { code: 'de',      label: 'Deutsch',    short: 'DE' },
+  { code: 'ru',      label: 'Русский',    short: 'RU', font: 'cyrillic' },
+  { code: 'zh-Hant', label: '繁體中文',     short: 'ZH', font: 'chinese'  },
+  { code: 'ko',      label: '한국어',       short: 'KO', font: 'korean'   }
 ];
 
 /* Tipografías que hacen falta según el sistema de escritura.
    Se cargan sólo cuando el visitante elige ese idioma. */
 window.NS_FONTS = {
   cyrillic: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;700&display=swap',
-  korean:   'https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap'
+  korean:   'https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap',
+  chinese:  'https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap'
 };
 
 window.NS_I18N = {
@@ -169,6 +172,142 @@ pt: {
   'foot.h2':'Clínica', 'foot.c1':'O método', 'foot.c2':'Casos', 'foot.c4':'Agendar',
   'foot.h3':'Contato', 'foot.hours':'Seg a Sex 8:OO–18:OO<br>Sábados 8:OO–13:OO',
   'foot.bar':'MEDICINA ORTOMOLECULAR · LONGEVIDADE'
+},
+
+/* ═══════════════════════════════════════════════════ FRANÇAIS */
+fr: {
+  'meta.title':'NutriSlim — Médecine fonctionnelle, métabolisme et longévité',
+  'meta.desc' :'Médecine orthomoléculaire et science de la longévité. Nous ne traitons pas le symptôme : nous évaluons la cause. Asunción, Paraguay. Consultations sur place et en ligne.',
+
+  'nav.areas':'Domaines', 'nav.method':'Méthode', 'nav.cases':'Cas', 'nav.tech':'Technologie', 'nav.book':'Rendez-vous',
+  'cur.start':'Commencer', 'cur.view':'Voir', 'cur.book':'Rendez-vous', 'cur.open':'Ouvrir', 'cur.prev':'Précédent', 'cur.next':'Suivant',
+  'ph.hero':'PLAN LARGE · CABINET / DR LILIAN', 'ph.portrait':'PORTRAIT · PATIENT', 'ph.method':'PHOTO · CONSULTATION',
+
+  'hero.eyebrow':'Réinitialisez-votre-métabolisme®',
+  'hero.title':'Une clinique de <em>médecine fonctionnelle</em> qui ne traite pas le symptôme — elle cherche <em>pourquoi</em> votre corps a cessé de fonctionner.',
+  'hero.cta1':'Faire le test gratuit', 'hero.cta2':'Découvrir la méthode',
+  'hero.m1':'MÉDECINE ORTHOMOLÉCULAIRE', 'hero.m2':'MÉTABOLISME', 'hero.m3':'SCIENCE DE LA LONGÉVITÉ',
+
+  'cases.eyebrow':'Cas',
+  'cases.disclaimer':'Témoignages individuels publiés avec l’autorisation de chaque patient. Les résultats varient d’un cas à l’autre. NutriSlim évalue et accompagne ; nous ne remplaçons pas le traitement prescrit par votre médecin traitant.',
+  'c1.tag':'DIABÈTE DE TYPE 1 · 12 ANS',
+  'c1.text':'Il est arrivé avec des glycémies atteignant 584&nbsp;mg/dL. Au cours des premières semaines d’accompagnement, les valeurs ont baissé de façon progressive et durable, avec des relevés documentés par son équipe soignante.',
+  'c1.k1':'À L’ARRIVÉE', 'c1.k2':'INTERMÉDIAIRE', 'c1.k3':'ACTUEL',
+  'c2.tag':'FERTILITÉ · 29 ANS',
+  'c2.text':'Elle est venue à la clinique comme dernière tentative de réaliser son rêve de devenir mère, après des années d’examens sans réponse. Elle a commencé pleine d’espoir et, deux mois plus tard, elle était enceinte.',
+  'c2.k1':'CONSULTATION', 'c2.v1':'ÉVALUATION COMPLÈTE', 'c2.k2':'DURÉE', 'c2.v2':'2 MOIS',
+  'c3.tag':'TROUBLES DIGESTIFS',
+  'c3.text':'« Je me sens tellement mieux. » Après avoir identifié les aliments que son corps ne tolérait pas et réorganisé son alimentation, elle décrit une amélioration durable de la digestion, de l’énergie et du sommeil.',
+  'c3.k1':'FOCUS', 'c3.v1':'SENSIBILITÉS ALIMENTAIRES',
+  'c4.tag':'SANTÉ HORMONALE',
+  'c4.text':'« Revivre sereinement » : son récit après des années de symptômes qu’aucun examen de routine ne parvenait à expliquer.',
+  'c4.k1':'FOCUS', 'c4.v1':'ÉQUILIBRE HORMONAL',
+
+  'areas.eyebrow':'Domaines cliniques',
+  'areas.title':'Une même question<br>dans chaque spécialité.',
+  'areas.th2':'DOMAINE', 'areas.th3':'FOCUS',
+  'a1.n':'Métabolisme, obésité et santé intégrative', 'a1.d':'Déséquilibres métaboliques, digestifs, hormonaux et inflammatoires',
+  'a2.n':'Thyroïde et santé hormonale',               'a2.d':'Énergie, sommeil, température, concentration et état émotionnel',
+  'a3.n':'Diabète et santé métabolique',              'a3.d':'Accompagnement du diabète de type 1, de type 2 et gestationnel',
+  'a4.n':'Maladies auto-immunes et inflammatoires',   'a4.d':'Alimentation et habitudes visant à réduire la charge inflammatoire',
+  'a5.n':'Santé hormonale féminine',                  'a5.d':'Ménopause, équilibre hormonal et vieillissement en bonne santé',
+  'a6.n':'Santé hormonale masculine et andropause',   'a6.d':'Énergie, vitalité, équilibre hormonal et longévité',
+
+  'method.eyebrow':'La méthode',
+  'method.title':'Les 6 R.<br>Cinq de la médecine fonctionnelle<br>et <em>un qui nous appartient</em>.',
+  'r1.n':'Retirer',       'r1.t':'Identifier et retirer les aliments et les facteurs que l’organisme tolère mal et qui entretiennent la réponse inflammatoire.',
+  'r2.n':'Remplacer',     'r2.t':'Réapporter ce qui manque pour que la digestion et l’absorption des nutriments fonctionnent à nouveau.',
+  'r3.n':'Réensemencer',  'r3.t':'Reconstituer la flore intestinale, où réside près de 70&nbsp;% du système immunitaire.',
+  'r4.n':'Réparer',       'r4.t':'Accompagner la récupération de la muqueuse intestinale avec les nutriments que le corps utilise lui-même.',
+  'r5.n':'Rééquilibrer',  'r5.t':'Remettre en ordre le sommeil, le stress et les habitudes : le système nerveux autonome gouverne le métabolisme 24 h sur 24.',
+  'r6.n':'Rééduquer <em>— le R de NutriSlim</em>', 'r6.t':'Pour que le patient comprenne son propre corps et puisse le soutenir sans dépendre de nous. Pas de médication : de l’éducation.',
+
+  'tech.eyebrow':'Technologie',
+  'tech.title':'OligoCheck.<br>Ce qu’un bilan sanguin<br>de routine <em>ne regarde pas</em>.',
+  'tech.lead':'Un scan non invasif qui évalue le statut minéral, le stress oxydatif et la présence éventuelle de métaux toxiques. C’est le point de départ que nous recommandons : avant de proposer un plan, nous voulons voir ce qui se passe réellement.',
+  'tech.cta':'Prendre rendez-vous', 'tech.h2':'SCAN · NON INVASIF',
+  'tech.p1':'MINÉRAUX', 'tech.p2':'STRESS OXYDATIF', 'tech.p3':'MÉTAUX TOXIQUES', 'tech.p4':'DURÉE', 'tech.p5':'PIQÛRES',
+  'tech.yes1':'OUI', 'tech.yes2':'OUI', 'tech.dur':'~2O MIN',
+  'tech.foot':'Outil d’évaluation complémentaire. Ne constitue pas un diagnostic à lui seul.',
+
+  'cta.eyebrow':'Commencez ici',
+  'cta.title':'Le test de santé est <em>gratuit</em> et prend trois minutes.',
+  'cta.lead':'Dix-sept zones du corps, une liste de symptômes et un score. S’il dépasse dix troubles, il vaut mieux qu’on en parle.',
+  'cta.b1':'Faire le test', 'cta.b2':'Écrire sur WhatsApp',
+
+  'foot.h1':'Domaines', 'foot.a1':'Métabolisme et obésité', 'foot.a2':'Thyroïde', 'foot.a3':'Diabète',
+  'foot.a4':'Auto-immunes', 'foot.a5':'Hormonal féminin', 'foot.a6':'Hormonal masculin',
+  'foot.h2':'Clinique', 'foot.c1':'La méthode', 'foot.c2':'Cas', 'foot.c4':'Rendez-vous',
+  'foot.h3':'Contact', 'foot.hours':'Lun–Ven 8:OO–18:OO<br>Samedi 8:OO–13:OO',
+  'foot.bar':'MÉDECINE ORTHOMOLÉCULAIRE · LONGÉVITÉ'
+},
+
+/* ═══════════════════════════════════════════════ 繁體中文 (台灣) */
+'zh-Hant': {
+  'meta.title':'NutriSlim — 功能醫學、代謝與長壽',
+  'meta.desc' :'正分子醫學與長壽科學。我們不處理症狀，而是評估原因。巴拉圭亞松森，提供門診與線上諮詢。',
+
+  'nav.areas':'診療領域', 'nav.method':'方法', 'nav.cases':'案例', 'nav.tech':'技術', 'nav.book':'預約',
+  'cur.start':'開始', 'cur.view':'查看', 'cur.book':'預約', 'cur.open':'展開', 'cur.prev':'上一個', 'cur.next':'下一個',
+  'ph.hero':'寬幅照片 · 診所 / 莉莉安醫師', 'ph.portrait':'人物照 · 患者', 'ph.method':'照片 · 看診過程',
+
+  'hero.eyebrow':'重啟你的代謝®',
+  'hero.title':'一間<em>功能醫學</em>診所 — 我們不處理症狀，而是探究您的身體<em>為何</em>不再正常運作。',
+  'hero.cta1':'免費健康檢測', 'hero.cta2':'了解我們的方法',
+  'hero.m1':'正分子醫學', 'hero.m2':'代謝', 'hero.m3':'長壽科學',
+
+  'cases.eyebrow':'案例',
+  'cases.disclaimer':'個別患者見證，均經本人同意後刊登。療效因人而異。NutriSlim 提供評估與陪伴，不能取代主治醫師開立的治療。',
+  'c1.tag':'第一型糖尿病 · 12 歲',
+  'c1.text':'初診時血糖值一度高達 584&nbsp;mg/dL。在陪伴的前幾週，數值逐步而穩定地下降，並由其主治團隊記錄在案。',
+  'c1.k1':'初診時', 'c1.k2':'中期', 'c1.k3':'目前',
+  'c2.tag':'生育 · 29 歲',
+  'c2.text':'多年檢查始終找不到答案，她把這裡當成圓夢當母親的最後一次嘗試。她懷著希望開始療程，兩個月後順利懷孕。',
+  'c2.k1':'諮詢', 'c2.v1':'完整評估', 'c2.k2':'時間', 'c2.v2':'2 個月',
+  'c3.tag':'消化道症狀',
+  'c3.text':'「我覺得好太多了。」在找出身體無法耐受的食物、重新調整飲食之後，她描述消化、體力與睡眠都持續改善。',
+  'c3.k1':'重點', 'c3.v1':'食物敏感',
+  'c4.tag':'荷爾蒙健康',
+  'c4.text':'「重新安心生活」：多年來的症狀從未被任何常規檢查解釋，這是她之後的故事。',
+  'c4.k1':'重點', 'c4.v1':'荷爾蒙平衡',
+
+  'areas.eyebrow':'診療領域',
+  'areas.title':'每一個專科<br>都問同一個問題。',
+  'areas.th2':'領域', 'areas.th3':'重點',
+  'a1.n':'代謝、肥胖與整合醫學',       'a1.d':'代謝、消化、荷爾蒙與發炎的失衡',
+  'a2.n':'甲狀腺與荷爾蒙健康',         'a2.d':'體力、睡眠、體溫、專注與情緒狀態',
+  'a3.n':'糖尿病與代謝健康',           'a3.d':'第一型、第二型與妊娠糖尿病的陪伴',
+  'a4.n':'自體免疫與發炎性疾病',       'a4.d':'以飲食與生活習慣降低發炎負擔',
+  'a5.n':'女性荷爾蒙健康',             'a5.d':'更年期、荷爾蒙平衡與健康老化',
+  'a6.n':'男性荷爾蒙健康與男性更年期', 'a6.d':'體力、活力、荷爾蒙平衡與長壽',
+
+  'method.eyebrow':'方法',
+  'method.title':'六個 R。<br>五個來自功能醫學，<br><em>一個屬於我們</em>。',
+  'r1.n':'Remove — 移除',        'r1.t':'找出並移除身體不易耐受、且持續維持發炎反應的食物與因素。',
+  'r2.n':'Replace — 補足',       'r2.t':'補回缺少的部分，讓消化與營養吸收重新運作。',
+  'r3.n':'Reinoculate — 重建菌叢','r3.t':'重建腸道菌相 — 約七成的免疫系統就住在那裡。',
+  'r4.n':'Repair — 修復',        'r4.t':'以身體本來就在使用的營養素，陪伴腸道黏膜的修復。',
+  'r5.n':'Rebalance — 再平衡',   'r5.t':'把休息、壓力與生活習慣重新安排：自律神經全天候主導著代謝。',
+  'r6.n':'Reeducate <em>— NutriSlim 的 R</em>', 'r6.t':'讓患者理解自己的身體，不必依賴我們也能維持下去。不是用藥，而是學會。',
+
+  'tech.eyebrow':'技術',
+  'tech.title':'OligoCheck。<br>常規抽血<br><em>不會看的地方</em>。',
+  'tech.lead':'一種非侵入式掃描，評估礦物質狀態、氧化壓力，以及是否可能存在毒性金屬。這是我們建議的起點：在提出計畫之前，我們想先看清楚實際的狀況。',
+  'tech.cta':'預約評估', 'tech.h2':'掃描 · 非侵入式',
+  'tech.p1':'礦物質', 'tech.p2':'氧化壓力', 'tech.p3':'毒性金屬', 'tech.p4':'所需時間', 'tech.p5':'針頭',
+  'tech.yes1':'是', 'tech.yes2':'是', 'tech.dur':'約 2O 分鐘',
+  'tech.foot':'輔助評估工具，單獨並不構成診斷。',
+
+  'cta.eyebrow':'從這裡開始',
+  'cta.title':'健康檢測<em>免費</em>，只需三分鐘。',
+  'cta.lead':'身體十七個面向、一份症狀清單，還有一個分數。如果超過十項，我們該談談。',
+  'cta.b1':'開始檢測', 'cta.b2':'用 WhatsApp 聯絡',
+
+  'foot.h1':'診療領域', 'foot.a1':'代謝與肥胖', 'foot.a2':'甲狀腺', 'foot.a3':'糖尿病',
+  'foot.a4':'自體免疫', 'foot.a5':'女性荷爾蒙', 'foot.a6':'男性荷爾蒙',
+  'foot.h2':'診所', 'foot.c1':'方法', 'foot.c2':'案例', 'foot.c4':'預約',
+  'foot.h3':'聯絡', 'foot.hours':'週一至週五 8:OO–18:OO<br>週六 8:OO–13:OO',
+  'foot.bar':'正分子醫學 · 長壽'
 },
 
 /* ═══════════════════════════════════════════════════ ITALIANO */

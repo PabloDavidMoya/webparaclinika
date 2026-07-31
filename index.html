@@ -14,9 +14,11 @@
 <link rel="alternate" hreflang="en" href="./">
 <link rel="alternate" hreflang="es" href="./?lang=es">
 <link rel="alternate" hreflang="pt" href="./?lang=pt">
+<link rel="alternate" hreflang="fr" href="./?lang=fr">
 <link rel="alternate" hreflang="it" href="./?lang=it">
 <link rel="alternate" hreflang="de" href="./?lang=de">
 <link rel="alternate" hreflang="ru" href="./?lang=ru">
+<link rel="alternate" hreflang="zh-Hant" href="./?lang=zh-Hant">
 <link rel="alternate" hreflang="ko" href="./?lang=ko">
 <link rel="alternate" hreflang="x-default" href="./">
 
@@ -24,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <!-- ?v= : subir el número al publicar cambios, para que nadie quede con la versión vieja en caché -->
-<link rel="stylesheet" href="assets/css/style.css?v=6">
+<link rel="stylesheet" href="assets/css/style.css?v=7">
 </head>
 
 <body>
@@ -51,6 +53,21 @@
     <rect width="24" height="16" fill="#009B3A"/>
     <path d="M12 2.3L21.4 8 12 13.7 2.6 8Z" fill="#FEDF00"/>
     <circle cx="12" cy="8" r="3.3" fill="#002776"/>
+  </symbol>
+
+  <symbol id="fl-fr" viewBox="0 0 24 16">
+    <rect width="24" height="16" fill="#fff"/>
+    <rect width="8" height="16" fill="#002395"/>
+    <rect x="16" width="8" height="16" fill="#ED2939"/>
+  </symbol>
+
+  <!-- Taiwán: sol de doce rayos sobre cantón azul -->
+  <symbol id="fl-zh-Hant" viewBox="0 0 24 16">
+    <rect width="24" height="16" fill="#FE0000"/>
+    <rect width="12" height="8" fill="#000095"/>
+    <path fill="#fff" d="M6 1.4 6.375 2.6 7.3 1.749 7.025 2.975 8.252 2.7 7.401 3.625 8.6 4 7.401 4.375 8.252 5.3 7.025 5.025 7.3 6.251 6.375 5.4 6 6.6 5.625 5.4 4.7 6.251 4.975 5.025 3.748 5.3 4.599 4.375 3.4 4 4.599 3.625 3.748 2.7 4.975 2.975 4.7 1.749 5.625 2.6Z"/>
+    <circle cx="6" cy="4" r="1.45" fill="#000095"/>
+    <circle cx="6" cy="4" r="1.15" fill="#fff"/>
   </symbol>
 
   <symbol id="fl-it" viewBox="0 0 24 16">
@@ -143,9 +160,11 @@
         <button class="lang__opt is-on" data-lang="en" lang="en" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-en"></use></svg>English</button>
         <button class="lang__opt" data-lang="es" lang="es" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-es"></use></svg>Español</button>
         <button class="lang__opt" data-lang="pt" lang="pt" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-pt"></use></svg>Português</button>
+        <button class="lang__opt" data-lang="fr" lang="fr" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-fr"></use></svg>Français</button>
         <button class="lang__opt" data-lang="it" lang="it" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-it"></use></svg>Italiano</button>
         <button class="lang__opt" data-lang="de" lang="de" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-de"></use></svg>Deutsch</button>
         <button class="lang__opt" data-lang="ru" lang="ru" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-ru"></use></svg>Русский</button>
+        <button class="lang__opt" data-lang="zh-Hant" lang="zh-Hant" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-zh-Hant"></use></svg>繁體中文</button>
         <button class="lang__opt" data-lang="ko" lang="ko" role="menuitem"><svg class="flag" aria-hidden="true"><use href="#fl-ko"></use></svg>한국어</button>
       </div>
     </div>
@@ -438,7 +457,7 @@
   </div>
 </footer>
 
-<script src="assets/js/i18n.js?v=6"></script>
-<script src="assets/js/app.js?v=6"></script>
+<script src="assets/js/i18n.js?v=7"></script>
+<script src="assets/js/app.js?v=7"></script>
 </body>
 </html>

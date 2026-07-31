@@ -4,7 +4,8 @@ Sitio estático de una sola página para **Policlínica NutriSlim** (Asunción, 
 Sin dependencias, sin build, sin framework: se abre `index.html` y funciona.
 
 **Inglés por defecto**, con selector de idioma —y banderita— en la barra de navegación.
-Siete idiomas: inglés, español, portugués, italiano, alemán, ruso y coreano.
+Nueve idiomas: inglés, español, portugués, francés, italiano, alemán, ruso,
+chino tradicional y coreano.
 
 ---
 
@@ -89,8 +90,9 @@ perdería justamente lo que lo hace ver caro. Por eso:
 
 | Idioma | Titulares | Cuerpo | Monoespaciada |
 |---|---|---|---|
-| en · es · pt · it · de | Fraunces | Inter | Space Mono |
+| en · es · pt · fr · it · de | Fraunces | Inter | Space Mono |
 | ru | Playfair Display | Inter | JetBrains Mono |
+| zh-Hant | Noto Serif TC | Noto Sans TC | Noto Sans TC |
 | ko | Noto Serif KR | Noto Sans KR | Noto Sans KR |
 
 Se cargan **sólo cuando el visitante elige ese idioma** (`loadFont()` en
@@ -115,6 +117,24 @@ resuelto: harían falta ajustes de dirección en todo el layout.
 la primera impresión sea siempre en inglés. Para activarla, poner `AUTO = true`
 en `app.js` (sección 2).
 
+### Por qué chino tradicional y no simplificado
+
+El código es `zh-Hant` (chino tradicional, el que se usa en Taiwán), no `zh-Hans`.
+No es un detalle técnico, es una decisión de mercado:
+
+- Paraguay es uno de los poquísimos países que mantiene **relaciones diplomáticas
+  formales con Taiwán**. Hay comunidad taiwanesa en Asunción, vínculos
+  institucionales, y un paciente taiwanés puede efectivamente viajar y llegar a
+  la clínica.
+- China continental sería otro proyecto entero: **Google está bloqueado**, con lo
+  cual las tipografías de este sitio no cargarían y habría que auto-alojarlas;
+  y todo el embudo —WhatsApp, Instagram— es invisible allá. Haría falta WeChat,
+  Baidu y Xiaohongshu.
+
+> **A tener en cuenta**: en Taiwán la mensajería dominante es **LINE**, no
+> WhatsApp. Si el mercado taiwanés se activa de verdad, el botón de contacto de
+> esa versión debería apuntar a LINE.
+
 ### ⚠ Las traducciones necesitan revisión nativa
 
 Están escritas con criterio, pero es copy médico y hay que hacerlo bien:
@@ -122,9 +142,9 @@ Están escritas con criterio, pero es copy médico y hay que hacerlo bien:
 - **Alemán**: Alemania tiene la ley de publicidad sanitaria más estricta de
   Europa (Heilmittelwerbegesetz). La diferencia entre *begleiten* (acompañar) y
   *behandeln* (tratar) no es de estilo, es legal.
-- **Ruso y coreano**: revisar con un hablante nativo antes de publicar. Una
-  preposición mal puesta en un texto de salud destruye la credibilidad que el
-  diseño construyó.
+- **Ruso, chino y coreano**: revisar con un hablante nativo antes de publicar.
+  Una preposición mal puesta en un texto de salud destruye la credibilidad que
+  el diseño construyó.
 - En los seis idiomas se respetó el criterio de **evaluar y acompañar, nunca
   curar ni garantizar**. Si alguien retoca una traducción, tiene que mantenerlo.
 
