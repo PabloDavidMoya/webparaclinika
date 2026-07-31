@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <!-- ?v= : subir el número al publicar cambios, para que nadie quede con la versión vieja en caché -->
-<link rel="stylesheet" href="assets/css/style.css?v=31">
+<link rel="stylesheet" href="assets/css/style.css?v=33">
 </head>
 
 <body>
@@ -167,6 +167,28 @@
       <li class="dock__item"><a href="#tecnologia"><span data-i18n="nav.tech">Technology</span></a></li>
       <li class="dock__item"><a href="#contacto"><span data-i18n="nav.book">Book</span></a></li>
     </ul>
+
+    <!-- Selector de paleta. Es una herramienta para que la Dra. Lilian elija;
+         una vez decidido, se borra este bloque y listo. -->
+    <div class="theme" id="theme">
+      <button class="theme__toggle" id="themeToggle" aria-expanded="false" aria-haspopup="true" aria-label="Colour palette">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="9" cy="9" r="5.4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="15" cy="15" r="5.4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+      </button>
+      <div class="theme__menu" id="themeMenu" role="menu">
+        <button class="theme__opt is-on" data-theme="bosque" role="menuitem">
+          <span class="sw"><i style="background:#f3f1ec"></i><i style="background:#1a2418"></i><i style="background:#6f8039"></i></span>BOSQUE
+        </button>
+        <button class="theme__opt" data-theme="salvia" role="menuitem">
+          <span class="sw"><i style="background:#F9F8F6"></i><i style="background:#1E2229"></i><i style="background:#7A8B79"></i><i style="background:#C5A059"></i></span>SALVIA
+        </button>
+        <button class="theme__opt" data-theme="noche" role="menuitem">
+          <span class="sw"><i style="background:#171A1F"></i><i style="background:#ECEAE5"></i><i style="background:#9AAC98"></i><i style="background:#C5A059"></i></span>NOCHE
+        </button>
+      </div>
+    </div>
 
     <div class="lang" id="lang">
       <button class="lang__toggle" id="langToggle" aria-expanded="false" aria-haspopup="true" aria-label="Language">
@@ -534,7 +556,7 @@
   </div>
 </footer>
 
-<script src="assets/js/i18n.js?v=31"></script>
-<script src="assets/js/app.js?v=31"></script>
+<script src="assets/js/i18n.js?v=33"></script>
+<script src="assets/js/app.js?v=33"></script>
 </body>
 </html>

@@ -165,6 +165,76 @@
 
   applyLang(readLang(), false);
 
+  /* ==========================================================
+     2-BIS · PALETA
+     Herramienta de decisión: la elección queda en la URL, así se
+     puede mandar un enlace directo a cada versión. Cuando esté
+     decidida, se borra este bloque y el del HTML.
+     ========================================================== */
+
+  var THEMES = ['bosque', 'salvia', 'noche'];
+
+  function applyTheme(name, push) {
+    if (THEMES.indexOf(name) < 0) name = THEMES[0];
+    document.documentElement.setAttribute('data-theme', name);
+
+    $$('.theme__opt').forEach(function (b) {
+      b.classList.toggle('is-on', b.dataset.theme === name);
+    });
+
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute('content',
+        getComputedStyle(document.documentElement).getPropertyValue('--overlay').trim());
+    }
+
+    try { localStorage.setItem('ns-theme', name); } catch (e) {}
+
+    if (push) {
+      var url = new URL(location.href);
+      if (name === THEMES[0]) url.searchParams.delete('theme');
+      else url.searchParams.set('theme', name);
+      history.replaceState(null, '', url);
+    }
+  }
+
+  (function initTheme() {
+    var q = new URLSearchParams(location.search).get('theme');
+    var saved = null;
+    try { saved = localStorage.getItem('ns-theme'); } catch (e) {}
+    applyTheme(q || saved || THEMES[0], false);
+  })();
+
+  var themeBox = $('#theme');
+  var themeBtn = $('#themeToggle');
+
+  function closeTheme() {
+    if (!themeBox) return;
+    themeBox.classList.remove('is-open');
+    if (themeBtn) themeBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  if (themeBox && themeBtn) {
+    themeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = themeBox.classList.toggle('is-open');
+      themeBtn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', function (e) {
+      if (!themeBox.contains(e.target)) closeTheme();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeTheme();
+    });
+  }
+
+  $$('.theme__opt').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyTheme(btn.dataset.theme, true);
+      closeTheme();
+    });
+  });
+
   /* — menú desplegable de idiomas — */
   var langBox = $('#lang');
   var langBtn = $('#langToggle');
