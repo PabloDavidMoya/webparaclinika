@@ -496,6 +496,32 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 .btn--light{ border-color:var(--light-20); color:var(--light); }
 .btn--light:hover{ background:var(--light); color:var(--paper-on); border-color:var(--light); }
 .btn--fill{ background:var(--light); color:var(--paper-on); border-color:var(--light); }
+
+/* ── Latido del botón principal ───────────────────────────────────────
+   Mismo gesto que el logo animado de KeyVox: respira cada 3,2 s. Allá
+   escala un 18 %, que en un logo funciona; en un botón se vería de
+   juguete y además distrae al leerlo. Acá escala un 4 % y el peso lo
+   lleva el resplandor, que es lo que el ojo capta de reojo.
+   Se frena al pasar el mouse: ahí manda el estado de hover.
+   ──────────────────────────────────────────────────────────────────── */
+.btn--pulse{
+  animation:btnBreathe 3.2s ease-in-out infinite;
+  will-change:transform, box-shadow;
+}
+@keyframes btnBreathe{
+  0%,100%{
+    transform:scale(1);
+    box-shadow:0 0 0 0 rgba(var(--accent-rgb),0),
+               0 0 0 0 rgba(var(--paper-rgb),0);
+  }
+  50%{
+    transform:scale(1.04);
+    box-shadow:0 0 26px 2px rgba(var(--accent-rgb),.55),
+               0 0 56px 10px rgba(var(--paper-rgb),.18);
+  }
+}
+.btn--pulse:hover, .btn--pulse:focus-visible{ animation:none; }
+@media (prefers-reduced-motion:reduce){ .btn--pulse{ animation:none; } }
 .btn--fill:hover{ background:var(--lime); border-color:var(--lime); color:var(--overlay); }
 
 .round{
