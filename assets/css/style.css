@@ -750,7 +750,7 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 
 .table__preview{
   position:fixed; top:0; left:0; z-index:60;
-  width:300px; height:380px;
+  width:196px; height:250px;
   pointer-events:none; opacity:0;
   transform:translate(-50%,-50%) scale(.94);
   transition:opacity .5s var(--expoOut), transform .6s var(--expoOut);

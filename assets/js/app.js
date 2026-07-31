@@ -511,10 +511,10 @@
     });
 
     table.addEventListener('mousemove', function (e) {
-      tx = e.clientX + 190;
+      tx = e.clientX + 148;
       ty = e.clientY;
       /* que no se escape por el borde derecho */
-      if (tx > window.innerWidth - 170) tx = e.clientX - 190;
+      if (tx > window.innerWidth - 120) tx = e.clientX - 148;
     }, { passive: true });
 
     (function follow() {
