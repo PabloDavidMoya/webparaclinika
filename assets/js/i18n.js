@@ -40,6 +40,9 @@ window.NS_I18N = {
 
 /* ══════════════════════════════════════════════════════ ESPAÑOL */
 es: {
+  'p1.t':'El test gratuito', 'p1.d':'Diecisiete áreas del cuerpo, una lista de síntomas y un puntaje. Tres minutos, sin costo. Si supera las diez dolencias, conviene que hablemos.', 'p1.b':'Hacer el test',
+  'p2.t':'Escribinos directo', 'p2.d':'Dudas sobre tu caso, qué incluye una consulta o cómo agendar desde el exterior. Contesta alguien de la clínica.', 'p2.b':'Abrir WhatsApp',
+
   'meta.title': 'NutriSlim — Medicina funcional, metabolismo y longevidad',
   'meta.desc' : 'Medicina ortomolecular y ciencia de la longevidad. No tratamos el síntoma: evaluamos la causa. Asunción, Paraguay. Consultas presenciales y online.',
 
@@ -108,6 +111,9 @@ es: {
 
 /* ══════════════════════════════════════════════════ PORTUGUÊS */
 pt: {
+  'p1.t':'O teste gratuito', 'p1.d':'Dezessete áreas do corpo, uma lista de sintomas e uma pontuação. Três minutos, sem custo. Se passar de dez queixas, vale a pena conversarmos.', 'p1.b':'Fazer o teste',
+  'p2.t':'Fale direto com a gente', 'p2.d':'Dúvidas sobre o seu caso, o que inclui uma consulta ou como agendar do exterior. Quem responde é alguém da clínica.', 'p2.b':'Abrir o WhatsApp',
+
   'meta.title':'NutriSlim — Medicina funcional, metabolismo e longevidade',
   'meta.desc' :'Medicina ortomolecular e ciência da longevidade. Não tratamos o sintoma: avaliamos a causa. Assunção, Paraguai. Consultas presenciais e online.',
 
@@ -176,6 +182,9 @@ pt: {
 
 /* ═══════════════════════════════════════════════════ FRANÇAIS */
 fr: {
+  'p1.t':'Le test gratuit', 'p1.d':'Dix-sept zones du corps, une liste de symptômes et un score. Trois minutes, sans frais. S’il dépasse dix troubles, il vaut mieux qu’on en parle.', 'p1.b':'Faire le test',
+  'p2.t':'Écrivez-nous directement', 'p2.d':'Des questions sur votre cas, sur ce qu’inclut une consultation ou sur la prise de rendez-vous depuis l’étranger. Quelqu’un de la clinique répond.', 'p2.b':'Ouvrir WhatsApp',
+
   'meta.title':'NutriSlim — Médecine fonctionnelle, métabolisme et longévité',
   'meta.desc' :'Médecine orthomoléculaire et science de la longévité. Nous ne traitons pas le symptôme : nous évaluons la cause. Asunción, Paraguay. Consultations sur place et en ligne.',
 
@@ -244,6 +253,9 @@ fr: {
 
 /* ═══════════════════════════════════════════════ 繁體中文 (台灣) */
 'zh-Hant': {
+  'p1.t':'免費健康檢測', 'p1.d':'身體十七個面向、一份症狀清單，還有一個分數。三分鐘，完全免費。如果超過十項，我們該談談。', 'p1.b':'開始檢測',
+  'p2.t':'直接與我們聯絡', 'p2.d':'關於您的狀況、看診包含哪些項目，或如何從海外預約。由診所人員親自回覆。', 'p2.b':'開啟 WhatsApp',
+
   'meta.title':'NutriSlim — 功能醫學、代謝與長壽',
   'meta.desc' :'正分子醫學與長壽科學。我們不處理症狀，而是評估原因。巴拉圭亞松森，提供門診與線上諮詢。',
 
@@ -312,6 +324,9 @@ fr: {
 
 /* ═══════════════════════════════════════════════════ ITALIANO */
 it: {
+  'p1.t':'Il test gratuito', 'p1.d':'Diciassette aree del corpo, un elenco di sintomi e un punteggio. Tre minuti, senza costi. Se supera i dieci disturbi, è il caso di parlarne.', 'p1.b':'Fai il test',
+  'p2.t':'Scrivici direttamente', 'p2.d':'Dubbi sul tuo caso, su cosa include una visita o su come prenotare dall’estero. Risponde qualcuno della clinica.', 'p2.b':'Apri WhatsApp',
+
   'meta.title':'NutriSlim — Medicina funzionale, metabolismo e longevità',
   'meta.desc' :'Medicina ortomolecolare e scienza della longevità. Non trattiamo il sintomo: valutiamo la causa. Asunción, Paraguay. Consulti in sede e online.',
 
@@ -380,6 +395,9 @@ it: {
 
 /* ═══════════════════════════════════════════════════ DEUTSCH */
 de: {
+  'p1.t':'Der kostenlose Test', 'p1.d':'Siebzehn Körperbereiche, eine Symptomliste und ein Punktwert. Drei Minuten, kostenfrei. Liegt er über zehn Beschwerden, sollten wir sprechen.', 'p1.b':'Test machen',
+  'p2.t':'Schreiben Sie uns direkt', 'p2.d':'Fragen zu Ihrem Fall, zum Umfang einer Sprechstunde oder zur Terminvereinbarung aus dem Ausland. Es antwortet jemand aus der Praxis.', 'p2.b':'WhatsApp öffnen',
+
   'meta.title':'NutriSlim — Funktionelle Medizin, Stoffwechsel und Langlebigkeit',
   'meta.desc' :'Orthomolekulare Medizin und Longevity-Wissenschaft. Wir behandeln nicht das Symptom, sondern beurteilen die Ursache. Asunción, Paraguay. Vor Ort und online.',
 
@@ -448,6 +466,9 @@ de: {
 
 /* ═══════════════════════════════════════════════════ РУССКИЙ */
 ru: {
+  'p1.t':'Бесплатный тест', 'p1.d':'Семнадцать областей организма, список симптомов и балл. Три минуты, бесплатно. Если он выше десяти жалоб — нам стоит поговорить.', 'p1.b':'Пройти тест',
+  'p2.t':'Напишите нам напрямую', 'p2.d':'Вопросы о вашем случае, о том, что входит в приём, или как записаться из-за рубежа. Отвечает сотрудник клиники.', 'p2.b':'Открыть WhatsApp',
+
   'meta.title':'NutriSlim — Функциональная медицина, метаболизм и долголетие',
   'meta.desc' :'Ортомолекулярная медицина и наука о долголетии. Мы не лечим симптом — мы выясняем причину. Асунсьон, Парагвай. Очные и онлайн-консультации.',
 
@@ -516,6 +537,9 @@ ru: {
 
 /* ═══════════════════════════════════════════════════════ 한국어 */
 ko: {
+  'p1.t':'무료 건강 검사', 'p1.d':'몸의 열일곱 개 영역, 증상 목록, 그리고 점수. 3분이면 되고 비용은 없습니다. 열 가지를 넘는다면 한번 이야기해 보는 게 좋습니다.', 'p1.b':'검사 받기',
+  'p2.t':'바로 문의하기', 'p2.d':'본인의 상태, 진료에 포함되는 항목, 해외에서의 예약 방법에 대한 문의. 클리닉 담당자가 직접 답변합니다.', 'p2.b':'WhatsApp 열기',
+
   'meta.title':'NutriSlim — 기능의학, 대사 그리고 장수',
   'meta.desc' :'정분자의학과 장수 과학. 증상이 아니라 원인을 평가합니다. 파라과이 아순시온. 대면 및 온라인 진료.',
 

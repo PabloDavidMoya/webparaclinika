@@ -636,6 +636,22 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 }
 .cases__nav{ display:flex; gap:10px; }
 
+/* barra de avance: se ve cuánto falta para que cambie solo */
+.cases__progress{
+  flex:1; max-width:260px; height:1px; margin:0 clamp(16px,3vw,44px);
+  background:var(--light-20); position:relative; overflow:hidden;
+}
+.cases__progress i{
+  position:absolute; inset:0; background:var(--lime);
+  transform:scaleX(0); transform-origin:left;
+}
+.cases__progress.is-running i{
+  animation:caseFill var(--auto,5s) linear forwards;
+}
+.cases__progress.is-paused i{ animation-play-state:paused; }
+@keyframes caseFill{ to{ transform:scaleX(1); } }
+@media (max-width:640px){ .cases__progress{ display:none; } }
+
 @media (max-width:900px){
   .case{ grid-template-columns:1fr; }
   .case__media{ height:230px; }
@@ -816,6 +832,68 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 }
 .cta .lead{ text-align:center; }
 .cta .hero__actions{ justify-content:center; }
+
+/* ── Dos caminos ──────────────────────────────────────────────────────
+   El test gratuito y el WhatsApp dejan de ser dos botones compitiendo
+   y pasan a ser dos destinos con peso propio. La tarjeta del test es
+   más ancha: sigue siendo la puerta principal.
+   ──────────────────────────────────────────────────────────────────── */
+
+.paths{
+  display:grid; grid-template-columns:1.1fr .9fr;
+  gap:clamp(16px,2.2vw,30px);
+  text-align:left; margin-top:clamp(42px,5vw,70px);
+}
+
+.path{
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column; align-items:flex-start;
+  min-height:clamp(380px,50vh,520px);
+  padding:clamp(28px,3.4vw,48px);
+  border-radius:var(--media-radius);
+  background:rgba(26,36,24,.028);
+  box-shadow:var(--lift), var(--edge-dark);
+}
+
+.path__n{
+  font-family:var(--font-mono); font-size:11px;
+  letter-spacing:.2em; color:var(--dark-40);
+  margin:0 0 auto;                 /* empuja el resto hacia abajo */
+}
+.path__t{
+  font-family:var(--font-display); font-weight:300;
+  font-size:clamp(25px,2.7vw,40px); line-height:1.08;
+  letter-spacing:-.02em; margin:0 0 14px;
+}
+.path__d{
+  font-size:15px; line-height:1.65; color:var(--dark-60);
+  max-width:36ch; margin:0 0 28px;
+}
+
+/* — la de WhatsApp lleva el video de fondo — */
+.path--wa{ padding:0; background:var(--overlay); color:var(--light); box-shadow:var(--lift), var(--edge-light); }
+.path__video{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; filter:saturate(.74) contrast(1.04);
+}
+.path__scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(to top,
+    rgba(18,26,17,.94) 0%, rgba(18,26,17,.72) 38%,
+    rgba(18,26,17,.34) 68%, rgba(18,26,17,.18) 100%);
+}
+.path__body{
+  position:relative; z-index:1;
+  display:flex; flex-direction:column; align-items:flex-start;
+  height:100%; padding:clamp(28px,3.4vw,48px);
+}
+.path--wa .path__n{ color:var(--light-40); }
+.path--wa .path__d{ color:var(--light-60); }
+
+@media (max-width:820px){
+  .paths{ grid-template-columns:1fr; }
+  .path{ min-height:340px; }
+}
 
 .foot{
   background:var(--overlay); color:var(--light);

@@ -389,10 +389,49 @@
 
     if (elTot) elTot.textContent = pad(slides.length, 4);
 
+    /* — avance automático —
+       Cada caso queda en pantalla el tiempo suficiente para leerlo. Se
+       frena si el visitante pasa el mouse por encima, si toca las flechas
+       o si la pestaña deja de estar visible: nadie vuelve para encontrar
+       que el carrusel siguió corriendo solo. */
+    var AUTO   = 5000;
+    var bar    = $('#caseBar');
+    var stage  = $('.cases');
+    var timer  = null;
+    var hover  = false;
+
+    if (bar) bar.style.setProperty('--auto', AUTO + 'ms');
+
+    /* Se mide en el momento, no con una bandera guardada: así no depende
+       de que el observador haya llegado a dispararse. */
+    function inView() {
+      if (!stage) return true;
+      var r = stage.getBoundingClientRect();
+      var vis = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0));
+      return r.height > 0 && vis / r.height >= 0.3;
+    }
+
+    function stopAuto() {
+      clearTimeout(timer);
+      timer = null;
+      if (bar) bar.classList.remove('is-running');
+    }
+
+    function startAuto() {
+      stopAuto();
+      if (REDUCED || hover || document.hidden || slides.length < 2 || !inView()) return;
+      if (bar) {
+        void bar.offsetWidth;            /* reinicia la animación de la barra */
+        bar.classList.add('is-running');
+      }
+      timer = setTimeout(function () { go(idx + 1); }, AUTO);
+    }
+
     var go = function (n) {
       idx = (n + slides.length) % slides.length;
       track.style.transform = 'translateX(' + (-idx * 100) + '%)';
       if (elIdx) elIdx.textContent = pad(idx + 1, 4);
+      startAuto();
     };
 
     var next = $('#caseNext');
@@ -404,6 +443,29 @@
       if (e.key === 'ArrowRight') go(idx + 1);
       if (e.key === 'ArrowLeft')  go(idx - 1);
     });
+
+    if (stage) {
+      stage.addEventListener('mouseenter', function () { hover = true;  stopAuto(); });
+      stage.addEventListener('mouseleave', function () { hover = false; startAuto(); });
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopAuto(); else startAuto();
+    });
+
+    /* al entrar o salir de pantalla, arranca o frena.
+       Con un freno por tiempo, no con requestAnimationFrame: leer una
+       posición no necesita esperar al próximo cuadro, y así sigue
+       funcionando aunque el navegador esté frenando las animaciones. */
+    var last = 0;
+    function onScroll() {
+      var now = Date.now();
+      if (now - last < 150) return;
+      last = now;
+      if (inView()) { if (!timer) startAuto(); }
+      else stopAuto();
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
 
     /* deslizar con el dedo */
     var sx = null;
