@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free health assessment — NutriSlim</title>
+<meta name="description" id="metaDesc" content="Seventeen areas of the body, one screen at a time. Two minutes, free, no diagnosis — just a clear picture of what your body has been signalling.">
+<meta name="theme-color" content="#121a11">
+<meta name="robots" content="index,follow">
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=34">
+<link rel="stylesheet" href="assets/css/quiz.css?v=34">
+</head>
+
+<body class="quiz-page">
+
+<!-- ══════════════════════════════════════════ CURSOR -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <div class="cursor__dot"></div>
+  <div class="cursor__label"></div>
+</div>
+
+<!-- ══════════════════════════════════════════ BARRA -->
+<header class="qbar" id="qbar">
+  <a class="qbar__back" href="./" data-cursor="Home" aria-label="NutriSlim">
+    <svg viewBox="0 0 40 64" fill="none" aria-hidden="true">
+      <path d="M9 3c0 12 22 15 22 26S9 49 9 61" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M31 3c0 12-22 15-22 26s22 15 22 32" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M13 13h14M9 29h22M13 47h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".5"/>
+    </svg>
+  </a>
+
+  <div class="qbar__track" id="qbarTrack" aria-hidden="true"><i id="qbarFill"></i></div>
+  <p class="qbar__count"><span id="qStep">OO</span> <span id="qOf">of</span> <span id="qTotal">17</span></p>
+</header>
+
+<main class="quiz" id="quiz">
+
+  <!-- ── portada ─────────────────────────────────────────── -->
+  <section class="qscreen is-on" id="qIntro">
+    <div class="qshell">
+      <p class="eyebrow" id="iKicker">Free health assessment</p>
+      <h1 class="qtitle" id="iTitle">Let's map what your body is telling you.</h1>
+      <p class="qlead" id="iLead"></p>
+      <p class="qnote" id="iHonest"></p>
+      <button class="btn btn--solid qstart" id="qStart" data-cursor="Start"></button>
+    </div>
+  </section>
+
+  <!-- ── preguntas (se generan solas) ─────────────────────── -->
+  <section class="qscreen" id="qStage">
+    <div class="qshell">
+      <p class="qarea__n" id="qAreaN">OO1</p>
+      <h2 class="qarea__t" id="qAreaT"></h2>
+      <div class="qchips" id="qChips"></div>
+
+      <div class="qnav">
+        <button class="btn qback" id="qBack" data-cursor="Back"></button>
+        <button class="btn btn--solid qnext" id="qNext" data-cursor="Next"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── resultado ───────────────────────────────────────── -->
+  <section class="qscreen" id="qResult">
+    <div class="qshell qshell--wide">
+      <p class="eyebrow" id="rKicker">Your result</p>
+
+      <div class="rhead">
+        <div class="rscore">
+          <span class="rscore__n" id="rScore">O</span>
+          <span class="rscore__l" id="rScoreL"></span>
+        </div>
+        <div class="rsay">
+          <h2 class="rsay__t" id="rTitle"></h2>
+          <p class="rsay__d" id="rText"></p>
+        </div>
+      </div>
+
+      <p class="rtop" id="rTopLabel"></p>
+      <div class="rbars" id="rBars"></div>
+
+      <div class="ract">
+        <a class="btn btn--solid" id="rCta" href="#" target="_blank" rel="noopener" data-cursor="WhatsApp"></a>
+        <button class="btn" id="rAgain" data-cursor="Again"></button>
+      </div>
+      <p class="rlegal" id="rLegal"></p>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/js/i18n.js?v=34"></script>
+<script src="assets/js/quiz-data.js?v=34"></script>
+<script src="assets/js/quiz.js?v=34"></script>
+</body>
+</html>

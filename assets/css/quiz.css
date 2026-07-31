@@ -1,0 +1,166 @@
+/* ============================================================
+   NUTRISLIM — test de salud
+   Hereda todo el sistema de style.css: colores, tipografías,
+   curvas y paletas. Acá sólo vive lo propio del test.
+   ============================================================ */
+
+.quiz-page{ background:var(--overlay); color:var(--light); }
+.quiz-page::after{ opacity:.045; }   /* el grano, un punto más suave sobre oscuro */
+
+/* ── barra superior ─────────────────────────────────────────── */
+.qbar{
+  position:fixed; top:0; left:0; right:0; z-index:60;
+  display:flex; align-items:center; gap:clamp(14px,3vw,32px);
+  padding:16px var(--gut);
+  background:linear-gradient(to bottom, rgba(var(--scrim-rgb),.9), rgba(var(--scrim-rgb),0));
+}
+.qbar__back{ display:grid; place-items:center; width:24px; color:var(--sand); flex:none; }
+.qbar__back svg{ width:15px; height:24px; }
+
+.qbar__track{ flex:1; height:1px; background:var(--light-20); position:relative; overflow:hidden; }
+.qbar__track i{
+  position:absolute; inset:0; background:var(--sand);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .7s var(--expoOut);
+}
+.qbar__count{
+  flex:none; margin:0;
+  font-family:var(--font-mono); font-size:11px;
+  letter-spacing:.16em; color:var(--light-40);
+}
+.qbar.is-hidden .qbar__track, .qbar.is-hidden .qbar__count{ opacity:0; }
+
+/* ── pantallas ──────────────────────────────────────────────── */
+.quiz{ min-height:100vh; min-height:100svh; display:grid; }
+.qscreen{
+  grid-area:1/1; display:flex; align-items:center;
+  padding:clamp(96px,14vh,150px) 0 clamp(48px,8vh,90px);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transform:translateY(14px);
+  transition:opacity .55s var(--expoOut), transform .65s var(--expoOut), visibility .55s;
+}
+.qscreen.is-on{ opacity:1; visibility:visible; pointer-events:auto; transform:none; }
+
+.qshell{ width:100%; max-width:760px; margin-inline:auto; padding-inline:var(--gut); }
+.qshell--wide{ max-width:1040px; }
+
+/* ── portada ────────────────────────────────────────────────── */
+.qtitle{
+  font-family:var(--font-display); font-weight:300;
+  font-size:clamp(32px,5.2vw,64px); line-height:1.04;
+  letter-spacing:-.025em; margin:0 0 26px; color:var(--light);
+}
+.qlead{ font-size:clamp(16px,1.4vw,19px); line-height:1.65; color:var(--light-60); margin:0 0 20px; }
+.qlead em{ font-style:normal; color:var(--sand); }
+.qnote{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.12em;
+  color:var(--light-40); margin:0 0 40px;
+}
+.qstart{ min-width:180px; justify-content:center; }
+
+/* ── pregunta ───────────────────────────────────────────────── */
+.qarea__n{
+  font-family:var(--font-mono); font-size:11px;
+  letter-spacing:.22em; color:var(--sand); margin:0 0 16px;
+}
+.qarea__t{
+  font-family:var(--font-display); font-weight:300;
+  font-size:clamp(30px,4.4vw,52px); line-height:1.06;
+  letter-spacing:-.02em; margin:0 0 clamp(28px,4vh,44px); color:var(--light);
+}
+
+.qchips{ display:flex; flex-wrap:wrap; gap:9px; margin-bottom:clamp(32px,5vh,52px); }
+.qchip{
+  display:inline-flex; align-items:center; gap:9px;
+  padding:12px 18px 12px 15px; border-radius:100px;
+  border:1px solid var(--light-20); color:var(--light-60);
+  font-size:14.5px; line-height:1.2; text-align:left;
+  transition:border-color .35s var(--expoOut), color .35s var(--expoOut),
+             background .35s var(--expoOut), transform .35s var(--expoOut);
+}
+.qchip:hover{ border-color:var(--light-40); color:var(--light); }
+.qchip::before{
+  content:""; flex:none; width:15px; height:15px; border-radius:50%;
+  border:1px solid var(--light-40);
+  transition:background .3s var(--expoOut), border-color .3s var(--expoOut),
+             box-shadow .3s var(--expoOut);
+}
+.qchip.is-on{
+  color:var(--overlay); background:var(--sand); border-color:var(--sand);
+  transform:translateY(-1px);
+}
+.qchip.is-on::before{
+  background:var(--overlay); border-color:var(--overlay);
+  box-shadow:inset 0 0 0 3px var(--sand);
+}
+
+.qnav{ display:flex; gap:10px; align-items:center; }
+.qback{ color:var(--light-40); border-color:var(--light-10); }
+.qback:hover{ background:transparent; border-color:var(--light-40); color:var(--light); }
+.qnext{ min-width:150px; justify-content:center; }
+
+/* ── resultado ──────────────────────────────────────────────── */
+.rhead{
+  display:grid; grid-template-columns:auto 1fr;
+  gap:clamp(24px,4vw,56px); align-items:center;
+  padding-bottom:clamp(30px,4vh,46px);
+  border-bottom:1px solid var(--light-10);
+  margin-bottom:clamp(30px,4vh,46px);
+}
+.rscore{ display:flex; flex-direction:column; align-items:flex-start; }
+.rscore__n{
+  font-family:var(--font-display); font-weight:300;
+  font-size:clamp(72px,11vw,150px); line-height:.85;
+  letter-spacing:-.05em; color:var(--sand);
+}
+.rscore__l{
+  font-family:var(--font-mono); font-size:10px;
+  letter-spacing:.18em; color:var(--light-40); margin-top:12px;
+}
+.rsay__t{
+  font-family:var(--font-display); font-weight:300;
+  font-size:clamp(24px,3.2vw,42px); line-height:1.1;
+  letter-spacing:-.02em; margin:0 0 14px; color:var(--light);
+}
+.rsay__d{ font-size:15.5px; line-height:1.7; color:var(--light-60); margin:0; max-width:52ch; }
+
+.rtop{
+  font-family:var(--font-mono); font-size:10.5px;
+  letter-spacing:.2em; color:var(--light-40); margin:0 0 22px;
+}
+.rbars{ display:flex; flex-direction:column; gap:2px; margin-bottom:clamp(36px,5vh,56px); }
+.rbar{
+  display:grid; grid-template-columns:44px 1fr 34px;
+  gap:16px; align-items:center;
+  padding:11px 0; border-bottom:1px solid var(--light-10);
+}
+.rbar__n, .rbar__v{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.1em;
+  color:var(--light-40);
+}
+.rbar__v{ text-align:right; color:var(--sand); }
+.rbar__t{ display:flex; align-items:center; gap:14px; font-size:14.5px; color:var(--light-60); }
+.rbar__line{ flex:1; height:2px; background:var(--light-10); position:relative; overflow:hidden; }
+.rbar__line i{
+  position:absolute; inset:0; background:var(--sand);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .9s var(--expoOut);
+}
+.rbar.is-in .rbar__line i{ transform:scaleX(var(--w,0)); }
+.rbar--zero .rbar__t{ color:var(--light-20); }
+
+.ract{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+.rlegal{
+  font-family:var(--font-mono); font-size:10px; line-height:1.8;
+  letter-spacing:.05em; color:var(--light-40);
+  max-width:80ch; margin:34px 0 0;
+  padding-top:20px; border-top:1px solid var(--light-10);
+}
+.rnote{ font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; color:var(--light-40); }
+
+@media (max-width:700px){
+  .rhead{ grid-template-columns:1fr; }
+  .rbar{ grid-template-columns:38px 1fr 30px; gap:10px; }
+  .rbar__t{ font-size:13px; }
+  .qnext, .qstart{ flex:1; }
+}

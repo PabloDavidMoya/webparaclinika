@@ -207,6 +207,44 @@ Si alguna foto ya viene graduada y no hay que tocarla, se le agrega la clase
 
 ---
 
+## El test de salud (`test.html`)
+
+Reescritura del cuestionario de la clínica. El original tiene los 84 síntomas
+en una sola página y pide nombre, teléfono y email **antes** de empezar.
+
+Acá: **un área por pantalla**, 17 pantallas, chips en vez de casillas, barra de
+progreso, avance con teclado (`Enter`, flechas) o deslizando con el dedo, y el
+progreso guardado en `localStorage` por si cierran a la mitad.
+
+Tres decisiones que cambian la conversión:
+
+1. **No se piden datos.** Ni al principio ni al final. El resultado se ve
+   completo, gratis y sin registrarse.
+2. **Se eliminó la opción "Ninguna"** de cada grupo. No marcar nada ya
+   significa ninguna: eran 17 decisiones inútiles. El botón lo dice solo —
+   si no marcaste nada dice «Nada de esto», si marcaste algo dice «Siguiente».
+3. **El resultado viaja a WhatsApp ya escrito.** El botón final abre WhatsApp
+   con el puntaje, la cantidad de áreas y las tres donde más marcó. La clínica
+   recibe un mensaje con contexto en vez de un «hola, información».
+
+> **No hay backend y es a propósito.** Un formulario que no guarda nada es peor
+> que no tenerlo. Cuando haya CRM, se agrega el envío ahí y el enlace de
+> WhatsApp queda como segunda vía.
+
+### Idiomas del test
+
+Por ahora **inglés y español**. Los otros siete caen a inglés. Son 84 síntomas
+de vocabulario médico por idioma: hay que traducirlos con criterio profesional,
+no automáticamente. El contenido está en `assets/js/quiz-data.js` y agregar un
+idioma es duplicar el bloque.
+
+### El criterio legal
+
+La pantalla de resultado dice, en el idioma que corresponda, que es una
+herramienta de orientación y no un diagnóstico, que no reemplaza la consulta y
+que ningún resultado debe usarse para iniciar, suspender ni modificar un
+tratamiento. **Ese texto no se saca.**
+
 ## La apertura
 
 1. Sube el telón oscuro (1 s).
