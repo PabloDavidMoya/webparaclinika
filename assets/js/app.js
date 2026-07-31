@@ -514,10 +514,13 @@
       if (e.key === 'ArrowLeft')  go(idx - 1);
     });
 
-    if (stage) {
-      stage.addEventListener('mouseenter', function () { hover = true;  stopAuto(); });
-      stage.addEventListener('mouseleave', function () { hover = false; startAuto(); });
-    }
+    /* La pausa por mouse encima se limita al texto y a los controles.
+       La sección ocupa toda la pantalla: si escuchara el bloque entero,
+       el cursor estaría siempre "encima" y no avanzaría nunca. */
+    $$('.case__block').concat($$('.cases__ui')).forEach(function (zone) {
+      zone.addEventListener('mouseenter', function () { hover = true;  stopAuto(); });
+      zone.addEventListener('mouseleave', function () { hover = false; startAuto(); });
+    });
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) stopAuto(); else startAuto();
     });
