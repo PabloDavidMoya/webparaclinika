@@ -394,7 +394,7 @@
        frena si el visitante pasa el mouse por encima, si toca las flechas
        o si la pestaña deja de estar visible: nadie vuelve para encontrar
        que el carrusel siguió corriendo solo. */
-    var AUTO   = 5000;
+    var AUTO   = 3400;   /* tiempo que queda cada caso en pantalla */
     var bar    = $('#caseBar');
     var stage  = $('.cases');
     var timer  = null;
