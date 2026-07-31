@@ -34,6 +34,12 @@
   --expoIn:    cubic-bezier(.7,0,.84,0);
 
   --radius: 3px;
+  --media-radius: 14px;
+  /* sombra larga y muy suave: levanta la pieza del fondo sin que se vea la sombra */
+  --lift: 0 54px 88px -48px rgba(26,36,24,.55), 0 10px 26px -16px rgba(26,36,24,.18);
+  /* cantos: hilo oscuro sobre crema, hilo de luz sobre material oscuro */
+  --edge-dark:  inset 0 0 0 1px rgba(26,36,24,.07);
+  --edge-light: inset 0 0 0 1px rgba(243,241,236,.10);
   --shell: 1440px;
   --gut: clamp(20px, 4vw, 64px);
 }
@@ -61,6 +67,19 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 ul,ol,dl,dd{ margin:0; padding:0; list-style:none; }
 
 .shell{ width:100%; max-width:var(--shell); margin-inline:auto; padding-inline:var(--gut); }
+
+/* ── Grano ────────────────────────────────────────────────────────────
+   Una capa de ruido finísimo sobre toda la página. Es lo que separa una
+   pantalla "plana digital" de algo que parece impreso: unifica fotos,
+   video y color plano bajo la misma textura. Generado con SVG, cero peso
+   y cero pedidos al servidor.
+   ──────────────────────────────────────────────────────────────────── */
+body::after{
+  content:""; position:fixed; inset:0; z-index:200;
+  pointer-events:none; opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+}
 
 /* que el dock fijo no tape el título al saltar por anclas */
 section[id]{ scroll-margin-top:96px; }
@@ -396,11 +415,31 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 
 .media{
   position:relative; margin:0; overflow:hidden;
-  border-radius:var(--radius);
+  border-radius:var(--media-radius);
   background-color:#e6e3db;
   background-size:cover;
   background-position:var(--pos, center);
+  box-shadow:var(--lift);
 }
+
+/* ── Tratamiento de bordes ────────────────────────────────────────────
+   Un rectángulo con un corte neto contra el fondo se lee como "una caja
+   con una imagen adentro". Tres capas lo resuelven:
+     1. radio de 14 px — suficiente para leerse como decisión, no como error
+     2. --lift  una sombra larguísima y casi invisible: la pieza flota
+     3. un hilo de 1 px que define el canto sin llegar a dibujar un marco
+   ──────────────────────────────────────────────────────────────────── */
+
+.media, .media--video{ box-shadow:var(--lift), var(--edge-dark); }
+.media::before, .media::after, .media--video::after{ border-radius:inherit; }
+
+/* Sobre material oscuro el canto se define con luz, no con sombra:
+   es el mismo principio que el bisel de una pantalla. */
+.media--dark, .media--video,
+.cases .media, .tech .media{ box-shadow:var(--lift), var(--edge-light); }
+
+/* el hero ocupa toda la pantalla: no tiene canto que tratar */
+.hero__bg{ box-shadow:none; }
 .media::before{
   content:""; position:absolute; inset:0;
   background:repeating-linear-gradient(45deg,
@@ -634,7 +673,7 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
   pointer-events:none; opacity:0;
   transform:translate(-50%,-50%) scale(.94);
   transition:opacity .5s var(--expoOut), transform .6s var(--expoOut);
-  box-shadow:0 30px 60px rgba(26,36,24,.22);
+  box-shadow:var(--lift), var(--edge-dark);
 }
 .table__preview.is-on{ opacity:1; transform:translate(-50%,-50%) scale(1); }
 
@@ -661,7 +700,7 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
    note el cambio de material entre una sección y otra. */
 .media--video{
   position:relative; margin:0; overflow:hidden;
-  border-radius:var(--radius); background:#e6e3db;
+  border-radius:var(--media-radius); background:transparent;
 }
 .media--video video{
   width:100%; height:100%; object-fit:cover; display:block;
@@ -726,7 +765,8 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 }
 
 .tech__panel{
-  border:1px solid var(--light-10); border-radius:6px;
+  border:1px solid var(--light-10); border-radius:var(--media-radius);
+  box-shadow:0 40px 70px -46px rgba(0,0,0,.7);
   padding:clamp(22px,3vw,38px);
   background:rgba(243,241,236,.02);
 }
