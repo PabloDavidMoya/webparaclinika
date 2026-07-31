@@ -540,6 +540,16 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
       rgba(18,26,17,.92) 0%, rgba(18,26,17,.72) 34%,
       rgba(18,26,17,.34) 62%, rgba(18,26,17,.30) 100%);
   }
+
+  /* En vertical, la foto apaisada se recorta tanto que la persona queda
+     fuera de cuadro y sólo se ve fondo. Va un recorte propio, 3:4, con
+     ella arriba para que el texto entre debajo sin taparla. */
+  .hero__bg{
+    background-image:url('../img/mujerdeblanco-vert.webp') !important;
+    background-position:center 18% !important;
+  }
+  .hero{ min-height:92vh; min-height:92svh; }
+  .hero__title{ font-size:clamp(30px, 8.2vw, 44px); max-width:16ch; }
 }
 .hero__title em{ color:var(--lime); }
 
