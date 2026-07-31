@@ -414,10 +414,11 @@
       row.addEventListener('mouseenter', function () {
         var img = row.dataset.img;
         if (img) {
-          preview.style.setProperty('--img', "url('" + img + "')");
-          preview.removeAttribute('data-label');
+          preview.style.backgroundImage = "url('" + img + "')";
+          preview.classList.add('has-img');
         } else {
-          preview.style.removeProperty('--img');
+          preview.style.backgroundImage = '';
+          preview.classList.remove('has-img');
           preview.setAttribute('data-label', row.querySelector('.row__id').textContent);
         }
         preview.classList.add('is-on');

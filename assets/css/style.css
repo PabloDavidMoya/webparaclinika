@@ -394,8 +394,8 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
   position:relative; margin:0; overflow:hidden;
   border-radius:var(--radius);
   background-color:#e6e3db;
-  background-image:var(--img, none);
-  background-size:cover; background-position:center;
+  background-size:cover;
+  background-position:var(--pos, center);
 }
 .media::before{
   content:""; position:absolute; inset:0;
@@ -409,7 +409,19 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
   letter-spacing:.2em; color:var(--dark-40); text-align:center;
   padding:20px;
 }
-.media[style*="--img"]::before, .media[style*="--img"]::after{ content:none; }
+.media.has-img::after{ content:none; }
+
+/* Tratamiento de color: baja saturación y una capa oliva encima, para que
+   cualquier foto —de banco o propia— entre en la paleta en vez de pelearse
+   con ella. Es lo que hace que un sitio se vea de una sola pieza. */
+.media.has-img{ filter:saturate(.74) contrast(1.04); }
+.media.has-img::before{
+  background:linear-gradient(172deg,
+    rgba(111,128,57,.13) 0%, rgba(26,36,24,.10) 45%, rgba(26,36,24,.26) 100%);
+}
+/* .media--raw : sin tratamiento, para fotos que ya vengan graduadas */
+.media--raw.has-img{ filter:none; }
+.media--raw.has-img::before{ background:none; }
 .media--dark{ background-color:#1f2a1d; }
 .media--dark::before{
   background:repeating-linear-gradient(45deg,

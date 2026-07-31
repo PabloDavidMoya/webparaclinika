@@ -161,19 +161,40 @@ apuntarlos a las nuevas rutas.
 ## Cómo poner las fotos
 
 Todos los espacios de imagen son `.media` con una etiqueta que dice qué va ahí.
-Para colocar una foto, se agrega la variable `--img` en el propio elemento:
+Para colocar una foto se agrega la clase `has-img` y la imagen de fondo:
 
 ```html
-<figure class="hero__media media" style="--img:url('assets/img/consultorio.jpg')"></figure>
+<figure class="hero__media media has-img"
+        style="background-image:url('assets/img/consultorio.jpg'); --pos:center 22%">
+</figure>
 ```
 
-La etiqueta gris desaparece sola cuando hay imagen. No hay que tocar el CSS.
+- `has-img` apaga la etiqueta gris y enciende el tratamiento de color.
+- `--pos` controla el encuadre (equivale a `background-position`). Como la foto
+  se recorta para llenar el espacio, este valor decide qué parte se ve.
+  `center 22%` deja aire sobre la cabeza; `center 50%` es el centro exacto.
+
+> **Ojo con las rutas.** No usar una variable CSS para la imagen: Chrome resuelve
+> las `url()` que viven dentro de una variable como relativas a la *hoja de
+> estilos*, no al documento, y la ruta termina en `assets/css/assets/img/…`.
+> Por eso `background-image` va escrito directo en el `style`.
 
 En la tabla de áreas, cada fila acepta su propia foto en el atributo `data-img`:
 
 ```html
 <a class="row" href="#contacto" data-img="assets/img/tiroides.jpg" data-cursor="Ver">
 ```
+
+### El tratamiento de color
+
+Toda foto con `has-img` recibe `saturate(.74) contrast(1.04)` más una capa de
+oliva a carbón por encima. No es decoración: es lo que hace que fotos de
+distintas fuentes —banco de imágenes, cámara del consultorio, celular— se vean
+como si pertenecieran al mismo sitio. Sin eso, cada foto trae su propia
+temperatura de color y la página se desarma.
+
+Si alguna foto ya viene graduada y no hay que tocarla, se le agrega la clase
+`media--raw` y queda tal cual.
 
 **Fotos recomendadas** (todas horizontales salvo donde se indique):
 
