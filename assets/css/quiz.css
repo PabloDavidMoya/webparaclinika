@@ -59,10 +59,33 @@
 .qstart{ min-width:180px; justify-content:center; }
 
 /* ── pregunta ───────────────────────────────────────────────── */
+/* ── íconos de área ─────────────────────────────────────────
+   Trazo fino, un solo color, y un tinte propio por área: apenas
+   suficiente para que cada pantalla se sienta distinta sin salirse
+   de la paleta. El color va en --tint, lo pone el motor. */
+.qsprite{ position:absolute; width:0; height:0; overflow:hidden; }
+
+.qarea__i{
+  width:clamp(40px,5vw,54px); height:clamp(40px,5vw,54px);
+  margin:0 0 22px;
+  color:var(--tint, var(--sand));
+  fill:none; stroke:currentColor;
+  stroke-width:1.35; stroke-linecap:round; stroke-linejoin:round;
+  filter:drop-shadow(0 0 22px color-mix(in srgb, var(--tint, var(--sand)) 35%, transparent));
+  animation:qIcon .7s var(--expoOut);
+}
+@keyframes qIcon{
+  from{ opacity:0; transform:translateY(10px) scale(.94); }
+}
+
 .qarea__n{
   font-family:var(--font-mono); font-size:11px;
-  letter-spacing:.22em; color:var(--sand); margin:0 0 16px;
+  letter-spacing:.22em; color:var(--tint, var(--sand)); margin:0 0 16px;
 }
+
+/* las fichas marcadas toman el color del área */
+.qchip.is-on{ background:var(--tint, var(--sand)); border-color:var(--tint, var(--sand)); }
+.qchip.is-on::before{ box-shadow:inset 0 0 0 3px var(--tint, var(--sand)); }
 .qarea__t{
   font-family:var(--font-display); font-weight:300;
   font-size:clamp(30px,4.4vw,52px); line-height:1.06;
@@ -130,24 +153,30 @@
 }
 .rbars{ display:flex; flex-direction:column; gap:2px; margin-bottom:clamp(36px,5vh,56px); }
 .rbar{
-  display:grid; grid-template-columns:44px 1fr 34px;
-  gap:16px; align-items:center;
+  display:grid; grid-template-columns:44px 22px 1fr 34px;
+  gap:14px; align-items:center;
   padding:11px 0; border-bottom:1px solid var(--light-10);
+}
+.rbar__i{
+  width:20px; height:20px; fill:none; stroke:currentColor;
+  stroke-width:1.35; stroke-linecap:round; stroke-linejoin:round;
+  color:var(--tint, var(--light-20));
 }
 .rbar__n, .rbar__v{
   font-family:var(--font-mono); font-size:11px; letter-spacing:.1em;
   color:var(--light-40);
 }
-.rbar__v{ text-align:right; color:var(--sand); }
+.rbar__v{ text-align:right; color:var(--tint, var(--sand)); }
 .rbar__t{ display:flex; align-items:center; gap:14px; font-size:14.5px; color:var(--light-60); }
 .rbar__line{ flex:1; height:2px; background:var(--light-10); position:relative; overflow:hidden; }
 .rbar__line i{
-  position:absolute; inset:0; background:var(--sand);
+  position:absolute; inset:0; background:var(--tint, var(--sand));
   transform:scaleX(0); transform-origin:left;
   transition:transform .9s var(--expoOut);
 }
 .rbar.is-in .rbar__line i{ transform:scaleX(var(--w,0)); }
 .rbar--zero .rbar__t{ color:var(--light-20); }
+.rbar--zero .rbar__i{ color:var(--light-10); }
 
 .ract{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
 .rlegal{
@@ -160,7 +189,8 @@
 
 @media (max-width:700px){
   .rhead{ grid-template-columns:1fr; }
-  .rbar{ grid-template-columns:38px 1fr 30px; gap:10px; }
+  .rbar{ grid-template-columns:34px 18px 1fr 28px; gap:9px; }
+  .rbar__i{ width:17px; height:17px; }
   .rbar__t{ font-size:13px; }
   .qnext, .qstart{ flex:1; }
 }

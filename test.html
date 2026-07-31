@@ -16,11 +16,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=34">
-<link rel="stylesheet" href="assets/css/quiz.css?v=34">
+<link rel="stylesheet" href="assets/css/style.css?v=35">
+<link rel="stylesheet" href="assets/css/quiz.css?v=35">
 </head>
 
 <body class="quiz-page">
+
+<!-- ══════════════════════════════════════════ ÍCONOS DE LAS 17 ÁREAS
+     Dibujados a mano, un solo trazo fino, mismo lenguaje que la hélice
+     del dock. Dan calidez y hacen la pantalla escaneable sin bajar el
+     registro: un dibujito de colores tiraría abajo el posicionamiento. -->
+<svg class="qsprite" aria-hidden="true" focusable="false"><defs>
+  <g id="a1"><path d="M6.5 5h7.5a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8.5"/></g>
+  <g id="a2"><path d="M12 4.5v15M8.5 19.5h7M5 7.5h14M5 7.5 2.6 13.6a3.4 3.4 0 0 0 4.8 0Z M19 7.5l-2.4 6.1a3.4 3.4 0 0 0 4.8 0Z"/></g>
+  <g id="a3"><path d="M12 8.6v7.2M12 8.6c-1.4-2-5.6-2.5-6.6.5s1.9 6.3 4.3 5.3S12 11.5 12 8.6Z M12 8.6c1.4-2 5.6-2.5 6.6.5s-1.9 6.3-4.3 5.3S12 11.5 12 8.6Z"/></g>
+  <g id="a4"><path d="M12 3.6c3.4 4.1 5.4 6.7 5.4 9.2a5.4 5.4 0 0 1-10.8 0c0-2.5 2-5.1 5.4-9.2Z"/></g>
+  <g id="a5"><circle cx="7.2" cy="7.2" r="3"/><circle cx="16.8" cy="16.8" r="3"/><path d="M9.4 9.4l5.2 5.2"/></g>
+  <g id="a6"><path d="M4.5 11.5a7.5 4 0 0 1 15 0 7.5 6 0 0 1-15 0Z M4.5 11.5h15"/></g>
+  <g id="a7"><path d="M12 19.6s-7.2-4.4-7.2-9.2a4.2 4.2 0 0 1 7.2-2.7 4.2 4.2 0 0 1 7.2 2.7c0 4.8-7.2 9.2-7.2 9.2Z"/></g>
+  <g id="a8"><path d="M7.6 3.8c2.7 0 2.8 1.1 4.4 1.1s1.7-1.1 4.4-1.1 3.3 2.3 3.3 4.8c0 3.2-1.5 4.3-2.2 7.6-.4 1.9-.9 2.9-1.9 2.9-1.7 0-1.5-5-3.6-5s-1.9 5-3.6 5c-1 0-1.5-1-1.9-2.9-.7-3.3-2.2-4.4-2.2-7.6 0-2.5.6-4.8 3.3-4.8Z"/></g>
+  <g id="a9"><rect x="4.2" y="4.2" width="15.6" height="15.6" rx="4"/><circle cx="9" cy="10" r=".85"/><circle cx="14.6" cy="8.6" r=".85"/><circle cx="11.8" cy="14.2" r=".85"/><circle cx="15.8" cy="14.8" r=".85"/></g>
+  <g id="a10"><path d="M8.4 20c0-2.8-1.6-3.4-1.6-6.8a5.4 5.4 0 0 1 10.8 0c0 2.4-1.9 3.5-3.4 3.5s-2-1-2-2.1a1.9 1.9 0 0 1 3.6-.7"/></g>
+  <g id="a11"><path d="M12.8 3.4v7.2c0 1.4 2 2.5 2 4.2a2.7 2.7 0 0 1-2.7 2.7h-1M8.6 15.2a3.2 3.2 0 0 0 6.3 0"/></g>
+  <g id="a12"><path d="M12 4.2v9M12 9.2c-1-1.5-3-2.4-4.4-1.4s-2.4 4.4-1.9 7.8 2.4 4.4 3.9 3.4 2.4-1.9 2.4-3.9M12 9.2c1-1.5 3-2.4 4.4-1.4s2.4 4.4 1.9 7.8-2.4 4.4-3.9 3.4-2.4-1.9-2.4-3.9"/></g>
+  <g id="a13"><path d="M2.6 12S6.2 6.2 12 6.2 21.4 12 21.4 12 17.8 17.8 12 17.8 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="2.9"/></g>
+  <g id="a14"><path d="M15.4 20v-3.1c0-.9.5-1.4 1.3-1.7l1.4-.6c.6-.3.8-.8.5-1.4l-1.2-2.3A6.3 6.3 0 1 0 6.6 14v6"/></g>
+  <g id="a15"><path d="M15.4 20v-3.1c0-.9.5-1.4 1.3-1.7l1.4-.6c.6-.3.8-.8.5-1.4l-1.2-2.3A6.3 6.3 0 1 0 6.6 14v6"/><path d="M12.6 12.4a1.7 1.7 0 1 1-1.1-2.9 2 2 0 0 1 2 1.6"/></g>
+  <g id="a16"><path d="M18.8 14.6A7.4 7.4 0 0 1 9.4 5.3a7.4 7.4 0 1 0 9.4 9.3Z"/><path d="M17.2 3.4l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8Z"/></g>
+  <g id="a17"><path d="M12 5.5v13M5.5 12h13"/><path d="M7.4 7.4l9.2 9.2M16.6 7.4l-9.2 9.2" opacity=".4"/></g>
+</defs></svg>
+
 
 <!-- ══════════════════════════════════════════ CURSOR -->
 <div class="cursor" id="cursor" aria-hidden="true">
@@ -58,6 +83,7 @@
   <!-- ── preguntas (se generan solas) ─────────────────────── -->
   <section class="qscreen" id="qStage">
     <div class="qshell">
+      <svg class="qarea__i" id="qAreaI" viewBox="0 0 24 24" aria-hidden="true"><use href="#a1"></use></svg>
       <p class="qarea__n" id="qAreaN">OO1</p>
       <h2 class="qarea__t" id="qAreaT"></h2>
       <div class="qchips" id="qChips"></div>
@@ -98,8 +124,8 @@
 
 </main>
 
-<script src="assets/js/i18n.js?v=34"></script>
-<script src="assets/js/quiz-data.js?v=34"></script>
-<script src="assets/js/quiz.js?v=34"></script>
+<script src="assets/js/i18n.js?v=35"></script>
+<script src="assets/js/quiz-data.js?v=35"></script>
+<script src="assets/js/quiz.js?v=35"></script>
 </body>
 </html>

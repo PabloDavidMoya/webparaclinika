@@ -14,6 +14,14 @@
 
   var WA = '595991638194';
 
+  /* Un tinte por área. Todos desaturados y de la misma familia: dan
+     variedad sin que la pantalla se vuelva un semáforo. */
+  var TINT = [
+    '#A9C04F', '#C7BFAE', '#C5A059', '#8FB3A8', '#B9A88C', '#C9A08F',
+    '#C98A85', '#D7CFC0', '#C4A6B4', '#9FB4C7', '#A8BFA0', '#92B7B3',
+    '#BFC79A', '#CDBBA0', '#B3ABC9', '#A7C2B8', '#C7BFAE'
+  ];
+
   function pad(n, len) {
     return String(n).padStart(len || 2, '0').replace(/0/g, 'O');
   }
@@ -95,6 +103,14 @@
     $('#qStep').textContent  = pad(i + 1);
     $('#qbarFill').style.transform = 'scaleX(' + ((i + 1) / AREA.length) + ')';
 
+    /* ícono y color propios del área */
+    var tint = TINT[i % TINT.length];
+    $('#qStage').style.setProperty('--tint', tint);
+    $('#qbarFill').style.background = tint;
+    var ico = $('#qAreaI');
+    ico.querySelector('use').setAttribute('href', '#a' + (i + 1));
+    ico.style.animation = 'none'; void ico.offsetWidth; ico.style.animation = '';
+
     var box = $('#qChips');
     box.innerHTML = '';
     a.items.forEach(function (label, k) {
@@ -150,7 +166,7 @@
 
     /* barras: cada área, proporción marcada sobre el total del área */
     var rows = AREA.map(function (a, i) {
-      return { n: i + 1, name: a.n, hit: picked[i].length, max: a.items.length };
+      return { n: i + 1, name: a.n, hit: picked[i].length, max: a.items.length, tint: TINT[i % TINT.length] };
     }).sort(function (x, y) {
       /* manda la cantidad real. Si ordenara por proporción, un área de
          un solo ítem treparía al primer puesto con un solo clic. */
@@ -163,8 +179,10 @@
       var el = document.createElement('div');
       el.className = 'rbar' + (r.hit ? '' : ' rbar--zero');
       el.style.setProperty('--w', r.max ? (r.hit / r.max) : 0);
+      if (r.hit) el.style.setProperty('--tint', r.tint);
       el.innerHTML =
         '<span class="rbar__n">' + pad(r.n, 3) + '</span>' +
+        '<svg class="rbar__i" viewBox="0 0 24 24" aria-hidden="true"><use href="#a' + r.n + '"></use></svg>' +
         '<span class="rbar__t">' + r.name + '<span class="rbar__line"><i></i></span></span>' +
         '<span class="rbar__v">' + (r.hit || '·') + '</span>';
       box.appendChild(el);
