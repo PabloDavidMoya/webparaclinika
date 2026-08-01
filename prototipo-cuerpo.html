@@ -93,8 +93,13 @@ body::after{ opacity:.045; }
 .p-body{ justify-self:center; }
 .p-body svg{ height:min(58vh,470px); width:auto; max-width:100%; overflow:visible; }
 
-.b-base{ fill:rgba(var(--paper-rgb),.085); transition:fill .8s var(--expoOut); }
-.b-base.is-skin{ fill:rgba(var(--paper-rgb),.20); }
+.b-base .b-line{
+  fill:rgba(var(--paper-rgb),.045);
+  stroke:rgba(var(--paper-rgb),.32);
+  stroke-width:1.1; stroke-linejoin:round; stroke-linecap:round;
+  transition:fill .8s var(--expoOut), stroke .8s var(--expoOut);
+}
+.b-base.is-skin .b-line{ stroke:rgba(var(--paper-rgb),.55); }
 
 .b-zone{
   opacity:0;
@@ -217,24 +222,46 @@ body::after{ opacity:.045; }
    ════════════════════════════════════════════════════════════ */
 
 function shapes(kind){
-  var hips  = kind === 'f' ? 40 : 34;      /* cadera */
-  var shou  = kind === 'f' ? 40 : 47;      /* hombro */
-  var waist = kind === 'f' ? 27 : 32;
-  if (kind === 'n'){ hips = 37; shou = 43; waist = 30; }
-  return ''
-    + '<ellipse cx="100" cy="44" rx="25" ry="29"/>'
-    + '<rect x="92" y="66" width="16" height="20" rx="7"/>'
-    + '<path d="M'+(100-shou)+' 100 C'+(100-shou)+' 90 '+(100-shou+14)+' 84 100 84'
-        + ' C'+(100+shou-14)+' 84 '+(100+shou)+' 90 '+(100+shou)+' 100'
-        + ' L'+(100+waist)+' 196 C'+(100+waist)+' 206 '+(100+14)+' 212 100 212'
-        + ' C'+(100-14)+' 212 '+(100-waist)+' 206 '+(100-waist)+' 196 Z"/>'
-    + '<path d="M'+(100-waist-2)+' 202 L'+(100+waist+2)+' 202 L'+(100+hips)+' 252'
-        + ' C'+(100+hips)+' 264 '+(100+16)+' 270 100 270'
-        + ' C'+(100-16)+' 270 '+(100-hips)+' 264 '+(100-hips)+' 252 Z"/>'
-    + '<rect x="'+(100-shou-9)+'" y="98" width="18" height="132" rx="9" transform="rotate(5 '+(100-shou)+' 98)"/>'
-    + '<rect x="'+(100+shou-9)+'" y="98" width="18" height="132" rx="9" transform="rotate(-5 '+(100+shou)+' 98)"/>'
-    + '<rect x="74" y="258" width="23" height="196" rx="11"/>'
-    + '<rect x="103" y="258" width="23" height="196" rx="11"/>';
+  /* Media silueta dibujada de un solo trazo: desde la coronilla, baja por
+     el perfil izquierdo, rodea la mano, vuelve por la axila, sigue el
+     costado, la pierna, el pie y sube por la cara interna hasta la ingle.
+     Espejada da el cuerpo entero sin línea central.
+
+     Tres medidas cambian según la silueta —hombro, cintura y cadera—
+     y la curva se adapta sola. */
+  var SH, WA, HI;                      /* menor x = más ancho */
+  if (kind === 'f'){ SH = 58; WA = 78; HI = 58; }
+  else if (kind === 'm'){ SH = 50; WA = 71; HI = 66; }
+  else { SH = 54; WA = 75; HI = 62; }
+
+  var d = 'M100 12'
+    + 'C87 12 79 24 79 40'                          /* cráneo */
+    + 'C79 53 86 63 91 67'                          /* mandíbula */
+    + 'C91 71 91 74 89 78'                          /* cuello */
+    + 'C86 84 78 86 70 90'                          /* trapecio */
+    + 'C63 93 '+(SH+3)+' 99 '+SH+' 107'             /* hombro */
+    + 'C'+(SH-3)+' 116 '+(SH-5)+' 128 '+(SH-6)+' 142'   /* brazo */
+    + 'C'+(SH-7)+' 160 '+(SH-9)+' 180 '+(SH-10)+' 198'  /* antebrazo */
+    + 'C'+(SH-11)+' 210 '+(SH-12)+' 222 '+(SH-12)+' 231'
+    + 'C'+(SH-12)+' 238 '+(SH-8)+' 242 '+(SH-4)+' 239'  /* mano */
+    + 'C'+(SH-1)+' 236 '+(SH+1)+' 229 '+(SH+2)+' 221'
+    + 'C'+(SH+4)+' 204 '+(SH+6)+' 186 '+(SH+8)+' 170'   /* cara interna */
+    + 'C'+(SH+10)+' 152 '+(SH+12)+' 134 '+(SH+14)+' 120'
+    + 'C'+(SH+15)+' 116 '+(SH+16)+' 114 '+(SH+17)+' 112'/* axila */
+    + 'C'+(WA-2)+' 130 '+(WA-1)+' 152 '+WA+' 172'       /* costado a cintura */
+    + 'C'+(WA+1)+' 190 '+(HI+5)+' 202 '+(HI+5)+' 216'   /* cadera */
+    + 'C'+(HI+2)+' 230 '+HI+' 248 '+HI+' 270'           /* muslo */
+    + 'C'+HI+' 292 '+(HI+2)+' 310 '+(HI+3)+' 330'       /* rodilla */
+    + 'C'+(HI+4)+' 352 '+(HI+6)+' 382 '+(HI+8)+' 410'   /* pantorrilla */
+    + 'C'+(HI+8)+' 422 '+(HI+10)+' 430 '+(HI+16)+' 430' /* tobillo */
+    + 'C86 430 94 430 96 428'                       /* pie */
+    + 'C98 426 97 416 96 404'
+    + 'C95 380 94 352 93 326'                       /* pierna, cara interna */
+    + 'C92 300 94 274 97 252'
+    + 'C98 246 99 242 100 238';                     /* ingle */
+
+  return '<path class="b-line" d="'+d+'"/>'
+       + '<path class="b-line" d="'+d+'" transform="translate(200 0) scale(-1 1)"/>';
 }
 
 /* Zonas: dónde se enciende cada área. r = radio del resplandor. */
@@ -345,7 +372,10 @@ function paintBody(host, upto, popZone){
 
     if (a.zone === 'skin'){            /* la piel tiñe todo el contorno */
       base.classList.toggle('is-skin', n > 0);
-      base.style.fill = n ? hexA(a.tint, 0.16 + ratio * 0.22) : '';
+      $$('.b-line', base).forEach(function(pt){
+        pt.style.stroke = n ? hexA(a.tint, 0.45 + ratio * 0.35) : '';
+        pt.style.fill   = n ? hexA(a.tint, 0.05 + ratio * 0.07) : '';
+      });
       return;
     }
     $$('.b-zone[data-a="'+i+'"]', svg).forEach(function(c){
