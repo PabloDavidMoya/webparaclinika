@@ -315,7 +315,7 @@
      En la segunda visita de la sesión el telón no aparece y la foto se
      sostiene menos: el efecto ya lo vieron.
      ──────────────────────────────────────────────────────────────── */
-  var CURTAIN   = 2200;
+  var CURTAIN   = 3700;
   var HERO_HOLD = REDUCED ? 0 : (seen ? 1100 : 1800);
 
   function openDock() { if (dock) dock.classList.add('is-in'); }
@@ -336,7 +336,7 @@
 
     var count = $('#loaderCount');
     var t0    = performance.now();
-    var DUR   = CURTAIN - 400;   /* el contador termina antes de que suba */
+    var DUR   = CURTAIN - 700;   /* el contador termina antes de que suba */
 
     (function tick(now) {
       var p = Math.min(1, (now - t0) / DUR);
