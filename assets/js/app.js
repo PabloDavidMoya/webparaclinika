@@ -309,9 +309,14 @@
   var dock   = $('#dock');
   var seen   = sessionStorage.getItem('ns-seen');
 
-  /* Cuánto se sostiene sola la foto del hero antes de que entre el texto.
-     En la segunda visita de la sesión se acorta: el efecto ya lo vieron. */
-  var HERO_HOLD = REDUCED ? 0 : (seen ? 1100 : 2600);
+  /* ── Tiempos de la apertura ───────────────────────────────────────
+     CURTAIN   el telón se sostiene con el logo puesto y después sube
+     HERO_HOLD la foto queda sola antes de que entre el título
+     En la segunda visita de la sesión el telón no aparece y la foto se
+     sostiene menos: el efecto ya lo vieron.
+     ──────────────────────────────────────────────────────────────── */
+  var CURTAIN   = 2200;
+  var HERO_HOLD = REDUCED ? 0 : (seen ? 1100 : 1800);
 
   function openDock() { if (dock) dock.classList.add('is-in'); }
 
@@ -331,7 +336,7 @@
 
     var count = $('#loaderCount');
     var t0    = performance.now();
-    var DUR   = 620;
+    var DUR   = CURTAIN - 400;   /* el contador termina antes de que suba */
 
     (function tick(now) {
       var p = Math.min(1, (now - t0) / DUR);
@@ -348,7 +353,7 @@
       setTimeout(function () { loader.classList.add('is-gone'); }, 1100);
       /* el telón tarda 1 s en subir; recién ahí empieza a contar la foto */
       setTimeout(revealHero, 1000 + HERO_HOLD);
-    }, DUR + 180);
+    }, CURTAIN);
   }
 
   /* ==========================================================

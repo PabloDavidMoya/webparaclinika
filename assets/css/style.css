@@ -163,18 +163,43 @@ section[id]{ scroll-margin-top:96px; }
 .loader.is-gone{ display:none; }
 
 .loader__mark{ display:flex; flex-direction:column; align-items:center; gap:16px; }
+
 /* El logo original venía sobre fondo negro. Se le generó canal alfa a partir
-   de la luminancia (ver README), así que acá va limpio, sin recuadro. */
-.loader__logo{ width:clamp(210px, 26vw, 340px); height:auto; }
+   de la luminancia (ver README), así que acá va limpio, sin recuadro.
+
+   Aparece con un barrido diagonal de borde difuso: una máscara en degradado
+   a 115° más grande que el propio logo, que se desplaza de una esquina a la
+   otra. No es un fundido —el logo se va dibujando— y ese es el gesto de la
+   referencia. */
+.loader__logo{
+  width:clamp(210px, 26vw, 340px); height:auto;
+  -webkit-mask-image:linear-gradient(115deg,
+    transparent 0 20%, rgba(0,0,0,.25) 32%, rgba(0,0,0,.75) 46%, #000 60%);
+          mask-image:linear-gradient(115deg,
+    transparent 0 20%, rgba(0,0,0,.25) 32%, rgba(0,0,0,.75) 46%, #000 60%);
+  -webkit-mask-size:260% 260%;   mask-size:260% 260%;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  animation:logoWipe 1.9s var(--expoOut) .12s both;
+}
+@keyframes logoWipe{
+  from{
+    -webkit-mask-position:0% 0%; mask-position:0% 0%;
+    opacity:.2; transform:scale(1.04);
+  }
+  to{
+    -webkit-mask-position:100% 100%; mask-position:100% 100%;
+    opacity:1; transform:none;
+  }
+}
 .loader__word{
   font-family:var(--font-mono); font-size:13px;
   letter-spacing:.42em; text-indent:.42em;
 }
-.loader__mark, .loader__meta{
+/* el pie del telón entra aparte; el logo tiene su propio barrido */
+.loader__meta{
   opacity:0; transform:translateY(12px);
-  animation:loaderIn .9s var(--expoOut) forwards;
+  animation:loaderIn 1s var(--expoOut) .5s forwards;
 }
-.loader__meta{ animation-delay:.1s; }
 @keyframes loaderIn{ to{ opacity:1; transform:none; } }
 
 .loader__meta{
