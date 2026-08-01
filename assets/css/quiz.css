@@ -187,6 +187,18 @@
 }
 .rnote{ font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; color:var(--light-40); }
 
+/* Los ideogramas y el hangul ocupan más alto y no toleran el
+   interletrado ancho; el cirílico necesita algo menos. */
+html[lang="ko"] .qtitle, html[lang="zh-Hant"] .qtitle{ font-size:clamp(27px,4.2vw,50px); line-height:1.28; letter-spacing:0; }
+html[lang="ko"] .qarea__t, html[lang="zh-Hant"] .qarea__t{ font-size:clamp(26px,3.6vw,42px); line-height:1.24; letter-spacing:0; }
+html[lang="ko"] .rsay__t, html[lang="zh-Hant"] .rsay__t{ font-size:clamp(21px,2.7vw,34px); line-height:1.3; letter-spacing:0; }
+html[lang="ko"] .qarea__n, html[lang="zh-Hant"] .qarea__n,
+html[lang="ko"] .qnote,    html[lang="zh-Hant"] .qnote,
+html[lang="ko"] .rtop,     html[lang="zh-Hant"] .rtop{ letter-spacing:.06em; }
+html[lang="ru"] .qtitle{ font-size:clamp(28px,4.4vw,54px); letter-spacing:-.01em; }
+html[lang="ru"] .qarea__t{ font-size:clamp(27px,3.8vw,46px); letter-spacing:-.01em; }
+html[lang="de"] .qarea__t{ font-size:clamp(26px,3.8vw,46px); }
+
 @media (max-width:700px){
   .rhead{ grid-template-columns:1fr; }
   .rbar{ grid-template-columns:34px 18px 1fr 28px; gap:9px; }

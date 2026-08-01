@@ -27,14 +27,17 @@
   }
 
   /* ── idioma ────────────────────────────────────────────────
-     El test existe en inglés y español. Los demás idiomas del
-     sitio caen a inglés hasta que se traduzcan los síntomas. */
+     El test está en los mismos nueve idiomas que el sitio.
+     Se prueba primero el código completo —«zh-Hant» no se puede
+     recortar a dos letras— y recién después el corto. */
   function pickLang() {
     var q = new URLSearchParams(location.search).get('lang');
     var saved = null;
     try { saved = localStorage.getItem('ns-lang'); } catch (e) {}
-    var want = (q || saved || 'en').slice(0, 2);
-    return window.NS_QUIZ[want] ? want : 'en';
+    var want = q || saved || 'en';
+    if (window.NS_QUIZ[want]) return want;
+    var short = want.slice(0, 2);
+    return window.NS_QUIZ[short] ? short : 'en';
   }
 
   var LANG = pickLang();
@@ -42,6 +45,20 @@
   var AREA = T.areas;
 
   document.documentElement.lang = LANG;
+
+  /* Cirílico, hangul e ideogramas necesitan tipografías propias:
+     Fraunces y Space Mono sólo tienen alfabeto latino. Se bajan
+     sólo si el idioma elegido las necesita. */
+  (function loadFont() {
+    var list = window.NS_LANGS || [];
+    var meta = list.filter(function (l) { return l.code === LANG; })[0];
+    var fonts = window.NS_FONTS || {};
+    if (!meta || !meta.font || !fonts[meta.font]) return;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = fonts[meta.font];
+    document.head.appendChild(link);
+  })();
 
   /* la paleta viaja igual que en el resto del sitio */
   (function theme() {
@@ -193,9 +210,14 @@
     /* el puntaje viaja a WhatsApp ya escrito */
     var top = rows.filter(function (r) { return r.hit; }).slice(0, 3)
                   .map(function (r) { return r.name + ' (' + r.hit + ')'; }).join(', ');
+    /* Plantilla por idioma: el espaciado alrededor de los números no es
+       igual en todas las lenguas — el coreano y el chino no llevan espacio
+       antes del contador, el francés sí lo lleva antes de los dos puntos. */
+    var linea = T.wa.score.replace('{n}', total).replace('{a}', areas);
+
     var msg = [
       T.wa.line1, '',
-      T.wa.line2 + ' ' + total + ' ' + T.wa.line3 + ' ' + areas + ' ' + T.wa.line4,
+      linea,
       top ? T.wa.line5 + ' ' + top : '', '',
       T.wa.line6
     ].filter(Boolean).join('\n');

@@ -233,10 +233,21 @@ Tres decisiones que cambian la conversión:
 
 ### Idiomas del test
 
-Por ahora **inglés y español**. Los otros siete caen a inglés. Son 84 síntomas
-de vocabulario médico por idioma: hay que traducirlos con criterio profesional,
-no automáticamente. El contenido está en `assets/js/quiz-data.js` y agregar un
-idioma es duplicar el bloque.
+Los **nueve**, igual que el sitio. Cada bloque de `assets/js/quiz-data.js` tiene
+la misma estructura: 17 áreas, 85 síntomas y 13 claves de resultado.
+
+El texto que viaja a WhatsApp usa **una plantilla por idioma** (`wa.score`) con
+los marcadores `{n}` y `{a}`, no tres pedazos pegados con espacios: el espaciado
+alrededor de los números no es igual en todas las lenguas — el coreano y el
+chino no llevan espacio antes del contador, el francés sí lo lleva antes de los
+dos puntos.
+
+El test carga sus propias tipografías cuando hacen falta (cirílico, hangul,
+ideogramas), leyendo `NS_LANGS` y `NS_FONTS` de `i18n.js`.
+
+> **Antes de publicar**: el ruso, el chino y el coreano necesitan revisión de un
+> hablante nativo. Es vocabulario médico. Y el alemán está sujeto a la
+> Heilmittelwerbegesetz — nada de ese texto puede prometer curación.
 
 ### El criterio legal
 
