@@ -307,7 +307,12 @@
 
   var loader = $('#loader');
   var dock   = $('#dock');
-  var seen   = sessionStorage.getItem('ns-seen');
+
+  /* El telón se muestra una vez por sesión: quien ya lo vio y recarga no
+     tiene por qué volver a esperarlo. Para probarlo cuantas veces haga
+     falta, agregar ?intro a la dirección — fuerza que aparezca siempre. */
+  var force = new URLSearchParams(location.search).has('intro');
+  var seen  = force ? null : sessionStorage.getItem('ns-seen');
 
   /* ── Tiempos de la apertura ───────────────────────────────────────
      CURTAIN   el telón se sostiene con el logo puesto y después sube
