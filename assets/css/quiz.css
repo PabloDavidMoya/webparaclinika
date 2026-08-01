@@ -31,15 +31,40 @@
 .qbar.is-hidden .qbar__track, .qbar.is-hidden .qbar__count{ opacity:0; }
 
 /* ── pantallas ──────────────────────────────────────────────── */
-.quiz{ min-height:100vh; min-height:100svh; display:grid; }
+.quiz{
+  min-height:100vh; min-height:100svh; display:grid; position:relative;
+}
 .qscreen{
-  grid-area:1/1; display:flex; align-items:center;
-  padding:clamp(84px,11vh,120px) 0 clamp(40px,6vh,70px);
+  grid-area:1/1; display:flex;
+  /* `center` a secas reparte el excedente arriba y abajo cuando el
+     contenido no entra: en un teléfono eso empujaba la pregunta fuera
+     de la pantalla y obligaba a scrollear para encontrarla. `safe`
+     centra sólo mientras sobre lugar; si falta, se comporta como
+     `start` y el contenido queda pegado arriba, que es lo correcto. */
+  align-items:center;
+  align-items:safe center;
+  padding:clamp(72px,9vh,110px) 0 clamp(40px,6vh,70px);
+  /* Las cuatro pantallas comparten celda. Con `visibility:hidden` las
+     ocultas seguían ocupando altura, así que la página medía siempre lo
+     que la más larga —el resultado, con sus 17 áreas—: al abrir el test
+     aparecía una barra de scroll de la nada y el contenido de la portada
+     quedaba empujado hacia abajo. Sacándolas del flujo, la página mide
+     exactamente lo que se está viendo. */
+  position:absolute; top:0; left:0; width:100%;
+  /* Fuera del flujo ya no aportan altura, pero una pantalla oculta más
+     larga que la visible seguía estirando el área de scroll. Recortarlas
+     al alto de la ventana la deja en manos de la pantalla activa, que es
+     la única que puede crecer. */
+  max-height:100svh; overflow:hidden;
   opacity:0; visibility:hidden; pointer-events:none;
   transform:translateY(14px);
   transition:opacity .55s var(--expoOut), transform .65s var(--expoOut), visibility .55s;
 }
-.qscreen.is-on{ opacity:1; visibility:visible; pointer-events:auto; transform:none; }
+.qscreen.is-on{
+  position:relative;
+  max-height:none; overflow:visible;
+  opacity:1; visibility:visible; pointer-events:auto; transform:none;
+}
 
 .qshell{ width:100%; max-width:760px; margin-inline:auto; padding-inline:var(--gut); }
 .qshell--wide{ max-width:1040px; }
@@ -265,11 +290,43 @@ html[lang="de"] .qarea__t{ font-size:clamp(26px,3.8vw,46px); }
 .bpick__b span{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.14em; text-align:center; line-height:1.6; }
 
 @media (max-width:900px){
-  .qshell--split, .rsplit{ grid-template-columns:1fr; }
-  .qbody{ order:-1; margin-bottom:18px; }
-  .qbody svg{ height:min(24vh,190px); }
+  /* En el teléfono la altura es el único recurso escaso. Apilar la
+     silueta encima de la pregunta le costaba 220 px al contenido y
+     empujaba el botón fuera de la pantalla: había que scrollear a
+     ciegas para poder avanzar.
+     Se resuelve poniéndola al costado del título, en el hueco que ese
+     bloque ya desperdicia. El `display:contents` del envoltorio deja
+     que sus hijos entren como celdas del mismo grid, así las fichas
+     pueden ocupar el ancho completo debajo de las dos columnas. */
+  .qshell--split{
+    grid-template-columns:1fr 118px;
+    column-gap:16px; row-gap:0; align-items:start;
+  }
+  .qshell--split > div:first-child{ display:contents; }
+  /* Acotadas al recuadro de preguntas: el del resultado también lleva
+     la clase .qbody, y sin el prefijo le nacía una segunda columna. */
+  .qshell--split .qarea__i{ grid-column:1; grid-row:1; margin-bottom:10px; }
+  .qshell--split .qarea__n{ grid-column:1; grid-row:2; }
+  .qshell--split .qarea__t{ grid-column:1; grid-row:3; }
+  .qshell--split .qbody   { grid-column:2; grid-row:1 / span 3; align-self:start; }
+  .qshell--split .qchips  { grid-column:1 / -1; grid-row:4; gap:7px; margin-bottom:22px; }
+  .qshell--split .qnav    { grid-column:1 / -1; grid-row:5; }
+
+  /* Centrar verticalmente es un lujo de pantalla ancha. En el teléfono
+     deja un hueco muerto debajo de la barra de progreso y empuja las
+     fichas hacia abajo: el contenido arranca arriba y punto. */
+  .qscreen{ align-items:start; padding-top:76px; }
+  /* La portada y el resultado sí respiran centrados: son cortos. */
+  #qIntro{ align-items:safe center; padding-top:48px; }
+  .qshell--split .qbody svg{ height:min(17vh,132px); }
+  /* La leyenda sobra al lado del título: el gesto se lee solo. En el
+     resultado vuelve, porque ahí la silueta es el protagonista. */
+  .qshell--split .qbody__l{ display:none; }
+
+  .rsplit{ grid-template-columns:1fr; }
+  .qbody--res{ order:-1; margin-bottom:18px; }
   .qbody--res svg{ height:min(30vh,250px); }
-  .qbody__l{ margin-top:12px; }
+  .qbody--res .qbody__l{ display:block; margin-top:12px; }
   .bpick{ grid-template-columns:1fr; max-width:420px; }
   .bpick__b{ flex-direction:row; justify-content:flex-start; gap:20px; padding:14px 18px; }
   .bpick__b svg{ height:64px; }

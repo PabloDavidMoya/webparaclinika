@@ -1080,6 +1080,37 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
 .cta .lead{ text-align:center; }
 .cta .hero__actions{ justify-content:center; }
 
+/* ── Cierre: "Hablemos" ───────────────────────────────────────────────
+   Comparte fondo con la sección anterior a propósito: no es un bloque
+   nuevo, es el silencio después del argumento. Todo el trabajo lo hace
+   el aire — por eso el padding inferior es el más grande de la página.
+   ──────────────────────────────────────────────────────────────────── */
+.talk{
+  padding:clamp(30px,4vw,60px) 0 clamp(110px,15vw,200px);
+  text-align:center;
+}
+.talk__dot{
+  display:block; width:11px; height:11px; border-radius:50%;
+  background:var(--dark); margin:0 auto clamp(26px,4vw,44px);
+  animation:talkDot 3.2s ease-in-out infinite;
+}
+@keyframes talkDot{ 50%{ transform:scale(1.35); opacity:.55; } }
+@media (prefers-reduced-motion:reduce){ .talk__dot{ animation:none; } }
+
+.talk__title{
+  font-family:var(--font-display);
+  font-size:clamp(54px,11vw,150px);
+  font-weight:300; line-height:.98; letter-spacing:-.035em;
+  margin:0 0 clamp(34px,5vw,56px);
+}
+/* El ruso y el coreano no toleran el mismo interletrado que una serif
+   latina: a -3,5 % los caracteres se tocan. */
+html[lang="ru"] .talk__title,
+html[lang="ko"] .talk__title,
+html[lang="zh-Hant"] .talk__title{ letter-spacing:-.01em; }
+
+.talk__btn{ padding:17px 34px; }
+
 /* ── Dos caminos ──────────────────────────────────────────────────────
    El test gratuito y el WhatsApp dejan de ser dos botones compitiendo
    y pasan a ser dos destinos con peso propio. La tarjeta del test es

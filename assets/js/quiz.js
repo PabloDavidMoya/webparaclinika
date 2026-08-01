@@ -7,6 +7,14 @@
 (function () {
   'use strict';
 
+  /* El navegador restaura la posición de scroll después del load y pisa
+     cualquier scrollTo nuestro: al refrescar, el test aparecía a media
+     página. Siempre arranca en la portada, así que no hay nada que
+     restaurar. */
+  try {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  } catch (e) {}
+
   var $  = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -351,6 +359,9 @@
 
   /* ── una pregunta ─────────────────────────────────────────── */
   function render(i) {
+    /* Cada área es una pantalla nueva: si el visitante bajó a marcar la
+       última ficha, la siguiente pregunta tiene que empezar arriba. */
+    window.scrollTo(0, 0);
     var a = AREA[i];
     $('#qAreaN').textContent = pad(i + 1, 3);
     $('#qAreaT').textContent = a.n;
