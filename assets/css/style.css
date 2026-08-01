@@ -200,7 +200,8 @@ section[id]{ scroll-margin-top:96px; }
 
 .cursor__dot{
   position:absolute; top:0; left:0;
-  width:12px; height:12px; margin:-6px 0 0 -6px;
+  /* 18px navegando (12 + 50 %); sobre un elemento interactivo pasa a 84 */
+  width:18px; height:18px; margin:-9px 0 0 -9px;
   border-radius:50%; background:var(--light);
   transition:width .5s var(--expoOut), height .5s var(--expoOut),
              margin .5s var(--expoOut);
