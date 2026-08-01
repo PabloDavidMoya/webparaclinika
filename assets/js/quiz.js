@@ -48,17 +48,20 @@
 
   /* Cirílico, hangul e ideogramas necesitan tipografías propias:
      Fraunces y Space Mono sólo tienen alfabeto latino. Se bajan
-     sólo si el idioma elegido las necesita. */
-  (function loadFont() {
+     sólo si el idioma elegido las necesita, y una sola vez. */
+  var fontsLoaded = {};
+  function loadFont() {
     var list = window.NS_LANGS || [];
     var meta = list.filter(function (l) { return l.code === LANG; })[0];
     var fonts = window.NS_FONTS || {};
-    if (!meta || !meta.font || !fonts[meta.font]) return;
+    if (!meta || !meta.font || fontsLoaded[meta.font] || !fonts[meta.font]) return;
+    fontsLoaded[meta.font] = true;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = fonts[meta.font];
     document.head.appendChild(link);
-  })();
+  }
+  loadFont();
 
   /* la paleta viaja igual que en el resto del sitio */
   (function theme() {
@@ -75,32 +78,96 @@
   var step   = -1;                                     // -1 portada, n área, AREA.length resultado
 
   try {
+    /* No se guarda el idioma: los índices marcados valen igual en los nueve,
+       así que el progreso sobrevive a un cambio de idioma. */
     var saved = JSON.parse(localStorage.getItem('ns-quiz') || 'null');
-    if (saved && saved.lang === LANG && saved.picked && saved.picked.length === AREA.length) {
+    if (saved && saved.picked && saved.picked.length === AREA.length) {
       picked = saved.picked;
     }
   } catch (e) {}
 
   function save() {
-    try { localStorage.setItem('ns-quiz', JSON.stringify({ lang: LANG, picked: picked })); } catch (e) {}
+    try { localStorage.setItem('ns-quiz', JSON.stringify({ picked: picked })); } catch (e) {}
   }
 
   /* ── textos fijos ─────────────────────────────────────────── */
-  $('#iKicker').textContent = T.intro.kicker;
-  $('#iTitle').textContent  = T.intro.title;
-  $('#iLead').innerHTML     = T.intro.lead;
-  $('#iHonest').textContent = T.intro.honest;
-  $('#qStart').textContent  = T.intro.start;
-  $('#qOf').textContent     = T.ui.of;
-  $('#qTotal').textContent  = pad(AREA.length);
-  $('#qBack').textContent   = T.ui.back;
-  $('#rKicker').textContent = T.result.kicker;
-  $('#rScoreL').textContent = T.result.symptoms;
-  $('#rTopLabel').textContent = T.result.top;
-  $('#rCta').textContent    = T.result.cta;
-  $('#rAgain').textContent  = T.result.again;
-  $('#rLegal').textContent  = T.result.legal;
-  document.title = T.intro.kicker + ' — NutriSlim';
+  function paintStatic() {
+    $('#iKicker').textContent = T.intro.kicker;
+    $('#iTitle').textContent  = T.intro.title;
+    $('#iLead').innerHTML     = T.intro.lead;
+    $('#iHonest').textContent = T.intro.honest;
+    $('#qStart').textContent  = T.intro.start;
+    $('#qOf').textContent     = T.ui.of;
+    $('#qTotal').textContent  = pad(AREA.length);
+    $('#qBack').textContent   = T.ui.back;
+    $('#rKicker').textContent = T.result.kicker;
+    $('#rScoreL').textContent = T.result.symptoms;
+    $('#rTopLabel').textContent = T.result.top;
+    $('#rCta').textContent    = T.result.cta;
+    $('#rAgain').textContent  = T.result.again;
+    $('#rLegal').textContent  = T.result.legal;
+    document.title = T.intro.kicker + ' — NutriSlim';
+  }
+  paintStatic();
+
+  /* ── cambio de idioma en vivo ─────────────────────────────────
+     Las respuestas no se pierden: las 17 áreas y los 85 síntomas
+     están en el mismo orden en los nueve idiomas, así que los
+     índices marcados siguen siendo válidos. */
+  function markLangUI() {
+    var meta = (window.NS_LANGS || []).filter(function (l) { return l.code === LANG; })[0];
+    $$('.lang__opt').forEach(function (b) {
+      b.classList.toggle('is-on', b.dataset.lang === LANG);
+      b.setAttribute('aria-current', b.dataset.lang === LANG);
+    });
+    var code = $('#langCode'), flag = $('#langFlag use');
+    if (code && meta) code.textContent = meta.short;
+    if (flag) flag.setAttribute('href', '#fl-' + LANG);
+  }
+
+  function setLang(code) {
+    if (!window.NS_QUIZ[code] || code === LANG) return;
+    LANG = code;
+    T    = window.NS_QUIZ[LANG];
+    AREA = T.areas;
+    document.documentElement.lang = LANG;
+    loadFont();
+    paintStatic();
+    markLangUI();
+
+    try { localStorage.setItem('ns-lang', LANG); } catch (e) {}
+    var url = new URL(location.href);
+    url.searchParams.set('lang', LANG);
+    history.replaceState(null, '', url);
+
+    if (step >= 0 && step < AREA.length) render(step);
+    else if (step >= AREA.length) finish();
+  }
+
+  markLangUI();
+
+  var langBox = $('#lang'), langBtn = $('#langToggle');
+  function closeLang() {
+    if (!langBox) return;
+    langBox.classList.remove('is-open');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  }
+  if (langBox && langBtn) {
+    langBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = langBox.classList.toggle('is-open');
+      langBtn.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', function (e) {
+      if (!langBox.contains(e.target)) closeLang();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLang();
+    });
+  }
+  $$('.lang__opt').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.lang); closeLang(); });
+  });
 
   /* ── pantallas ────────────────────────────────────────────── */
   var screens = { intro: $('#qIntro'), stage: $('#qStage'), result: $('#qResult') };
