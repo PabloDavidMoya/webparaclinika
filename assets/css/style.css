@@ -1168,7 +1168,22 @@ html[lang="ru"] .cta__title{ letter-spacing:-.01em; line-height:1.1; }
   gap:clamp(28px,4vw,56px);
   padding-bottom:clamp(50px,7vw,90px);
 }
-.foot__logo{ width:clamp(150px,15vw,210px); height:auto; margin-bottom:26px; }
+.foot__logo{
+  width:clamp(150px,15vw,210px); height:auto; margin-bottom:26px;
+  /* mismo latido que el botón del test */
+  animation:btnBreathe 3.2s ease-in-out infinite;
+  will-change:transform, filter;
+}
+/* en el logo el resplandor va por filtro, no por sombra de caja: el PNG
+   tiene fondo transparente y una box-shadow dibujaría un rectángulo */
+@keyframes logoBreathe{
+  0%,100%{ transform:scale(1); filter:drop-shadow(0 0 0 rgba(var(--accent-rgb),0)); }
+  50%{ transform:scale(1.035);
+       filter:drop-shadow(0 0 18px rgba(var(--accent-rgb),.55))
+              drop-shadow(0 0 40px rgba(var(--paper-rgb),.16)); }
+}
+.foot__logo{ animation-name:logoBreathe; }
+@media (prefers-reduced-motion:reduce){ .foot__logo{ animation:none; } }
 
 /* — redes — */
 .social{ display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }

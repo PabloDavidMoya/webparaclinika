@@ -17,6 +17,11 @@
 window.NS_QUIZ = {
 
 en: {
+  body:   { kicker:'Before we start', title:'Which body should we map?',
+            sub:'Only to draw the silhouette. It changes no question and is not stored anywhere.',
+            f:'FEMALE', m:'MALE', n:'RATHER NOT SAY',
+            legend1:'YOUR MAP IS BEING DRAWN', legend2:'WHERE IT CONCENTRATES' },
+
   intro:  { kicker:'Free health assessment',
             title:'Let\'s map what your body is telling you.',
             lead:'Seventeen areas, one screen at a time. Mark only what has been happening <em>regularly over the last 30 days</em>. It takes about two minutes and costs nothing.',
@@ -63,6 +68,11 @@ en: {
 },
 
 es: {
+  body:   { kicker:'Antes de empezar', title:'¿Qué cuerpo mapeamos?',
+            sub:'Solo para dibujar la silueta. No cambia ninguna pregunta y no se guarda en ningún lado.',
+            f:'FEMENINO', m:'MASCULINO', n:'PREFIERO NO INDICARLO',
+            legend1:'TU MAPA SE VA DIBUJANDO', legend2:'DONDE SE CONCENTRA' },
+
   intro:  { kicker:'Test de salud gratuito',
             title:'Vamos a mapear lo que tu cuerpo te está diciendo.',
             lead:'Diecisiete áreas, una pantalla por vez. Marcá solo lo que te pasa <em>de forma recurrente en los últimos 30 días</em>. Toma unos dos minutos y no cuesta nada.',
@@ -110,6 +120,11 @@ es: {
 
 /* ══════════════════════════════════════════════════════ PORTUGUÊS */
 pt: {
+  body:   { kicker:'Antes de começar', title:'Qual corpo vamos mapear?',
+            sub:'Apenas para desenhar a silhueta. Não muda nenhuma pergunta e não fica guardado.',
+            f:'FEMININO', m:'MASCULINO', n:'PREFIRO NÃO DIZER',
+            legend1:'SEU MAPA ESTÁ SENDO DESENHADO', legend2:'ONDE SE CONCENTRA' },
+
   intro:  { kicker:'Teste de saúde gratuito',
             title:'Vamos mapear o que o seu corpo está dizendo.',
             lead:'Dezessete áreas, uma tela por vez. Marque apenas o que acontece <em>de forma recorrente nos últimos 30 dias</em>. Leva cerca de dois minutos e não custa nada.',
@@ -157,6 +172,11 @@ pt: {
 
 /* ══════════════════════════════════════════════════════ FRANÇAIS */
 fr: {
+  body:   { kicker:'Avant de commencer', title:'Quel corps cartographions-nous ?',
+            sub:'Uniquement pour dessiner la silhouette. Cela ne change aucune question et n’est enregistré nulle part.',
+            f:'FÉMININ', m:'MASCULIN', n:'JE PRÉFÈRE NE PAS LE DIRE',
+            legend1:'VOTRE CARTE SE DESSINE', legend2:'OÙ ÇA SE CONCENTRE' },
+
   intro:  { kicker:'Test de santé gratuit',
             title:'Cartographions ce que votre corps vous dit.',
             lead:'Dix-sept zones, un écran à la fois. Ne cochez que ce qui revient <em>régulièrement depuis 30 jours</em>. Cela prend environ deux minutes et ne coûte rien.',
@@ -204,6 +224,11 @@ fr: {
 
 /* ══════════════════════════════════════════════════════ ITALIANO */
 it: {
+  body:   { kicker:'Prima di iniziare', title:'Quale corpo mappiamo?',
+            sub:'Serve solo a disegnare la sagoma. Non cambia nessuna domanda e non viene salvato.',
+            f:'FEMMINILE', m:'MASCHILE', n:'PREFERISCO NON DIRLO',
+            legend1:'LA TUA MAPPA SI STA DISEGNANDO', legend2:'DOVE SI CONCENTRA' },
+
   intro:  { kicker:'Test di salute gratuito',
             title:'Mappiamo quello che il tuo corpo ti sta dicendo.',
             lead:'Diciassette aree, una schermata alla volta. Segna solo ciò che ti succede <em>in modo ricorrente negli ultimi 30 giorni</em>. Richiede circa due minuti e non costa nulla.',
@@ -251,6 +276,11 @@ it: {
 
 /* ═══════════════════════════════════════════════════════ DEUTSCH */
 de: {
+  body:   { kicker:'Bevor wir beginnen', title:'Welchen Körper bilden wir ab?',
+            sub:'Nur um die Silhouette zu zeichnen. Es ändert keine Frage und wird nirgends gespeichert.',
+            f:'WEIBLICH', m:'MÄNNLICH', n:'KEINE ANGABE',
+            legend1:'IHRE KARTE ENTSTEHT', legend2:'WO ES SICH BÜNDELT' },
+
   intro:  { kicker:'Kostenloser Gesundheitscheck',
             title:'Bringen wir aufs Papier, was Ihr Körper sagt.',
             lead:'Siebzehn Bereiche, einer pro Bildschirm. Kreuzen Sie nur an, was <em>in den letzten 30 Tagen regelmäßig</em> auftritt. Es dauert rund zwei Minuten und kostet nichts.',
@@ -298,6 +328,11 @@ de: {
 
 /* ═══════════════════════════════════════════════════════ РУССКИЙ */
 ru: {
+  body:   { kicker:'Перед началом', title:'Какое тело рисуем?',
+            sub:'Только чтобы нарисовать силуэт. Это не меняет вопросы и нигде не сохраняется.',
+            f:'ЖЕНСКОЕ', m:'МУЖСКОЕ', n:'НЕ УКАЗЫВАТЬ',
+            legend1:'ВАША КАРТА РИСУЕТСЯ', legend2:'ГДЕ СОСРЕДОТОЧЕНО' },
+
   intro:  { kicker:'Бесплатный тест здоровья',
             title:'Составим карту того, о чём говорит ваш организм.',
             lead:'Семнадцать областей, по одной на экран. Отмечайте только то, что повторяется <em>регулярно в последние 30 дней</em>. Займёт около двух минут и ничего не стоит.',
@@ -345,6 +380,11 @@ ru: {
 
 /* ═════════════════════════════════════════════════ 繁體中文 (台灣) */
 'zh-Hant': {
+  body:   { kicker:'開始之前', title:'要描繪哪一種身形？',
+            sub:'僅用於繪製輪廓。不會改變任何問題，也不會被儲存。',
+            f:'女性', m:'男性', n:'不願透露',
+            legend1:'您的地圖正在成形', legend2:'集中在哪裡' },
+
   intro:  { kicker:'免費健康檢測',
             title:'一起把身體想說的話畫成地圖。',
             lead:'十七個面向，一次一頁。只勾選<em>最近三十天內反覆出現</em>的狀況。大約兩分鐘，完全免費。',
@@ -392,6 +432,11 @@ ru: {
 
 /* ═══════════════════════════════════════════════════════════ 한국어 */
 ko: {
+  body:   { kicker:'시작하기 전에', title:'어떤 몸을 그릴까요?',
+            sub:'실루엣을 그리는 데만 사용합니다. 질문이 바뀌지 않고 어디에도 저장되지 않습니다.',
+            f:'여성', m:'남성', n:'밝히지 않음',
+            legend1:'지도가 그려지고 있습니다', legend2:'어디에 몰려 있나' },
+
   intro:  { kicker:'무료 건강 검사',
             title:'몸이 보내는 신호를 지도로 그려봅니다.',
             lead:'열일곱 개 영역, 한 화면에 하나씩. <em>최근 30일 동안 반복해서</em> 나타난 것만 선택하세요. 약 2분이면 되고 비용은 없습니다.',

@@ -34,7 +34,7 @@
 .quiz{ min-height:100vh; min-height:100svh; display:grid; }
 .qscreen{
   grid-area:1/1; display:flex; align-items:center;
-  padding:clamp(96px,14vh,150px) 0 clamp(48px,8vh,90px);
+  padding:clamp(84px,11vh,120px) 0 clamp(40px,6vh,70px);
   opacity:0; visibility:hidden; pointer-events:none;
   transform:translateY(14px);
   transition:opacity .55s var(--expoOut), transform .65s var(--expoOut), visibility .55s;
@@ -66,8 +66,8 @@
 .qsprite{ position:absolute; width:0; height:0; overflow:hidden; }
 
 .qarea__i{
-  width:clamp(40px,5vw,54px); height:clamp(40px,5vw,54px);
-  margin:0 0 22px;
+  width:clamp(34px,4vw,46px); height:clamp(34px,4vw,46px);
+  margin:0 0 16px;
   color:var(--tint, var(--sand));
   fill:none; stroke:currentColor;
   stroke-width:1.35; stroke-linecap:round; stroke-linejoin:round;
@@ -89,10 +89,10 @@
 .qarea__t{
   font-family:var(--font-display); font-weight:300;
   font-size:clamp(30px,4.4vw,52px); line-height:1.06;
-  letter-spacing:-.02em; margin:0 0 clamp(28px,4vh,44px); color:var(--light);
+  letter-spacing:-.02em; margin:0 0 clamp(22px,3vh,34px); color:var(--light);
 }
 
-.qchips{ display:flex; flex-wrap:wrap; gap:9px; margin-bottom:clamp(32px,5vh,52px); }
+.qchips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:clamp(24px,3.5vh,40px); }
 .qchip{
   display:inline-flex; align-items:center; gap:9px;
   padding:12px 18px 12px 15px; border-radius:100px;
@@ -205,4 +205,73 @@ html[lang="de"] .qarea__t{ font-size:clamp(26px,3.8vw,46px); }
   .rbar__i{ width:17px; height:17px; }
   .rbar__t{ font-size:13px; }
   .qnext, .qstart{ flex:1; }
+}
+
+/* ============================================================
+   EL CUERPO
+   Acompaña el test: cada área que se completa enciende su zona.
+   El dibujo es un solo trazo espejado — mismo lenguaje de línea
+   que los 17 íconos, las banderas y la hélice del dock.
+   ============================================================ */
+
+.qshell--split{
+  max-width:1080px;
+  display:grid; grid-template-columns:1fr 220px;
+  gap:clamp(24px,4vw,56px); align-items:center;
+}
+.rsplit{
+  display:grid; grid-template-columns:1fr 300px;
+  gap:clamp(28px,5vw,64px); align-items:center;
+}
+
+.qbody{ justify-self:center; }
+.qbody svg{ height:min(46vh,360px); width:auto; max-width:100%; overflow:visible; }
+.qbody--res svg{ height:min(44vh,340px); }
+.qbody__l{
+  margin:18px 0 0; text-align:center;
+  font-family:var(--font-mono); font-size:9.5px;
+  letter-spacing:.16em; color:var(--light-40);
+}
+
+.b-line{
+  fill:rgba(var(--paper-rgb),.045);
+  stroke:rgba(var(--paper-rgb),.30);
+  stroke-width:1.1; stroke-linejoin:round; stroke-linecap:round;
+  transition:fill .8s var(--expoOut), stroke .8s var(--expoOut);
+}
+.b-zone{ opacity:0; transition:opacity .9s var(--expoOut); }
+.b-zone.is-on{ opacity:var(--lvl,.7); }
+
+/* el destello al completar un área: la respuesta inmediata */
+@keyframes zonePop{ 0%{transform:scale(.86)} 55%{transform:scale(1.14)} 100%{transform:scale(1)} }
+.b-zone.pop{ animation:zonePop .75s var(--expoOut); transform-origin:center; transform-box:fill-box; }
+.b-ring{ fill:none; stroke-width:1; opacity:0; transform-origin:center; transform-box:fill-box; }
+@keyframes ringOut{ 0%{opacity:.8; transform:scale(.4)} 100%{opacity:0; transform:scale(1.9)} }
+.b-ring.pop{ animation:ringOut .9s var(--expoOut); }
+
+/* ── elección de silueta ─────────────────────────────────── */
+.bpick{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,2vw,20px); max-width:660px; }
+.bpick__b{
+  display:flex; flex-direction:column; align-items:center; gap:16px;
+  padding:24px 16px 18px; border-radius:var(--media-radius);
+  border:1px solid var(--light-10); background:rgba(var(--paper-rgb),.03);
+  color:var(--light-60);
+  transition:border-color .4s var(--expoOut), background .4s var(--expoOut),
+             color .4s var(--expoOut), transform .4s var(--expoOut);
+}
+.bpick__b:hover{ border-color:var(--light-40); color:var(--light); transform:translateY(-3px); }
+.bpick__b.is-on{ border-color:var(--sand); color:var(--light); background:rgba(var(--paper-rgb),.07); }
+.bpick__b svg{ width:auto; height:104px; }
+.bpick__b span{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.14em; text-align:center; line-height:1.6; }
+
+@media (max-width:900px){
+  .qshell--split, .rsplit{ grid-template-columns:1fr; }
+  .qbody{ order:-1; margin-bottom:18px; }
+  .qbody svg{ height:min(24vh,190px); }
+  .qbody--res svg{ height:min(30vh,250px); }
+  .qbody__l{ margin-top:12px; }
+  .bpick{ grid-template-columns:1fr; max-width:420px; }
+  .bpick__b{ flex-direction:row; justify-content:flex-start; gap:20px; padding:14px 18px; }
+  .bpick__b svg{ height:64px; }
+  .bpick__b span{ text-align:left; }
 }

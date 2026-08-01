@@ -26,6 +26,109 @@
     return String(n).padStart(len || 2, '0').replace(/0/g, 'O');
   }
 
+  function hexA(hex, a) {
+    var n = parseInt(hex.slice(1), 16);
+    return 'rgba(' + ((n>>16)&255) + ',' + ((n>>8)&255) + ',' + (n&255) + ',' + a.toFixed(2) + ')';
+  }
+
+  /* ==========================================================
+     EL CUERPO
+     Media silueta dibujada de un solo trazo: baja por el perfil,
+     rodea la mano, vuelve por la axila, sigue el costado, la
+     pierna y sube por la cara interna. Espejada da el cuerpo
+     entero sin línea central. Tres medidas —hombro, cintura y
+     cadera— cambian según la silueta elegida.
+     ========================================================== */
+
+  function bodyPath(kind) {
+    var SH, WA, HI;                    /* menor x = más ancho */
+    if (kind === 'f')      { SH = 58; WA = 78; HI = 58; }
+    else if (kind === 'm') { SH = 50; WA = 71; HI = 66; }
+    else                   { SH = 54; WA = 75; HI = 62; }
+
+    return 'M100 12'
+      + 'C87 12 79 24 79 40'
+      + 'C79 53 86 63 91 67'
+      + 'C91 71 91 74 89 78'
+      + 'C86 84 78 86 70 90'
+      + 'C63 93 ' + (SH+3) + ' 99 ' + SH + ' 107'
+      + 'C' + (SH-3) + ' 116 ' + (SH-5) + ' 128 ' + (SH-6) + ' 142'
+      + 'C' + (SH-7) + ' 160 ' + (SH-9) + ' 180 ' + (SH-10) + ' 198'
+      + 'C' + (SH-11) + ' 210 ' + (SH-12) + ' 222 ' + (SH-12) + ' 231'
+      + 'C' + (SH-12) + ' 238 ' + (SH-8) + ' 242 ' + (SH-4) + ' 239'
+      + 'C' + (SH-1) + ' 236 ' + (SH+1) + ' 229 ' + (SH+2) + ' 221'
+      + 'C' + (SH+4) + ' 204 ' + (SH+6) + ' 186 ' + (SH+8) + ' 170'
+      + 'C' + (SH+10) + ' 152 ' + (SH+12) + ' 134 ' + (SH+14) + ' 120'
+      + 'C' + (SH+15) + ' 116 ' + (SH+16) + ' 114 ' + (SH+17) + ' 112'
+      + 'C' + (WA-2) + ' 130 ' + (WA-1) + ' 152 ' + WA + ' 172'
+      + 'C' + (WA+1) + ' 190 ' + (HI+5) + ' 202 ' + (HI+5) + ' 216'
+      + 'C' + (HI+2) + ' 230 ' + HI + ' 248 ' + HI + ' 270'
+      + 'C' + HI + ' 292 ' + (HI+2) + ' 310 ' + (HI+3) + ' 330'
+      + 'C' + (HI+4) + ' 352 ' + (HI+6) + ' 382 ' + (HI+8) + ' 410'
+      + 'C' + (HI+8) + ' 422 ' + (HI+10) + ' 430 ' + (HI+16) + ' 430'
+      + 'C86 430 94 430 96 428'
+      + 'C98 426 97 416 96 404'
+      + 'C95 380 94 352 93 326'
+      + 'C92 300 94 274 97 252'
+      + 'C98 246 99 242 100 238';
+  }
+
+  function bodyShape(kind) {
+    var d = bodyPath(kind);
+    return '<path class="b-line" d="' + d + '"/>'
+         + '<path class="b-line" d="' + d + '" transform="translate(200 0) scale(-1 1)"/>';
+  }
+
+  /* Dónde se enciende cada una de las 17 áreas, en el orden del test.
+     Va por índice, no por nombre: así vale igual en los nueve idiomas. */
+  var ZONE = [
+    [{x:100,y:180,r:27}],                                            /* O1 digestivo */
+    [{x:100,y:150,r:40}],                                            /* O2 peso */
+    [{x:100,y:74, r:13}],                                            /* O3 tiroides */
+    [{x:100,y:216,r:22}],                                            /* O4 genito-urinario */
+    [{x:60,y:104,r:16},{x:140,y:104,r:16},
+     {x:78,y:330,r:16},{x:122,y:330,r:16}],                          /* O5 articulaciones */
+    [{x:100,y:56, r:12}],                                            /* O6 boca y garganta */
+    [{x:94, y:124,r:22}],                                            /* O7 corazón */
+    [{x:100,y:60, r:10}],                                            /* O8 dientes */
+    [],                                                              /* O9 piel → contorno */
+    [{x:80,y:42,r:9},{x:120,y:42,r:9}],                              /* 1O oídos */
+    [{x:100,y:46, r:9}],                                             /* 11 nariz */
+    [{x:88,y:120,r:19},{x:112,y:120,r:19}],                          /* 12 respiratorio */
+    [{x:91,y:35,r:8},{x:109,y:35,r:8}],                              /* 13 ojos */
+    [{x:100,y:38, r:26}],                                            /* 14 cabeza */
+    [{x:100,y:34, r:34}],                                            /* 15 mente */
+    [{x:100,y:200,r:110}],                                           /* 16 energía → todo */
+    [{x:100,y:150,r:16}]                                             /* 17 algo más */
+  ];
+
+  function bodySVG(kind, id) {
+    var grads = '', glows = '', rings = '';
+    ZONE.forEach(function (pts, i) {
+      if (!pts.length) return;
+      var tint = TINT[i % TINT.length], gid = 'g' + id + i;
+      grads += '<radialGradient id="' + gid + '">'
+             +   '<stop offset="0"   stop-color="' + tint + '" stop-opacity=".95"/>'
+             +   '<stop offset=".45" stop-color="' + tint + '" stop-opacity=".55"/>'
+             +   '<stop offset=".75" stop-color="' + tint + '" stop-opacity=".18"/>'
+             +   '<stop offset="1"   stop-color="' + tint + '" stop-opacity="0"/>'
+             + '</radialGradient>';
+      pts.forEach(function (p) {
+        glows += '<circle class="b-zone" data-a="' + i + '" cx="' + p.x + '" cy="' + p.y
+               + '" r="' + (p.r * 1.3) + '" fill="url(#' + gid + ')"/>';
+        rings += '<circle class="b-ring" data-a="' + i + '" cx="' + p.x + '" cy="' + p.y
+               + '" r="' + (p.r * 0.8) + '" stroke="' + tint + '"/>';
+      });
+    });
+    var sh = bodyShape(kind);
+    return '<svg viewBox="0 0 200 470" aria-hidden="true">'
+      + '<defs>' + grads + '<clipPath id="c' + id + '">' + sh + '</clipPath></defs>'
+      + '<g class="b-base">' + sh + '</g>'
+      + '<g clip-path="url(#c' + id + ')">' + glows + '</g>'
+      + '<g>' + rings + '</g>'
+      + '</svg>';
+  }
+
   /* ── idioma ────────────────────────────────────────────────
      El test está en los mismos nueve idiomas que el sitio.
      Se prueba primero el código completo —«zh-Hant» no se puede
@@ -106,6 +209,12 @@
     $('#rCta').textContent    = T.result.cta;
     $('#rAgain').textContent  = T.result.again;
     $('#rLegal').textContent  = T.result.legal;
+    $('#bKicker').textContent = T.body.kicker;
+    $('#bTitle').textContent  = T.body.title;
+    $('#bSub').textContent    = T.body.sub;
+    $('#bLegend1').textContent = T.body.legend1;
+    $('#bLegend2').textContent = T.body.legend2;
+    paintPick();
     document.title = T.intro.kicker + ' — NutriSlim';
   }
   paintStatic();
@@ -169,8 +278,69 @@
     b.addEventListener('click', function () { setLang(b.dataset.lang); closeLang(); });
   });
 
+  /* ── el cuerpo: elección y pintado ────────────────────────── */
+  var kind = 'n';
+  try { kind = localStorage.getItem('ns-body') || 'n'; } catch (e) {}
+
+  function buildBodies() {
+    $('#bodyA').innerHTML = bodySVG(kind, 'A');
+    $('#bodyB').innerHTML = bodySVG(kind, 'B');
+  }
+
+  function paintBody(host, upto, pop) {
+    var svg = $('svg', host); if (!svg) return;
+    var base = $('.b-base', svg);
+
+    AREA.forEach(function (a, i) {
+      if (upto !== undefined && i > upto) return;
+      var n = picked[i].length, ratio = n / a.items.length;
+      var tint = TINT[i % TINT.length];
+
+      if (!ZONE[i] || !ZONE[i].length) {          /* la piel tiñe el contorno */
+        $$('.b-line', base).forEach(function (pt) {
+          pt.style.stroke = n ? hexA(tint, 0.42 + ratio * 0.34) : '';
+          pt.style.fill   = n ? hexA(tint, 0.05 + ratio * 0.07) : '';
+        });
+        return;
+      }
+
+      $$('.b-zone[data-a="' + i + '"]', svg).forEach(function (c) {
+        c.style.setProperty('--lvl', (n ? 0.28 + 0.55 * ratio : 0).toFixed(2));
+        c.classList.toggle('is-on', n > 0);
+      });
+
+      if (pop === i && n > 0) {
+        $$('.b-zone[data-a="' + i + '"], .b-ring[data-a="' + i + '"]', svg).forEach(function (el) {
+          el.classList.remove('pop'); void el.getBoundingClientRect(); el.classList.add('pop');
+        });
+      }
+    });
+  }
+
+  function paintPick() {
+    var box = $('#bPick'); if (!box) return;
+    box.innerHTML = '';
+    [['f', T.body.f], ['m', T.body.m], ['n', T.body.n]].forEach(function (o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bpick__b' + (kind === o[0] ? ' is-on' : '');
+      b.dataset.cursor = T.intro.start;
+      b.innerHTML = '<svg viewBox="0 0 200 470" aria-hidden="true"><g class="b-base">'
+                  + bodyShape(o[0]) + '</g></svg><span>' + o[1] + '</span>';
+      b.addEventListener('click', function () {
+        kind = o[0];
+        try { localStorage.setItem('ns-body', kind); } catch (e) {}
+        $$('.bpick__b').forEach(function (x) { x.classList.remove('is-on'); });
+        b.classList.add('is-on');
+        buildBodies();
+        setTimeout(function () { go(0); }, 280);
+      });
+      box.appendChild(b);
+    });
+  }
+
   /* ── pantallas ────────────────────────────────────────────── */
-  var screens = { intro: $('#qIntro'), stage: $('#qStage'), result: $('#qResult') };
+  var screens = { intro: $('#qIntro'), pick: $('#qBodyPick'), stage: $('#qStage'), result: $('#qResult') };
 
   function show(name) {
     Object.keys(screens).forEach(function (k) {
@@ -208,11 +378,13 @@
         b.classList.toggle('is-on', at === -1);
         save();
         paintNext(i);
+        paintBody($('#bodyA'), i, i);     /* respuesta inmediata en el cuerpo */
       });
       box.appendChild(b);
     });
 
     paintNext(i);
+    paintBody($('#bodyA'), i);
     $('#qBack').style.visibility = i === 0 ? 'hidden' : 'visible';
   }
 
@@ -290,15 +462,21 @@
     ].filter(Boolean).join('\n');
 
     $('#rCta').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+    paintBody($('#bodyB'));
   }
 
   /* ── controles ────────────────────────────────────────────── */
-  $('#qStart').addEventListener('click', function () { go(0); });
+  $('#qStart').addEventListener('click', function () {
+    step = -0.5; show('pick'); $('#qbar').classList.add('is-hidden');
+  });
   $('#qNext').addEventListener('click',  function () { go(step + 1); });
-  $('#qBack').addEventListener('click',  function () { go(step - 1); });
+  $('#qBack').addEventListener('click',  function () {
+    if (step === 0) { step = -0.5; show('pick'); $('#qbar').classList.add('is-hidden'); }
+    else go(step - 1);
+  });
   $('#rAgain').addEventListener('click', function () {
     picked = AREA.map(function () { return []; });
-    save(); go(-1);
+    save(); buildBodies(); go(-1);
   });
 
   document.addEventListener('keydown', function (e) {
@@ -338,5 +516,6 @@
     });
   }
 
+  buildBodies();
   go(-1);
 })();

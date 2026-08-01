@@ -16,8 +16,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=46">
-<link rel="stylesheet" href="assets/css/quiz.css?v=46">
+<link rel="stylesheet" href="assets/css/style.css?v=50">
+<link rel="stylesheet" href="assets/css/quiz.css?v=50">
 </head>
 
 <body class="quiz-page">
@@ -166,17 +166,33 @@
     </div>
   </section>
 
+  <!-- ── qué silueta ─────────────────────────────────────── -->
+  <section class="qscreen" id="qBodyPick">
+    <div class="qshell">
+      <p class="eyebrow" id="bKicker"></p>
+      <h2 class="qtitle" id="bTitle"></h2>
+      <p class="qlead" id="bSub"></p>
+      <div class="bpick" id="bPick"></div>
+    </div>
+  </section>
+
   <!-- ── preguntas (se generan solas) ─────────────────────── -->
   <section class="qscreen" id="qStage">
-    <div class="qshell">
-      <svg class="qarea__i" id="qAreaI" viewBox="0 0 24 24" aria-hidden="true"><use href="#a1"></use></svg>
-      <p class="qarea__n" id="qAreaN">OO1</p>
-      <h2 class="qarea__t" id="qAreaT"></h2>
-      <div class="qchips" id="qChips"></div>
+    <div class="qshell qshell--split">
+      <div>
+        <svg class="qarea__i" id="qAreaI" viewBox="0 0 24 24" aria-hidden="true"><use href="#a1"></use></svg>
+        <p class="qarea__n" id="qAreaN">OO1</p>
+        <h2 class="qarea__t" id="qAreaT"></h2>
+        <div class="qchips" id="qChips"></div>
 
-      <div class="qnav">
-        <button class="btn qback" id="qBack" data-cursor="Back"></button>
-        <button class="btn btn--solid qnext" id="qNext" data-cursor="Next"></button>
+        <div class="qnav">
+          <button class="btn qback" id="qBack" data-cursor="Back"></button>
+          <button class="btn btn--solid qnext" id="qNext" data-cursor="Next"></button>
+        </div>
+      </div>
+      <div class="qbody">
+        <div id="bodyA"></div>
+        <p class="qbody__l" id="bLegend1"></p>
       </div>
     </div>
   </section>
@@ -197,8 +213,16 @@
         </div>
       </div>
 
-      <p class="rtop" id="rTopLabel"></p>
-      <div class="rbars" id="rBars"></div>
+      <div class="rsplit">
+        <div>
+          <p class="rtop" id="rTopLabel"></p>
+          <div class="rbars" id="rBars"></div>
+        </div>
+        <div class="qbody qbody--res">
+          <div id="bodyB"></div>
+          <p class="qbody__l" id="bLegend2"></p>
+        </div>
+      </div>
 
       <div class="ract">
         <a class="btn btn--solid" id="rCta" href="#" target="_blank" rel="noopener" data-cursor="WhatsApp"></a>
@@ -210,8 +234,8 @@
 
 </main>
 
-<script src="assets/js/i18n.js?v=46"></script>
-<script src="assets/js/quiz-data.js?v=46"></script>
-<script src="assets/js/quiz.js?v=46"></script>
+<script src="assets/js/i18n.js?v=50"></script>
+<script src="assets/js/quiz-data.js?v=50"></script>
+<script src="assets/js/quiz.js?v=50"></script>
 </body>
 </html>
