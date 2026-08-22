@@ -7,6 +7,17 @@
 <meta name="description" id="metaDesc" content="Functional medicine, metabolism and longevity science. We don't treat the symptom — we assess the cause. Clinic in Asunción, Paraguay.">
 <meta name="theme-color" content="#121a11">
 <link rel="canonical" href="https://policlinicanutrislim.com/">
+<script>
+/* Este sitio vive en policlinicanutrislim.com. Cualquier otra copia —la de
+   GitHub Pages, que queda de portafolio— se marca noindex para que no le
+   compita en Google. */
+(function(){
+  if (/(^|\.)policlinicanutrislim\.com$/.test(location.hostname)) return;
+  var m = document.querySelector('meta[name="robots"]');
+  if (!m) { m = document.createElement('meta'); m.name = 'robots'; document.head.appendChild(m); }
+  m.content = 'noindex,nofollow';
+})();
+</script>
 
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png">
