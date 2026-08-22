@@ -45,13 +45,13 @@ es: {
   'talk.title':'Hablemos.', 'talk.b':'Hablemos de mi salud', 'cur.talk':'Hablar',
 
   'meta.title': 'NutriSlim — Medicina funcional, metabolismo y longevidad',
-  'meta.desc' : 'Medicina ortomolecular y ciencia de la longevidad. No tratamos el síntoma: evaluamos la causa. Asunción, Paraguay. Consultas presenciales y online.',
+  'meta.desc' : 'Medicina funcional, metabolismo y ciencia de la longevidad. No tratamos el síntoma: evaluamos la causa. Clínica en Asunción, Paraguay.',
 
   'nav.areas':'Áreas', 'nav.method':'Método', 'nav.cases':'Casos', 'nav.tech':'Tecnología', 'nav.book':'Agendar',
   'cur.start':'Empezar', 'cur.view':'Ver', 'cur.book':'Agendar', 'cur.open':'Abrir', 'cur.prev':'Anterior', 'cur.next':'Siguiente',
   'ph.hero':'FOTO AMPLIA · CONSULTORIO / DRA. LILIAN', 'ph.portrait':'RETRATO · PACIENTE', 'ph.method':'FOTO · PROCESO DE CONSULTA',
 
-  'hero.eyebrow':'Resetea-tu-metabolismo®',
+  'hero.eyebrow':'Resetea-tu-metabolismo',
   'hero.title'  :'Una clínica de <em>medicina funcional</em> que no trata el síntoma — investiga <em>por qué</em> tu cuerpo dejó de funcionar.',
   'hero.cta1':'Hacer el test gratuito', 'hero.cta2':'Conocer el método',
   'hero.m1':'MEDICINA ORTOMOLECULAR', 'hero.m2':'METABOLISMO', 'hero.m3':'CIENCIA DE LA LONGEVIDAD',
@@ -117,13 +117,13 @@ pt: {
   'talk.title':'Vamos conversar.', 'talk.b':'Vamos falar da minha saúde', 'cur.talk':'Falar',
 
   'meta.title':'NutriSlim — Medicina funcional, metabolismo e longevidade',
-  'meta.desc' :'Medicina ortomolecular e ciência da longevidade. Não tratamos o sintoma: avaliamos a causa. Assunção, Paraguai. Consultas presenciais e online.',
+  'meta.desc' :'Medicina funcional, metabolismo e ciência da longevidade. Não tratamos o sintoma: avaliamos a causa. Clínica em Assunção, Paraguai.',
 
   'nav.areas':'Áreas', 'nav.method':'Método', 'nav.cases':'Casos', 'nav.tech':'Tecnologia', 'nav.book':'Agendar',
   'cur.start':'Começar', 'cur.view':'Ver', 'cur.book':'Agendar', 'cur.open':'Abrir', 'cur.prev':'Anterior', 'cur.next':'Próximo',
   'ph.hero':'FOTO AMPLA · CONSULTÓRIO / DRA. LILIAN', 'ph.portrait':'RETRATO · PACIENTE', 'ph.method':'FOTO · PROCESSO DE CONSULTA',
 
-  'hero.eyebrow':'Reinicie-seu-metabolismo®',
+  'hero.eyebrow':'Reinicie-seu-metabolismo',
   'hero.title':'Uma clínica de <em>medicina funcional</em> que não trata o sintoma — investiga <em>por que</em> o seu corpo parou de funcionar.',
   'hero.cta1':'Fazer o teste gratuito', 'hero.cta2':'Conhecer o método',
   'hero.m1':'MEDICINA ORTOMOLECULAR', 'hero.m2':'METABOLISMO', 'hero.m3':'CIÊNCIA DA LONGEVIDADE',
@@ -189,13 +189,13 @@ fr: {
   'talk.title':'Parlons-en.', 'talk.b':'Parlons de ma santé', 'cur.talk':'Parler',
 
   'meta.title':'NutriSlim — Médecine fonctionnelle, métabolisme et longévité',
-  'meta.desc' :'Médecine orthomoléculaire et science de la longévité. Nous ne traitons pas le symptôme : nous évaluons la cause. Asunción, Paraguay. Consultations sur place et en ligne.',
+  'meta.desc' :'Médecine fonctionnelle, métabolisme et science de la longévité. Nous ne traitons pas le symptôme : nous évaluons la cause. Clinique à Asunción, Paraguay.',
 
   'nav.areas':'Domaines', 'nav.method':'Méthode', 'nav.cases':'Cas', 'nav.tech':'Technologie', 'nav.book':'Rendez-vous',
   'cur.start':'Commencer', 'cur.view':'Voir', 'cur.book':'Rendez-vous', 'cur.open':'Ouvrir', 'cur.prev':'Précédent', 'cur.next':'Suivant',
   'ph.hero':'PLAN LARGE · CABINET / DR LILIAN', 'ph.portrait':'PORTRAIT · PATIENT', 'ph.method':'PHOTO · CONSULTATION',
 
-  'hero.eyebrow':'Réinitialisez-votre-métabolisme®',
+  'hero.eyebrow':'Réinitialisez-votre-métabolisme',
   'hero.title':'Une clinique de <em>médecine fonctionnelle</em> qui ne traite pas le symptôme — elle cherche <em>pourquoi</em> votre corps a cessé de fonctionner.',
   'hero.cta1':'Faire le test gratuit', 'hero.cta2':'Découvrir la méthode',
   'hero.m1':'MÉDECINE ORTHOMOLÉCULAIRE', 'hero.m2':'MÉTABOLISME', 'hero.m3':'SCIENCE DE LA LONGÉVITÉ',
@@ -261,13 +261,13 @@ fr: {
   'talk.title':'聊聊吧。', 'talk.b':'聊聊我的健康', 'cur.talk':'聯繫',
 
   'meta.title':'NutriSlim — 功能醫學、代謝與長壽',
-  'meta.desc' :'正分子醫學與長壽科學。我們不處理症狀，而是評估原因。巴拉圭亞松森，提供門診與線上諮詢。',
+  'meta.desc' :'功能醫學、代謝與長壽科學。我們不處理症狀，而是評估原因。巴拉圭亞松森診所。',
 
   'nav.areas':'診療領域', 'nav.method':'方法', 'nav.cases':'案例', 'nav.tech':'技術', 'nav.book':'預約',
   'cur.start':'開始', 'cur.view':'查看', 'cur.book':'預約', 'cur.open':'展開', 'cur.prev':'上一個', 'cur.next':'下一個',
   'ph.hero':'寬幅照片 · 診所 / 莉莉安醫師', 'ph.portrait':'人物照 · 患者', 'ph.method':'照片 · 看診過程',
 
-  'hero.eyebrow':'重啟你的代謝®',
+  'hero.eyebrow':'重啟你的代謝',
   'hero.title':'一間<em>功能醫學</em>診所 — 我們不處理症狀，而是探究您的身體<em>為何</em>不再正常運作。',
   'hero.cta1':'免費健康檢測', 'hero.cta2':'了解我們的方法',
   'hero.m1':'正分子醫學', 'hero.m2':'代謝', 'hero.m3':'長壽科學',
@@ -333,13 +333,13 @@ it: {
   'talk.title':'Parliamone.', 'talk.b':'Parliamo della mia salute', 'cur.talk':'Parla',
 
   'meta.title':'NutriSlim — Medicina funzionale, metabolismo e longevità',
-  'meta.desc' :'Medicina ortomolecolare e scienza della longevità. Non trattiamo il sintomo: valutiamo la causa. Asunción, Paraguay. Consulti in sede e online.',
+  'meta.desc' :'Medicina funzionale, metabolismo e scienza della longevità. Non trattiamo il sintomo: valutiamo la causa. Clinica ad Asunción, Paraguay.',
 
   'nav.areas':'Aree', 'nav.method':'Metodo', 'nav.cases':'Casi', 'nav.tech':'Tecnologia', 'nav.book':'Prenota',
   'cur.start':'Inizia', 'cur.view':'Vedi', 'cur.book':'Prenota', 'cur.open':'Apri', 'cur.prev':'Precedente', 'cur.next':'Successivo',
   'ph.hero':'FOTO AMPIA · STUDIO / DOTT.SSA LILIAN', 'ph.portrait':'RITRATTO · PAZIENTE', 'ph.method':'FOTO · PROCESSO DI VISITA',
 
-  'hero.eyebrow':'Resetta-il-tuo-metabolismo®',
+  'hero.eyebrow':'Resetta-il-tuo-metabolismo',
   'hero.title':'Una clinica di <em>medicina funzionale</em> che non tratta il sintomo — indaga <em>perché</em> il tuo corpo ha smesso di funzionare.',
   'hero.cta1':'Fai il test gratuito', 'hero.cta2':'Scopri il metodo',
   'hero.m1':'MEDICINA ORTOMOLECOLARE', 'hero.m2':'METABOLISMO', 'hero.m3':'SCIENZA DELLA LONGEVITÀ',
@@ -405,13 +405,13 @@ de: {
   'talk.title':'Sprechen wir.', 'talk.b':'Sprechen wir über meine Gesundheit', 'cur.talk':'Sprechen',
 
   'meta.title':'NutriSlim — Funktionelle Medizin, Stoffwechsel und Langlebigkeit',
-  'meta.desc' :'Orthomolekulare Medizin und Longevity-Wissenschaft. Wir behandeln nicht das Symptom, sondern beurteilen die Ursache. Asunción, Paraguay. Vor Ort und online.',
+  'meta.desc' :'Funktionelle Medizin, Stoffwechsel und Longevity-Wissenschaft. Wir behandeln nicht das Symptom, sondern beurteilen die Ursache. Klinik in Asunción, Paraguay.',
 
   'nav.areas':'Bereiche', 'nav.method':'Methode', 'nav.cases':'Fälle', 'nav.tech':'Technologie', 'nav.book':'Termin',
   'cur.start':'Starten', 'cur.view':'Ansehen', 'cur.book':'Termin', 'cur.open':'Öffnen', 'cur.prev':'Zurück', 'cur.next':'Weiter',
   'ph.hero':'WEITWINKEL · PRAXIS / DR. LILIAN', 'ph.portrait':'PORTRÄT · PATIENT', 'ph.method':'FOTO · SPRECHSTUNDE',
 
-  'hero.eyebrow':'Setz-deinen-Stoffwechsel-zurück®',
+  'hero.eyebrow':'Setz-deinen-Stoffwechsel-zurück',
   'hero.title':'Eine Praxis für <em>funktionelle Medizin</em>, die nicht das Symptom behandelt — sondern untersucht, <em>warum</em> Ihr Körper nicht mehr funktioniert.',
   'hero.cta1':'Kostenlosen Test machen', 'hero.cta2':'Die Methode ansehen',
   'hero.m1':'ORTHOMOLEKULARE MEDIZIN', 'hero.m2':'STOFFWECHSEL', 'hero.m3':'LONGEVITY-WISSENSCHAFT',
@@ -477,13 +477,13 @@ ru: {
   'talk.title':'Давайте поговорим.', 'talk.b':'Поговорим о моём здоровье', 'cur.talk':'Написать',
 
   'meta.title':'NutriSlim — Функциональная медицина, метаболизм и долголетие',
-  'meta.desc' :'Ортомолекулярная медицина и наука о долголетии. Мы не лечим симптом — мы выясняем причину. Асунсьон, Парагвай. Очные и онлайн-консультации.',
+  'meta.desc' :'Функциональная медицина, метаболизм и наука о долголетии. Мы не лечим симптом — мы выясняем причину. Клиника в Асунсьоне, Парагвай.',
 
   'nav.areas':'Направления', 'nav.method':'Метод', 'nav.cases':'Случаи', 'nav.tech':'Технология', 'nav.book':'Запись',
   'cur.start':'Начать', 'cur.view':'Смотреть', 'cur.book':'Запись', 'cur.open':'Открыть', 'cur.prev':'Назад', 'cur.next':'Далее',
   'ph.hero':'ОБЩИЙ ПЛАН · КЛИНИКА / Д-Р ЛИЛИАН', 'ph.portrait':'ПОРТРЕТ · ПАЦИЕНТ', 'ph.method':'ФОТО · ПРИЁМ',
 
-  'hero.eyebrow':'Перезапусти-свой-метаболизм®',
+  'hero.eyebrow':'Перезапусти-свой-метаболизм',
   'hero.title':'Клиника <em>функциональной медицины</em>, которая лечит не симптом, а выясняет, <em>почему</em> ваш организм перестал работать.',
   'hero.cta1':'Пройти бесплатный тест', 'hero.cta2':'Узнать о методе',
   'hero.m1':'ОРТОМОЛЕКУЛЯРНАЯ МЕДИЦИНА', 'hero.m2':'МЕТАБОЛИЗМ', 'hero.m3':'НАУКА О ДОЛГОЛЕТИИ',
@@ -549,13 +549,13 @@ ko: {
   'talk.title':'이야기해요.', 'talk.b':'제 건강에 대해 이야기해요', 'cur.talk':'문의',
 
   'meta.title':'NutriSlim — 기능의학, 대사 그리고 장수',
-  'meta.desc' :'정분자의학과 장수 과학. 증상이 아니라 원인을 평가합니다. 파라과이 아순시온. 대면 및 온라인 진료.',
+  'meta.desc' :'기능의학, 대사 및 장수 과학. 증상이 아니라 원인을 평가합니다. 파라과이 아순시온 클리닉.',
 
   'nav.areas':'진료분야', 'nav.method':'방법', 'nav.cases':'사례', 'nav.tech':'기술', 'nav.book':'예약',
   'cur.start':'시작', 'cur.view':'보기', 'cur.book':'예약', 'cur.open':'열기', 'cur.prev':'이전', 'cur.next':'다음',
   'ph.hero':'와이드 컷 · 진료실 / 릴리안 원장', 'ph.portrait':'인물 · 환자', 'ph.method':'사진 · 진료 과정',
 
-  'hero.eyebrow':'대사를-다시-세팅하다®',
+  'hero.eyebrow':'대사를-다시-세팅하다',
   'hero.title':'증상을 치료하는 대신, 몸이 <em>왜</em> 제대로 작동하지 않게 되었는지를 밝히는 <em>기능의학</em> 클리닉입니다.',
   'hero.cta1':'무료 검사 받기', 'hero.cta2':'방법 살펴보기',
   'hero.m1':'정분자의학', 'hero.m2':'대사', 'hero.m3':'장수 과학',
