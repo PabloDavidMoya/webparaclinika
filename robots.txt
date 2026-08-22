@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /prototipo-cuerpo.html
+
+Sitemap: https://policlinicanutrislim.com/sitemap.xml
