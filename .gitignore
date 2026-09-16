@@ -1,3 +1,7 @@
 .DS_Store
 Thumbs.db
 node_modules/
+
+# CV y documentos personales de los médicos: son datos de terceros y este
+# repo es público. No van al sitio ni al repo — el sitio no los referencia.
+assets/doctores/

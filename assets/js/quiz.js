@@ -25,9 +25,7 @@
   /* Un tinte por área. Todos desaturados y de la misma familia: dan
      variedad sin que la pantalla se vuelva un semáforo. */
   var TINT = [
-    '#A9C04F', '#C7BFAE', '#C5A059', '#8FB3A8', '#B9A88C', '#C9A08F',
-    '#C98A85', '#D7CFC0', '#C4A6B4', '#9FB4C7', '#A8BFA0', '#92B7B3',
-    '#BFC79A', '#CDBBA0', '#B3ABC9', '#A7C2B8', '#C7BFAE'
+    '#A9C04F', '#C7BFAE', '#C5A059', '#8FB3A8', '#B9A88C', '#C9A08F', '#C98A85'
   ];
 
   function pad(n, len) {
@@ -87,27 +85,17 @@
          + '<path class="b-line" d="' + d + '" transform="translate(200 0) scale(-1 1)"/>';
   }
 
-  /* Dónde se enciende cada una de las 17 áreas, en el orden del test.
-     Va por índice, no por nombre: así vale igual en los nueve idiomas. */
+  /* Dónde se enciende cada área, en el orden del test: las seis comunes
+     y, si corresponde, la séptima según el género elegido. Va por
+     índice, no por nombre: así vale igual en los nueve idiomas. */
   var ZONE = [
-    [{x:100,y:180,r:27}],                                            /* O1 digestivo */
-    [{x:100,y:150,r:40}],                                            /* O2 peso */
-    [{x:100,y:74, r:13}],                                            /* O3 tiroides */
-    [{x:100,y:216,r:22}],                                            /* O4 genito-urinario */
-    [{x:60,y:104,r:16},{x:140,y:104,r:16},
-     {x:78,y:330,r:16},{x:122,y:330,r:16}],                          /* O5 articulaciones */
-    [{x:100,y:56, r:12}],                                            /* O6 boca y garganta */
-    [{x:94, y:124,r:22}],                                            /* O7 corazón */
-    [{x:100,y:60, r:10}],                                            /* O8 dientes */
-    [],                                                              /* O9 piel → contorno */
-    [{x:80,y:42,r:9},{x:120,y:42,r:9}],                              /* 1O oídos */
-    [{x:100,y:46, r:9}],                                             /* 11 nariz */
-    [{x:88,y:120,r:19},{x:112,y:120,r:19}],                          /* 12 respiratorio */
-    [{x:91,y:35,r:8},{x:109,y:35,r:8}],                              /* 13 ojos */
-    [{x:100,y:38, r:26}],                                            /* 14 cabeza */
-    [{x:100,y:34, r:34}],                                            /* 15 mente */
-    [{x:100,y:200,r:110}],                                           /* 16 energía → todo */
-    [{x:100,y:150,r:16}]                                             /* 17 algo más */
+    [{x:100,y:172,r:28}],                                            /* O1 digestión y problemas gástricos */
+    [{x:100,y:196,r:22}],                                            /* O2 intolerancias alimentarias */
+    [{x:100,y:222,r:20}],                                            /* O3 microbiota intestinal */
+    [],                                                              /* O4 estrés oxidativo → contorno (sistémico) */
+    [{x:100,y:74, r:13}],                                            /* O5 tiroides */
+    [{x:100,y:34, r:32}],                                            /* O6 problemas cognitivos */
+    [{x:100,y:216,r:22}]                                             /* O7 menopausia / andropausia */
   ];
 
   function bodySVG(kind, id) {
@@ -138,22 +126,54 @@
   }
 
   /* ── idioma ────────────────────────────────────────────────
-     El test está en los mismos nueve idiomas que el sitio.
+     El test está en los mismos nueve idiomas que el sitio, con
+     la misma prioridad que app.js: ?lang= en la URL, después lo
+     guardado de una visita anterior, y si no hay nada, el idioma
+     del navegador/región (en Paraguay, español). Si ese idioma no
+     es uno de los nueve, se cae en inglés.
      Se prueba primero el código completo —«zh-Hant» no se puede
      recortar a dos letras— y recién después el corto. */
   function pickLang() {
+    function match(want) {
+      if (!want) return null;
+      if (window.NS_QUIZ[want]) return want;
+      var short = want.slice(0, 2);
+      return window.NS_QUIZ[short] ? short : null;
+    }
     var q = new URLSearchParams(location.search).get('lang');
+    var found = match(q);
+    if (found) return found;
+
     var saved = null;
     try { saved = localStorage.getItem('ns-lang'); } catch (e) {}
-    var want = q || saved || 'en';
-    if (window.NS_QUIZ[want]) return want;
-    var short = want.slice(0, 2);
-    return window.NS_QUIZ[short] ? short : 'en';
+    found = match(saved);
+    if (found) return found;
+
+    var navs = navigator.languages || [navigator.language || 'en'];
+    for (var i = 0; i < navs.length; i++) {
+      found = match(navs[i]);
+      if (found) return found;
+    }
+    return 'en';
   }
 
   var LANG = pickLang();
   var T    = window.NS_QUIZ[LANG];
-  var AREA = T.areas;
+
+  /* La séptima área depende de la silueta elegida al empezar: Menopausia
+     si es mujer, Andropausia si es hombre, ninguna si prefiere no decirlo.
+     Las seis comunes son siempre las mismas y en el mismo orden. */
+  var kind = 'n';
+  try { kind = localStorage.getItem('ns-body') || 'n'; } catch (e) {}
+
+  function buildAreas(t, k) {
+    var list = t.areasCommon.slice();
+    if (k === 'f') list.push(t.areaF);
+    else if (k === 'm') list.push(t.areaM);
+    return list;
+  }
+
+  var AREA = buildAreas(T, kind);
 
   document.documentElement.lang = LANG;
 
@@ -187,6 +207,14 @@
   /* ── estado ───────────────────────────────────────────────── */
   var picked = AREA.map(function () { return []; });   // índices marcados por área
   var step   = -1;                                     // -1 portada, n área, AREA.length resultado
+
+  /* Interrupción a mitad de test: pide nombre y apellido antes de
+     seguir. Una sola vez por navegador — si ya lo dio, no se repite
+     aunque cambie de idioma, de silueta o vuelva a hacer el test. */
+  var nameCaptured = false;
+  try { nameCaptured = !!localStorage.getItem('ns-name'); } catch (e) {}
+  var pendingStep = null;
+  var gateOpen     = false;   // true mientras se ve la pantalla de nombre
 
   try {
     /* No se guarda el idioma: los índices marcados valen igual en los nueve,
@@ -222,15 +250,20 @@
     $('#bSub').textContent    = T.body.sub;
     $('#bLegend1').textContent = T.body.legend1;
     $('#bLegend2').textContent = T.body.legend2;
+    $('#gKicker').textContent  = T.mid.kicker;
+    $('#gTitle').textContent   = T.mid.title;
+    $('#gLead').textContent    = T.mid.lead;
+    $('#gName').setAttribute('placeholder', T.mid.placeholder);
+    $('#gSubmit').textContent  = T.mid.cta;
     paintPick();
     document.title = T.intro.kicker + ' — NutriSlim';
   }
   paintStatic();
 
   /* ── cambio de idioma en vivo ─────────────────────────────────
-     Las respuestas no se pierden: las 17 áreas y los 85 síntomas
-     están en el mismo orden en los nueve idiomas, así que los
-     índices marcados siguen siendo válidos. */
+     Las respuestas no se pierden: las áreas y los síntomas están
+     en el mismo orden en los nueve idiomas, así que los índices
+     marcados siguen siendo válidos. */
   function markLangUI() {
     var meta = (window.NS_LANGS || []).filter(function (l) { return l.code === LANG; })[0];
     $$('.lang__opt').forEach(function (b) {
@@ -246,7 +279,7 @@
     if (!window.NS_QUIZ[code] || code === LANG) return;
     LANG = code;
     T    = window.NS_QUIZ[LANG];
-    AREA = T.areas;
+    AREA = buildAreas(T, kind);
     document.documentElement.lang = LANG;
     loadFont();
     paintStatic();
@@ -287,9 +320,6 @@
   });
 
   /* ── el cuerpo: elección y pintado ────────────────────────── */
-  var kind = 'n';
-  try { kind = localStorage.getItem('ns-body') || 'n'; } catch (e) {}
-
   function buildBodies() {
     $('#bodyA').innerHTML = bodySVG(kind, 'A');
     $('#bodyB').innerHTML = bodySVG(kind, 'B');
@@ -336,10 +366,22 @@
       b.innerHTML = '<svg viewBox="0 0 200 470" aria-hidden="true"><g class="b-base">'
                   + bodyShape(o[0]) + '</g></svg><span>' + o[1] + '</span>';
       b.addEventListener('click', function () {
+        var commonLen = T.areasCommon.length;
         kind = o[0];
         try { localStorage.setItem('ns-body', kind); } catch (e) {}
         $$('.bpick__b').forEach(function (x) { x.classList.remove('is-on'); });
         b.classList.add('is-on');
+
+        /* Las seis áreas comunes conservan lo marcado al cambiar de
+           silueta; la séptima (Menopausia/Andropausia) es distinta en
+           cada caso, así que arranca vacía. */
+        AREA = buildAreas(T, kind);
+        picked = picked.slice(0, commonLen);
+        while (picked.length < commonLen) picked.push([]);
+        if (AREA.length > commonLen) picked.push([]);
+        save();
+        $('#qTotal').textContent = pad(AREA.length);
+
         buildBodies();
         setTimeout(function () { go(0); }, 280);
       });
@@ -348,7 +390,7 @@
   }
 
   /* ── pantallas ────────────────────────────────────────────── */
-  var screens = { intro: $('#qIntro'), pick: $('#qBodyPick'), stage: $('#qStage'), result: $('#qResult') };
+  var screens = { intro: $('#qIntro'), pick: $('#qBodyPick'), stage: $('#qStage'), midgate: $('#qMidGate'), result: $('#qResult') };
 
   function show(name) {
     Object.keys(screens).forEach(function (k) {
@@ -409,23 +451,53 @@
   }
 
   function go(i) {
+    if (i < 0)               { step = i; show('intro');  $('#qbar').classList.add('is-hidden'); return; }
+    if (i >= AREA.length)    { step = i; finish(); return; }
+
+    /* A mitad de camino, antes de la próxima área, se pide nombre y
+       apellido una sola vez. No cuenta como retroceso: si vuelve para
+       atrás desde la primera área de la segunda mitad, salta derecho
+       a la última área de la primera mitad, sin volver a mostrarla. */
+    var mid = Math.floor(AREA.length / 2);
+    if (i === mid && i > 0 && !nameCaptured) {
+      pendingStep = i;
+      gateOpen = true;
+      show('midgate');
+      $('#qbar').classList.add('is-hidden');
+      setTimeout(function () { var f = $('#gName'); if (f) f.focus(); }, 320);
+      return;
+    }
+
+    gateOpen = false;
     step = i;
-    if (i < 0)               { show('intro');  $('#qbar').classList.add('is-hidden'); return; }
-    if (i >= AREA.length)    { finish(); return; }
     $('#qbar').classList.remove('is-hidden');
     show('stage');
     render(i);
+  }
+
+  /* ── medición ──────────────────────────────────────────────
+     Tres señales peladas para Meta: empezó, terminó, se fue a
+     WhatsApp. Sin puntaje, sin áreas, sin nombre — eso es dato
+     de salud y no sale de acá. consent.js decide si sale algo.
+     Si el script no está (o el visitante dijo que no), esto no
+     hace nada y el test sigue funcionando igual. */
+  function track(ev) {
+    if (typeof window.nsTrack === 'function') window.nsTrack(ev);
   }
 
   /* ── resultado ────────────────────────────────────────────── */
   function finish() {
     show('result');
     $('#qbar').classList.add('is-hidden');
+    track('Lead');
 
     var total = picked.reduce(function (s, p) { return s + p.length; }, 0);
     var areas = picked.filter(function (p) { return p.length; }).length;
 
-    $('#rScore').textContent = pad(total, total > 9 ? 2 : 1);
+    /* Nada de mostrar el número crudo: se ve demasiado a puntaje
+       clínico. Queda una exclamación — el detalle real está en las
+       barras de abajo y en el mensaje que viaja a WhatsApp. */
+    $('#rScore').textContent = T.result.scoreWord;
 
     var band = total <= 5 ? 'low' : (total <= 10 ? 'mid' : 'high');
     $('#rTitle').textContent = T.result[band];
@@ -465,8 +537,12 @@
        antes del contador, el francés sí lo lleva antes de los dos puntos. */
     var linea = T.wa.score.replace('{n}', total).replace('{a}', areas);
 
+    var name = null;
+    try { name = localStorage.getItem('ns-name'); } catch (e) {}
+
     var msg = [
-      T.wa.line1, '',
+      T.wa.line1,
+      name ? T.wa.name.replace('{name}', name) : '', '',
       linea,
       top ? T.wa.line5 + ' ' + top : '', '',
       T.wa.line6
@@ -479,18 +555,38 @@
   /* ── controles ────────────────────────────────────────────── */
   $('#qStart').addEventListener('click', function () {
     step = -0.5; show('pick'); $('#qbar').classList.add('is-hidden');
+    track('ViewContent');
+  });
+  $('#gForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var field = $('#gName'), name = field.value.trim();
+    if (!name) { field.focus(); return; }
+    try { localStorage.setItem('ns-name', name); } catch (e) {}
+    nameCaptured = true;
+    go(pendingStep);
   });
   $('#qNext').addEventListener('click',  function () { go(step + 1); });
   $('#qBack').addEventListener('click',  function () {
     if (step === 0) { step = -0.5; show('pick'); $('#qbar').classList.add('is-hidden'); }
     else go(step - 1);
   });
+  /* El paso que de verdad importa: el que sale hacia WhatsApp.
+     Es el equivalente en la web de la conversación que ya mide
+     la campaña de click-to-WhatsApp, así que es el evento por
+     el que conviene optimizar. */
+  $('#rCta').addEventListener('click', function () { track('Contact'); });
+
   $('#rAgain').addEventListener('click', function () {
     picked = AREA.map(function () { return []; });
     save(); buildBodies(); go(-1);
   });
 
   document.addEventListener('keydown', function (e) {
+    /* El campo de nombre es el único input real del test: mientras se
+       escribe ahí, las flechas y el Enter son para editar texto, no
+       para navegar entre áreas. */
+    if (e.target && e.target.tagName === 'INPUT') return;
+    if (gateOpen) return;
     if (step < 0 && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(0); return; }
     if (step < 0 || step >= AREA.length) return;
     if (e.key === 'Enter' || e.key === 'ArrowRight') go(step + 1);
@@ -501,7 +597,7 @@
   var sx = null;
   document.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
   document.addEventListener('touchend', function (e) {
-    if (sx === null || step < 0 || step >= AREA.length) return;
+    if (sx === null || gateOpen || step < 0 || step >= AREA.length) return;
     var d = e.changedTouches[0].clientX - sx;
     if (Math.abs(d) > 70) go(step + (d < 0 ? 1 : -1));
     sx = null;

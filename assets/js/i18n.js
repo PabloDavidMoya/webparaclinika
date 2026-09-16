@@ -107,7 +107,13 @@ es: {
   'foot.a4':'Autoinmunes', 'foot.a5':'Hormonal femenina', 'foot.a6':'Hormonal masculina',
   'foot.h2':'Clínica', 'foot.c1':'El método', 'foot.c2':'Casos', 'foot.c4':'Agendar',
   'foot.h3':'Contacto', 'foot.hours':'Lun a Vie 8:OO–18:OO<br>Sábados 8:OO–13:OO',
-  'foot.bar':'MEDICINA ORTOMOLECULAR · LONGEVIDAD'
+  'foot.bar':'MEDICINA ORTOMOLECULAR · LONGEVIDAD',
+
+  /* aviso de cookies */
+  'ck.text':'Usamos cookies propias y de Meta para entender cómo llega la gente al sitio. Nada de lo que respondés en el test se guarda ni se comparte.',
+  'ck.accept':'Aceptar', 'ck.reject':'Solo lo esencial',
+  'ck.more':'Política de cookies', 'ck.aria':'Aviso de cookies',
+  'foot.cookies':'Política de cookies'
 },
 
 /* ══════════════════════════════════════════════════ PORTUGUÊS */
@@ -179,7 +185,13 @@ pt: {
   'foot.a4':'Autoimunes', 'foot.a5':'Hormonal feminina', 'foot.a6':'Hormonal masculina',
   'foot.h2':'Clínica', 'foot.c1':'O método', 'foot.c2':'Casos', 'foot.c4':'Agendar',
   'foot.h3':'Contato', 'foot.hours':'Seg a Sex 8:OO–18:OO<br>Sábados 8:OO–13:OO',
-  'foot.bar':'MEDICINA ORTOMOLECULAR · LONGEVIDADE'
+  'foot.bar':'MEDICINA ORTOMOLECULAR · LONGEVIDADE',
+
+  /* aviso de cookies */
+  'ck.text':'Usamos cookies próprios e da Meta para entender como as pessoas chegam ao site. Nada do que você responde no teste é guardado ou compartilhado.',
+  'ck.accept':'Aceitar', 'ck.reject':'Apenas o essencial',
+  'ck.more':'Política de cookies', 'ck.aria':'Aviso de cookies',
+  'foot.cookies':'Política de cookies'
 },
 
 /* ═══════════════════════════════════════════════════ FRANÇAIS */
@@ -251,7 +263,13 @@ fr: {
   'foot.a4':'Auto-immunes', 'foot.a5':'Hormonal féminin', 'foot.a6':'Hormonal masculin',
   'foot.h2':'Clinique', 'foot.c1':'La méthode', 'foot.c2':'Cas', 'foot.c4':'Rendez-vous',
   'foot.h3':'Contact', 'foot.hours':'Lun–Ven 8:OO–18:OO<br>Samedi 8:OO–13:OO',
-  'foot.bar':'MÉDECINE ORTHOMOLÉCULAIRE · LONGÉVITÉ'
+  'foot.bar':'MÉDECINE ORTHOMOLÉCULAIRE · LONGÉVITÉ',
+
+  /* aviso de cookies */
+  'ck.text':"Nous utilisons des cookies internes et ceux de Meta pour comprendre comment les visiteurs arrivent sur le site. Rien de ce que vous répondez au test n'est conservé ni partagé.",
+  'ck.accept':'Accepter', 'ck.reject':'Essentiels uniquement',
+  'ck.more':'Politique de cookies', 'ck.aria':'Avis relatif aux cookies',
+  'foot.cookies':'Politique de cookies'
 },
 
 /* ═══════════════════════════════════════════════ 繁體中文 (台灣) */
@@ -323,7 +341,13 @@ fr: {
   'foot.a4':'自體免疫', 'foot.a5':'女性荷爾蒙', 'foot.a6':'男性荷爾蒙',
   'foot.h2':'診所', 'foot.c1':'方法', 'foot.c2':'案例', 'foot.c4':'預約',
   'foot.h3':'聯絡', 'foot.hours':'週一至週五 8:OO–18:OO<br>週六 8:OO–13:OO',
-  'foot.bar':'正分子醫學 · 長壽'
+  'foot.bar':'正分子醫學 · 長壽',
+
+  /* aviso de cookies */
+  'ck.text':'我們使用自有及 Meta 的 Cookie，以了解訪客如何來到本網站。您在測驗中的回答不會被儲存或分享。',
+  'ck.accept':'接受', 'ck.reject':'僅必要項目',
+  'ck.more':'Cookie 政策', 'ck.aria':'Cookie 聲明',
+  'foot.cookies':'Cookie 政策'
 },
 
 /* ═══════════════════════════════════════════════════ ITALIANO */
@@ -395,7 +419,13 @@ it: {
   'foot.a4':'Autoimmuni', 'foot.a5':'Ormonale femminile', 'foot.a6':'Ormonale maschile',
   'foot.h2':'Clinica', 'foot.c1':'Il metodo', 'foot.c2':'Casi', 'foot.c4':'Prenota',
   'foot.h3':'Contatti', 'foot.hours':'Lun–Ven 8:OO–18:OO<br>Sabato 8:OO–13:OO',
-  'foot.bar':'MEDICINA ORTOMOLECOLARE · LONGEVITÀ'
+  'foot.bar':'MEDICINA ORTOMOLECOLARE · LONGEVITÀ',
+
+  /* aviso de cookies */
+  'ck.text':'Usiamo cookie propri e di Meta per capire come le persone arrivano al sito. Nulla di ciò che rispondi nel test viene conservato o condiviso.',
+  'ck.accept':'Accetta', 'ck.reject':'Solo essenziali',
+  'ck.more':'Informativa sui cookie', 'ck.aria':'Avviso sui cookie',
+  'foot.cookies':'Informativa sui cookie'
 },
 
 /* ═══════════════════════════════════════════════════ DEUTSCH */
@@ -467,7 +497,13 @@ de: {
   'foot.a4':'Autoimmun', 'foot.a5':'Hormone Frau', 'foot.a6':'Hormone Mann',
   'foot.h2':'Praxis', 'foot.c1':'Die Methode', 'foot.c2':'Fälle', 'foot.c4':'Termin',
   'foot.h3':'Kontakt', 'foot.hours':'Mo–Fr 8:OO–18:OO<br>Samstags 8:OO–13:OO',
-  'foot.bar':'ORTHOMOLEKULARE MEDIZIN · LONGEVITY'
+  'foot.bar':'ORTHOMOLEKULARE MEDIZIN · LONGEVITY',
+
+  /* aviso de cookies */
+  'ck.text':'Wir verwenden eigene Cookies und Cookies von Meta, um zu verstehen, wie Besucher auf diese Website gelangen. Nichts von dem, was Sie im Test beantworten, wird gespeichert oder weitergegeben.',
+  'ck.accept':'Annehmen', 'ck.reject':'Nur notwendige',
+  'ck.more':'Cookie-Richtlinie', 'ck.aria':'Cookie-Hinweis',
+  'foot.cookies':'Cookie-Richtlinie'
 },
 
 /* ═══════════════════════════════════════════════════ РУССКИЙ */
@@ -539,7 +575,13 @@ ru: {
   'foot.a4':'Аутоиммунные', 'foot.a5':'Женские гормоны', 'foot.a6':'Мужские гормоны',
   'foot.h2':'Клиника', 'foot.c1':'Метод', 'foot.c2':'Случаи', 'foot.c4':'Запись',
   'foot.h3':'Контакты', 'foot.hours':'Пн–Пт 8:OO–18:OO<br>Суббота 8:OO–13:OO',
-  'foot.bar':'ОРТОМОЛЕКУЛЯРНАЯ МЕДИЦИНА · ДОЛГОЛЕТИЕ'
+  'foot.bar':'ОРТОМОЛЕКУЛЯРНАЯ МЕДИЦИНА · ДОЛГОЛЕТИЕ',
+
+  /* aviso de cookies */
+  'ck.text':'Мы используем собственные файлы cookie и файлы cookie Meta, чтобы понимать, как посетители попадают на сайт. Ответы, которые вы даёте в тесте, не сохраняются и не передаются.',
+  'ck.accept':'Принять', 'ck.reject':'Только необходимые',
+  'ck.more':'Политика использования cookie', 'ck.aria':'Уведомление о cookie',
+  'foot.cookies':'Политика cookie'
 },
 
 /* ═══════════════════════════════════════════════════════ 한국어 */
@@ -611,7 +653,13 @@ ko: {
   'foot.a4':'자가면역', 'foot.a5':'여성 호르몬', 'foot.a6':'남성 호르몬',
   'foot.h2':'클리닉', 'foot.c1':'방법', 'foot.c2':'사례', 'foot.c4':'예약',
   'foot.h3':'연락처', 'foot.hours':'월–금 8:OO–18:OO<br>토요일 8:OO–13:OO',
-  'foot.bar':'정분자의학 · 장수'
+  'foot.bar':'정분자의학 · 장수',
+
+  /* aviso de cookies */
+  'ck.text':'방문자가 이 사이트에 어떻게 도달하는지 파악하기 위해 자체 쿠키와 Meta 쿠키를 사용합니다. 테스트에서 입력한 답변은 저장하거나 공유하지 않습니다.',
+  'ck.accept':'동의', 'ck.reject':'필수 항목만',
+  'ck.more':'쿠키 정책', 'ck.aria':'쿠키 안내',
+  'foot.cookies':'쿠키 정책'
 }
 
 };
