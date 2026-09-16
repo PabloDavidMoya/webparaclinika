@@ -63,7 +63,8 @@
   var LIST      = window.NS_LANGS || [{ code: 'en', short: 'EN' }];
   var FONTS     = window.NS_FONTS || {};
   var LANGS     = LIST.map(function (l) { return l.code; });
-  var AUTO      = false;   /* ponerlo en true para detectar el idioma del navegador */
+  var AUTO      = true;    /* detecta el idioma del navegador/región; si no coincide con
+                               ninguno de los nueve, se sigue cayendo en inglés */
   var originals = [];
   var loaded    = {};
 

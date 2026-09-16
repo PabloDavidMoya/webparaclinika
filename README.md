@@ -113,9 +113,13 @@ además hay que sumar sus tipografías a `NS_FONTS` y marcarlo con `font:` en
 `NS_LANGS`. **Árabe y hebreo se escriben de derecha a izquierda** y eso no está
 resuelto: harían falta ajustes de dirección en todo el layout.
 
-**Detección automática del navegador**: está desactivada a propósito, para que
-la primera impresión sea siempre en inglés. Para activarla, poner `AUTO = true`
-en `app.js` (sección 2).
+**Detección automática del navegador**: activada (`AUTO = true` en `app.js`,
+sección 2). Se prueba primero `?lang=` en la URL, después lo guardado en
+`localStorage` de una visita anterior y, si no hay nada, el idioma del
+navegador — así un visitante de Paraguay entra directo en español. Si el
+idioma del navegador no es ninguno de los nueve soportados, se cae en inglés.
+El test (`quiz.js`) sigue la misma prioridad. Para volver a que la primera
+impresión sea siempre en inglés, poner `AUTO = false` en `app.js`.
 
 ### Por qué chino tradicional y no simplificado
 
@@ -209,23 +213,34 @@ Si alguna foto ya viene graduada y no hay que tocarla, se le agrega la clase
 
 ## El test de salud (`test.html`)
 
-Reescritura del cuestionario de la clínica. El original tiene los 84 síntomas
-en una sola página y pide nombre, teléfono y email **antes** de empezar.
+Reescritura del cuestionario de la clínica. El original tiene los síntomas en
+una sola página y pide nombre, teléfono y email **antes** de empezar.
 
-Acá: **un área por pantalla**, 17 pantallas, chips en vez de casillas, barra de
-progreso, avance con teclado (`Enter`, flechas) o deslizando con el dedo, y el
-progreso guardado en `localStorage` por si cierran a la mitad.
+Acá: **un área por pantalla** (6 comunes + 1 según el género elegido: Menopausia
+o Andropausia), chips en vez de casillas, barra de progreso, avance con teclado
+(`Enter`, flechas) o deslizando con el dedo, y el progreso guardado en
+`localStorage` por si cierran a la mitad.
 
-Tres decisiones que cambian la conversión:
+Decisiones que cambian la conversión:
 
-1. **No se piden datos.** Ni al principio ni al final. El resultado se ve
-   completo, gratis y sin registrarse.
+1. **No se piden datos al principio.** El test arranca directo, sin formulario.
 2. **Se eliminó la opción "Ninguna"** de cada grupo. No marcar nada ya
-   significa ninguna: eran 17 decisiones inútiles. El botón lo dice solo —
+   significa ninguna: eran decisiones inútiles. El botón lo dice solo —
    si no marcaste nada dice «Nada de esto», si marcaste algo dice «Siguiente».
 3. **El resultado viaja a WhatsApp ya escrito.** El botón final abre WhatsApp
-   con el puntaje, la cantidad de áreas y las tres donde más marcó. La clínica
-   recibe un mensaje con contexto en vez de un «hola, información».
+   con el nombre (si lo dio), el puntaje, la cantidad de áreas y las tres donde
+   más marcó. La clínica recibe un mensaje con contexto en vez de un «hola,
+   información».
+
+> **Actualizado el 26/08/2026: sí se pide un dato, a mitad de camino.** Al
+> llegar a la mitad de las áreas, una pantalla pide nombre y apellido para
+> seguir (`quiz.js`, función `go()`, variable `mid`). Es un cambio de estrategia
+> pedido por el cliente — revierte la decisión original de "cero fricción" de
+> este mismo documento — para poder personalizar el mensaje de WhatsApp y tener
+> un dato de contacto aunque el visitante no llegue al final. Se pide una sola
+> vez por navegador (`localStorage: ns-name`); si vuelve a hacer el test no se
+> le vuelve a preguntar. Vale la pena medir si esto baja la tasa de gente que
+> termina el test.
 
 > **No hay backend y es a propósito.** Un formulario que no guarda nada es peor
 > que no tenerlo. Cuando haya CRM, se agrega el envío ahí y el enlace de

@@ -1,17 +1,32 @@
 /* ============================================================
    NUTRISLIM — contenido del test de salud
    ------------------------------------------------------------
-   Las 17 áreas del cuestionario original de la clínica, con sus
-   síntomas. Se quitó la opción "Ninguna" de cada grupo: no marcar
-   nada ya significa ninguna, y eran 17 decisiones de más.
+   Seis áreas comunes a todos + una séptima según la silueta
+   elegida al empezar (Menopausia para mujeres, Andropausia para
+   hombres; con "prefiero no decirlo" el test queda en seis).
+   Contenido tomado del cuestionario real de la clínica ("TEST DE
+   SÍNTOMAS PARA EVALUACIÓN CLÍNICA Y SEGUIMIENTO DEL PACIENTE").
 
-   Los nueve idiomas del sitio, con la misma estructura: 17 áreas,
-   85 síntomas y 13 claves de resultado en cada uno.
+   Corregido el 26/08/2026: antes esta lista traía una plantilla
+   genérica de síntomas (17 áreas tipo "tracto digestivo, peso,
+   dientes, oídos...") que nunca fue la de la clínica, pese a que
+   el comentario de este archivo decía lo contrario. Se reemplazó
+   entera por las ocho categorías reales del documento de la Dra.
 
-   ⚠  Es vocabulario médico. Antes de publicar, el ruso, el chino y
-      el coreano necesitan revisión de un hablante nativo. El alemán
-      además está sujeto a la Heilmittelwerbegesetz: nada de este
-      texto debe prometer curación.
+   areasCommon: las seis que ve todo el mundo, en el orden del
+   documento. areaF / areaM: la séptima, condicional por género.
+
+   Los nueve idiomas del sitio, con la misma estructura y el mismo
+   orden de ítems, así los índices marcados valen igual en todos.
+
+   ⚠  Es vocabulario médico. El español es el texto de origen
+      (viene del PDF de la clínica). El resto se tradujo con
+      criterio pero SIN revisión nativa todavía — inglés, portugués,
+      francés, italiano, alemán, ruso, chino y coreano necesitan
+      que alguien que hable el idioma los revise antes de darlos
+      por buenos, sobre todo ruso/chino/coreano. El alemán además
+      está sujeto a la Heilmittelwerbegesetz: nada de este texto
+      debe prometer curación.
    ============================================================ */
 
 window.NS_QUIZ = {
@@ -23,10 +38,15 @@ en: {
             legend1:'YOUR MAP IS BEING DRAWN', legend2:'WHERE IT CONCENTRATES' },
 
   intro:  { kicker:'Free health assessment',
-            title:'Let\'s map what your body is telling you.',
-            lead:'Seventeen areas, one screen at a time. Mark only what has been happening <em>regularly over the last 30 days</em>. It takes about two minutes and costs nothing.',
+            title:'Am I listening to my body?',
+            lead:'START THE QUICK, EASY TEST',
             honest:'Be honest — nobody sees this but you.',
             start:'Start' },
+  mid:    { kicker:'Halfway there',
+            title:'You\'re doing great so far.',
+            lead:'Tell us your full name to continue.',
+            placeholder:'Full name',
+            cta:'Continue' },
   ui:     { next:'Next', back:'Back', of:'of', skip:'Nothing here',
             seeResult:'See my result', restart:'Start over',
             areasFlagged:'areas with something flagged' },
@@ -38,33 +58,26 @@ en: {
             midText:'Enough recurring symptoms to be worth a conversation. It does not mean something is wrong — it means it is worth finding out why.',
             highText:'Above ten recurring symptoms. In our experience that pattern rarely resolves on its own, and it is exactly what a full assessment is for.',
             symptoms:'symptoms marked',
+            scoreWord:'Oh!',
             top:'Where your body flagged the most',
-            cta:'Send my result and book',
+            cta:'VIEW RESULT',
             ctaNote:'Opens WhatsApp with your score already written.',
             again:'Do it again',
             legal:'This is an orientation tool, not a diagnosis. It does not replace a medical consultation, and no result here should be used to start, stop or change any treatment.' },
   wa:     { line1:'Hi! I did the health assessment on the website.',
+            name:'My name is {name}.',
             score:'My score: {n} symptoms across {a} areas.',
             line5:'Where I flagged the most:', line6:'I would like to book a consultation.' },
-  areas: [
-    { n:'Digestive tract',      items:['Bloating','Nausea or vomiting','Stomach pain or cramps','Heartburn','Belching','Gas','Anal itching','Diarrhoea','Constipation','Blood or mucus in stool'] },
-    { n:'Weight',               items:['Excess weight','Difficulty gaining weight','Compulsive appetite','Little appetite','Sugar cravings'] },
-    { n:'Thyroid',              items:['Difficulty losing weight','Sensitivity to cold','Hair loss','Dry skin'] },
-    { n:'Genitourinary',        items:['Frequent infections','Urgent or frequent urination','Abnormal discharge','Genital itching'] },
-    { n:'Joints and muscles',   items:['Joint pain or discomfort','Osteoarthritis','Swollen joints','Increasing leg pain'] },
-    { n:'Mouth and throat',     items:['Chronic cough','Throat clearing','Sore throat','Painful sores','Coated tongue'] },
-    { n:'Heart',                items:['Irregular or skipped beats','High cholesterol','Chest pain'] },
-    { n:'Teeth',                items:['Swollen or bleeding gums','Tartar build-up','Frequent cavities'] },
-    { n:'Skin',                 items:['Acne','Itchy skin','Flushing or redness'] },
-    { n:'Ears',                 items:['Ear pain or infection','Ringing in the ears','Red ears','Hearing loss'] },
-    { n:'Nose',                 items:['Blocked nose','Chronically red or swollen','Sinus problems','Sneezing fits','Excess mucus'] },
-    { n:'Respiratory',          items:['Chest congestion','Asthma','Shortness of breath','Wheezing','Persistent cough','Difficulty breathing'] },
-    { n:'Eyes',                 items:['Watery or itchy','Red eyelids','Red eyes','Bags or dark circles'] },
-    { n:'Head',                 items:['Headaches','Dizziness','Vertigo'] },
-    { n:'Mind and emotions',    items:['Trouble focusing','Stuttering or broken speech','Easily distracted','Poor memory','Trouble finishing things','Trouble with numbers','Learning difficulties','Poor performance at school or work','Trouble making decisions','Confusion','Mood swings','Anxiety','Anger','Frustration','Low mood'] },
-    { n:'Energy and sleep',     items:['Apathy or lethargy','Fatigue','Hyperactivity','Insomnia','Unrefreshing sleep','Poor physical coordination'] },
-    { n:'Anything else',        items:['Something that does not fit any of the above'] }
-  ]
+  areasCommon: [
+    { n:'Digestion and gastric issues', items:['Heartburn','Gastroesophageal reflux','Stomach burning','Heaviness after eating','Slow digestion','Feeling of food stuck in the stomach','Abdominal bloating','Frequent gas','Frequent belching','Nausea','Abdominal pain','Feeling of abdominal inflammation','Constipation','Diarrhea','Alternating constipation and diarrhea','Bad breath','Early fullness','Intolerance to fatty foods','Frequent digestive discomfort'] },
+    { n:'Food intolerances',            items:['Bloating after eating','Gas after eating','Fatigue after eating','Drowsiness after eating','Brain fog after eating','Headache after certain foods','Nasal congestion after eating','Itching after eating','Digestive discomfort with certain foods','Sensitivity to multiple foods','Frequent reactions to food','Worsening of symptoms after meals'] },
+    { n:'Gut microbiota (dysbiosis)',   items:['Frequent abdominal bloating','Excessive gas','Chronic constipation','Frequent diarrhea','Alternating diarrhea and constipation','Food intolerances','Persistent bad breath','Chronic fatigue','Brain fog','Recurrent infections','Recurrent candidiasis','Frequent skin problems','Feeling of intestinal inflammation','Weak immune defenses','Persistent digestive discomfort'] },
+    { n:'Oxidative stress',             items:['Persistent fatigue','Lack of energy','Physical weakness','Muscle pain','Joint pain','Slow recovery after exercise','Brain fog','Difficulty concentrating','Memory problems','Irritability','Anxiety','Persistent stress','Unrefreshing sleep','Insomnia','Hair loss','Brittle nails','Slow wound healing','Frequent infections','Premature aging','Dull skin'] },
+    { n:'Thyroid (hypothyroidism)',     items:['Fatigue','Drowsiness','Cold intolerance','Cold hands and feet','Weight gain','Difficulty losing weight','Fluid retention','Constipation','Dry skin','Hair loss','Dry hair','Brittle nails','Hoarse voice','Mental sluggishness','Memory problems','Lack of concentration','Low mood','Decreased libido','Muscle weakness','Facial puffiness'] },
+    { n:'Cognitive issues',             items:['Short-term memory problems','Frequent forgetfulness','Difficulty concentrating','Brain fog','Mental sluggishness','Difficulty finding words','Mental fatigue','Lack of attention','Reduced intellectual performance','Feeling of confusion','Difficulty learning new information','Reduced mental clarity'] }
+  ],
+  areaF: { n:'Menopause / Perimenopause', items:['Irregular menstrual cycles','Hot flashes','Night sweats','Insomnia','Mood swings','Irritability','Anxiety','Fatigue','Decreased libido','Vaginal dryness','Pain during intercourse','Memory problems','Difficulty concentrating','Increased abdominal fat','Joint pain','Palpitations','Breast tenderness','Sadness or low mood','Decreased muscle mass','Known loss of bone density'] },
+  areaM: { n:'Andropause',               items:['Decreased libido','Erectile dysfunction','Fewer morning erections','Persistent fatigue','Lack of energy','Loss of muscle strength','Loss of muscle mass','Increased abdominal fat','Decreased physical performance','Lack of motivation','Irritability','Mood swings','Concentration problems','Memory problems','Sleep disturbances','Low mood','Reduced self-confidence','Slower physical recovery','Decreased body hair','Reduced overall vitality'] }
 },
 
 es: {
@@ -74,10 +87,15 @@ es: {
             legend1:'TU MAPA SE VA DIBUJANDO', legend2:'DONDE SE CONCENTRA' },
 
   intro:  { kicker:'Test de salud gratuito',
-            title:'Vamos a mapear lo que tu cuerpo te está diciendo.',
-            lead:'Diecisiete áreas, una pantalla por vez. Marcá solo lo que te pasa <em>de forma recurrente en los últimos 30 días</em>. Toma unos dos minutos y no cuesta nada.',
+            title:'¿Estoy escuchando a mi cuerpo?',
+            lead:'INICIAR TEST RÁPIDO Y FÁCIL',
             honest:'Sé honesto — esto no lo ve nadie más que vos.',
             start:'Empezar' },
+  mid:    { kicker:'A mitad de camino',
+            title:'Vas muy bien con el test.',
+            lead:'Decinos tu nombre y apellido para continuar.',
+            placeholder:'Nombre y apellido',
+            cta:'Continuar' },
   ui:     { next:'Siguiente', back:'Atrás', of:'de', skip:'Nada de esto',
             seeResult:'Ver mi resultado', restart:'Empezar de nuevo',
             areasFlagged:'áreas con algo marcado' },
@@ -89,33 +107,26 @@ es: {
             midText:'Suficientes síntomas recurrentes como para que valga una conversación. No significa que algo ande mal: significa que vale la pena averiguar por qué.',
             highText:'Más de diez síntomas recurrentes. Ese patrón rara vez se resuelve solo, y es exactamente para lo que sirve una evaluación completa.',
             symptoms:'síntomas marcados',
+            scoreWord:'¡Oh!',
             top:'Donde tu cuerpo marcó más',
-            cta:'Enviar mi resultado y agendar',
+            cta:'VER RESULTADO',
             ctaNote:'Abre WhatsApp con tu puntaje ya escrito.',
             again:'Hacerlo de nuevo',
             legal:'Esto es una herramienta de orientación, no un diagnóstico. No reemplaza una consulta médica, y ningún resultado de acá debe usarse para iniciar, suspender ni modificar un tratamiento.' },
   wa:     { line1:'¡Hola! Hice el test de salud en la web.',
+            name:'Soy {name}.',
             score:'Mi puntaje: {n} síntomas en {a} áreas.',
             line5:'Donde marqué más:', line6:'Me gustaría agendar una consulta.' },
-  areas: [
-    { n:'Tracto digestivo',     items:['Sensación de hinchazón','Náuseas o vómitos','Dolor estomacal o cólicos','Acidez','Eructos','Flatulencias','Comezón anal','Diarrea','Estreñimiento','Sangre o mucosidad en las heces'] },
-    { n:'Peso',                 items:['Peso excesivo','Dificultad para ganar peso','Apetito compulsivo','Poco apetito','Antojo por dulces'] },
-    { n:'Tiroides',             items:['Dificultad para bajar de peso','Sensibilidad al frío','Pérdida del cabello','Piel seca'] },
-    { n:'Genito-urinario',      items:['Infecciones frecuentes','Necesidad de orinar con urgencia o frecuencia','Flujo genital anormal','Comezón genital'] },
-    { n:'Articulaciones y músculos', items:['Dolor o molestia articular','Artrosis','Articulaciones hinchadas','Dolor creciente en las piernas'] },
-    { n:'Boca y garganta',      items:['Tos crónica','Carraspera','Dolor de garganta','Llagas dolorosas','Lengua saburral'] },
-    { n:'Corazón',              items:['Latidos irregulares o salteados','Colesterol elevado','Dolor de pecho'] },
-    { n:'Dientes',              items:['Encías inflamadas o sangrantes','Sarro','Tendencia a las caries'] },
-    { n:'Piel',                 items:['Acné','Comezón en la piel','Rubores o enrojecimientos'] },
-    { n:'Oídos',                items:['Dolor o infección de oídos','Zumbido en los oídos','Enrojecimiento de las orejas','Pérdida de audición'] },
-    { n:'Nariz',                items:['Nariz tapada','Crónicamente roja o inflamada','Problemas sinusales','Ataques de estornudos','Exceso de moco'] },
-    { n:'Respiratorio',         items:['Congestión del pecho','Asma','Falta de aliento','Silbido al respirar','Tos persistente','Dificultad respiratoria'] },
-    { n:'Ojos',                 items:['Llorosos o con picazón','Párpados rojos','Ojos rojos','Bolsas u ojeras'] },
-    { n:'Cabeza',               items:['Dolores de cabeza','Mareos','Vértigo'] },
-    { n:'Mente y emociones',    items:['Falta de atención','Habla entrecortada o tartamudeo','Fácil distracción','Memoria pobre','Dificultad para terminar lo que empezás','Dificultad con los números','Dificultad de aprendizaje','Bajo rendimiento en el estudio o el trabajo','Dificultad para tomar decisiones','Confusión','Cambios de carácter','Ansiedad','Enojo','Frustración','Ánimo bajo'] },
-    { n:'Energía y sueño',      items:['Apatía o letargo','Fatiga','Hiperactividad','Insomnio','Sueño que no descansa','Poca coordinación física'] },
-    { n:'¿Algo más?',           items:['Algo que no entra en ninguna de las anteriores'] }
-  ]
+  areasCommon: [
+    { n:'Digestión y problemas gástricos', items:['Acidez','Reflujo gastroesofágico','Ardor estomacal','Pesadez después de comer','Digestión lenta','Sensación de comida detenida en el estómago','Distensión abdominal','Gases frecuentes','Eructos frecuentes','Náuseas','Dolor abdominal','Sensación de inflamación abdominal','Estreñimiento','Diarrea','Alternancia entre estreñimiento y diarrea','Mal aliento','Saciedad temprana','Intolerancia a comidas grasas','Molestias digestivas frecuentes'] },
+    { n:'Intolerancias alimentarias',       items:['Hinchazón después de comer','Gases después de comer','Fatiga después de comer','Somnolencia después de comer','Niebla mental después de comer','Dolor de cabeza después de ciertas comidas','Congestión nasal después de comer','Picazón después de comer','Molestias digestivas con ciertos alimentos','Sensibilidad a múltiples alimentos','Reacciones frecuentes a alimentos','Empeoramiento de síntomas tras las comidas'] },
+    { n:'Microbiota intestinal (disbiosis)', items:['Distensión abdominal frecuente','Gases excesivos','Estreñimiento crónico','Diarrea frecuente','Alternancia entre diarrea y estreñimiento','Intolerancias alimentarias','Mal aliento persistente','Fatiga crónica','Niebla mental','Infecciones recurrentes','Candidiasis recurrente','Problemas de piel frecuentes','Sensación de inflamación intestinal','Defensas bajas','Molestias digestivas persistentes'] },
+    { n:'Estrés oxidativo',                  items:['Fatiga persistente','Falta de energía','Debilidad física','Dolores musculares','Dolores articulares','Recuperación lenta después del ejercicio','Niebla mental','Dificultad para concentrarse','Problemas de memoria','Irritabilidad','Ansiedad','Estrés persistente','Sueño no reparador','Insomnio','Caída del cabello','Uñas quebradizas','Cicatrización lenta','Infecciones frecuentes','Envejecimiento prematuro','Piel opaca'] },
+    { n:'Tiroides (hipotiroidismo)',         items:['Fatiga','Somnolencia','Intolerancia al frío','Manos y pies fríos','Aumento de peso','Dificultad para bajar de peso','Retención de líquidos','Estreñimiento','Piel seca','Caída del cabello','Cabello seco','Uñas frágiles','Voz ronca','Lentitud mental','Problemas de memoria','Falta de concentración','Estado de ánimo bajo','Disminución de la libido','Debilidad muscular','Hinchazón facial'] },
+    { n:'Problemas cognitivos',              items:['Problemas de memoria reciente','Olvidos frecuentes','Dificultad para concentrarse','Niebla mental','Lentitud mental','Dificultad para encontrar palabras','Fatiga mental','Falta de atención','Menor rendimiento intelectual','Sensación de confusión','Dificultad para aprender información nueva','Disminución de la claridad mental'] }
+  ],
+  areaF: { n:'Menopausia / Perimenopausia', items:['Ciclos menstruales irregulares','Sofocos','Sudoración nocturna','Insomnio','Cambios de humor','Irritabilidad','Ansiedad','Fatiga','Disminución de la libido','Sequedad vaginal','Dolor durante las relaciones','Problemas de memoria','Dificultad para concentrarse','Aumento de grasa abdominal','Dolores articulares','Palpitaciones','Sensibilidad mamaria','Tristeza o desánimo','Disminución de la masa muscular','Pérdida de densidad ósea conocida'] },
+  areaM: { n:'Andropausia',                 items:['Disminución de la libido','Disfunción eréctil','Menos erecciones matutinas','Fatiga persistente','Falta de energía','Pérdida de fuerza muscular','Pérdida de masa muscular','Aumento de grasa abdominal','Disminución del rendimiento físico','Falta de motivación','Irritabilidad','Cambios de humor','Problemas de concentración','Problemas de memoria','Alteraciones del sueño','Estado de ánimo bajo','Menor confianza en sí mismo','Recuperación física más lenta','Disminución del vello corporal','Menor vitalidad general'] }
 },
 
 /* ══════════════════════════════════════════════════════ PORTUGUÊS */
@@ -126,10 +137,15 @@ pt: {
             legend1:'SEU MAPA ESTÁ SENDO DESENHADO', legend2:'ONDE SE CONCENTRA' },
 
   intro:  { kicker:'Teste de saúde gratuito',
-            title:'Vamos mapear o que o seu corpo está dizendo.',
-            lead:'Dezessete áreas, uma tela por vez. Marque apenas o que acontece <em>de forma recorrente nos últimos 30 dias</em>. Leva cerca de dois minutos e não custa nada.',
+            title:'Estou ouvindo o meu corpo?',
+            lead:'COMEÇAR O TESTE RÁPIDO E FÁCIL',
             honest:'Seja honesto — ninguém vê isto além de você.',
             start:'Começar' },
+  mid:    { kicker:'Na metade do caminho',
+            title:'Você está indo muito bem.',
+            lead:'Nos diga seu nome completo para continuar.',
+            placeholder:'Nome completo',
+            cta:'Continuar' },
   ui:     { next:'Próximo', back:'Voltar', of:'de', skip:'Nada disso',
             seeResult:'Ver meu resultado', restart:'Começar de novo',
             areasFlagged:'áreas com algo marcado' },
@@ -141,33 +157,26 @@ pt: {
             midText:'Sintomas recorrentes suficientes para valer uma conversa. Não significa que algo esteja errado: significa que vale a pena descobrir por quê.',
             highText:'Mais de dez sintomas recorrentes. Esse padrão raramente se resolve sozinho, e é exatamente para isso que serve uma avaliação completa.',
             symptoms:'sintomas marcados',
+            scoreWord:'Nossa!',
             top:'Onde o seu corpo mais marcou',
-            cta:'Enviar meu resultado e agendar',
+            cta:'VER RESULTADO',
             ctaNote:'Abre o WhatsApp com a sua pontuação já escrita.',
             again:'Fazer de novo',
             legal:'Esta é uma ferramenta de orientação, não um diagnóstico. Não substitui uma consulta médica, e nenhum resultado daqui deve ser usado para iniciar, suspender ou alterar qualquer tratamento.' },
   wa:     { line1:'Olá! Fiz o teste de saúde no site.',
+            name:'Meu nome é {name}.',
             score:'Minha pontuação: {n} sintomas em {a} áreas.',
             line5:'Onde marquei mais:', line6:'Gostaria de agendar uma consulta.' },
-  areas: [
-    { n:'Trato digestivo',      items:['Sensação de inchaço','Náuseas ou vômitos','Dor de estômago ou cólicas','Azia','Arrotos','Gases','Coceira anal','Diarreia','Prisão de ventre','Sangue ou muco nas fezes'] },
-    { n:'Peso',                 items:['Peso excessivo','Dificuldade para ganhar peso','Apetite compulsivo','Pouco apetite','Vontade de doces'] },
-    { n:'Tireoide',             items:['Dificuldade para emagrecer','Sensibilidade ao frio','Queda de cabelo','Pele seca'] },
-    { n:'Genito-urinário',      items:['Infecções frequentes','Vontade de urinar com urgência ou frequência','Corrimento genital anormal','Coceira genital'] },
-    { n:'Articulações e músculos', items:['Dor ou desconforto nas articulações','Artrose','Articulações inchadas','Dor crescente nas pernas'] },
-    { n:'Boca e garganta',      items:['Tosse crônica','Pigarro','Dor de garganta','Aftas dolorosas','Língua saburrosa'] },
-    { n:'Coração',              items:['Batimentos irregulares ou falhando','Colesterol alto','Dor no peito'] },
-    { n:'Dentes',               items:['Gengivas inflamadas ou sangrando','Tártaro','Tendência a cáries'] },
-    { n:'Pele',                 items:['Acne','Coceira na pele','Rubor ou vermelhidão'] },
-    { n:'Ouvidos',              items:['Dor ou infecção de ouvido','Zumbido nos ouvidos','Vermelhidão nas orelhas','Perda de audição'] },
-    { n:'Nariz',                items:['Nariz entupido','Cronicamente vermelho ou inchado','Problemas de sinusite','Crises de espirros','Excesso de muco'] },
-    { n:'Respiratório',         items:['Congestão no peito','Asma','Falta de ar','Chiado ao respirar','Tosse persistente','Dificuldade para respirar'] },
-    { n:'Olhos',                items:['Lacrimejantes ou com coceira','Pálpebras vermelhas','Olhos vermelhos','Bolsas ou olheiras'] },
-    { n:'Cabeça',               items:['Dores de cabeça','Tonturas','Vertigem'] },
-    { n:'Mente e emoções',      items:['Falta de atenção','Fala entrecortada ou gagueira','Distração fácil','Memória fraca','Dificuldade para terminar o que começa','Dificuldade com números','Dificuldade de aprendizagem','Baixo rendimento no estudo ou no trabalho','Dificuldade para tomar decisões','Confusão','Mudanças de humor','Ansiedade','Raiva','Frustração','Ânimo baixo'] },
-    { n:'Energia e sono',       items:['Apatia ou letargia','Fadiga','Hiperatividade','Insônia','Sono que não descansa','Pouca coordenação física'] },
-    { n:'Mais alguma coisa?',   items:['Algo que não se encaixa em nenhuma das anteriores'] }
-  ]
+  areasCommon: [
+    { n:'Digestão e problemas gástricos', items:['Azia','Refluxo gastroesofágico','Ardor no estômago','Peso após as refeições','Digestão lenta','Sensação de comida parada no estômago','Distensão abdominal','Gases frequentes','Arrotos frequentes','Náuseas','Dor abdominal','Sensação de inflamação abdominal','Prisão de ventre','Diarreia','Alternância entre prisão de ventre e diarreia','Mau hálito','Saciedade precoce','Intolerância a alimentos gordurosos','Desconforto digestivo frequente'] },
+    { n:'Intolerâncias alimentares',       items:['Inchaço após comer','Gases após comer','Fadiga após comer','Sonolência após comer','Neblina mental após comer','Dor de cabeça após certos alimentos','Congestão nasal após comer','Coceira após comer','Desconforto digestivo com certos alimentos','Sensibilidade a vários alimentos','Reações frequentes a alimentos','Piora dos sintomas após as refeições'] },
+    { n:'Microbiota intestinal (disbiose)', items:['Distensão abdominal frequente','Gases excessivos','Prisão de ventre crônica','Diarreia frequente','Alternância entre diarreia e prisão de ventre','Intolerâncias alimentares','Mau hálito persistente','Fadiga crônica','Neblina mental','Infecções recorrentes','Candidíase recorrente','Problemas de pele frequentes','Sensação de inflamação intestinal','Baixa imunidade','Desconforto digestivo persistente'] },
+    { n:'Estresse oxidativo',              items:['Fadiga persistente','Falta de energia','Fraqueza física','Dores musculares','Dores articulares','Recuperação lenta após o exercício','Neblina mental','Dificuldade de concentração','Problemas de memória','Irritabilidade','Ansiedade','Estresse persistente','Sono não reparador','Insônia','Queda de cabelo','Unhas quebradiças','Cicatrização lenta','Infecções frequentes','Envelhecimento precoce','Pele opaca'] },
+    { n:'Tireoide (hipotireoidismo)',      items:['Fadiga','Sonolência','Intolerância ao frio','Mãos e pés frios','Ganho de peso','Dificuldade para emagrecer','Retenção de líquidos','Prisão de ventre','Pele seca','Queda de cabelo','Cabelo seco','Unhas frágeis','Rouquidão','Lentidão mental','Problemas de memória','Falta de concentração','Ânimo baixo','Diminuição da libido','Fraqueza muscular','Inchaço facial'] },
+    { n:'Problemas cognitivos',            items:['Problemas de memória recente','Esquecimentos frequentes','Dificuldade de concentração','Neblina mental','Lentidão mental','Dificuldade para encontrar palavras','Fadiga mental','Falta de atenção','Menor rendimento intelectual','Sensação de confusão','Dificuldade para aprender informações novas','Diminuição da clareza mental'] }
+  ],
+  areaF: { n:'Menopausa / Perimenopausa', items:['Ciclos menstruais irregulares','Fogachos (ondas de calor)','Suores noturnos','Insônia','Mudanças de humor','Irritabilidade','Ansiedade','Fadiga','Diminuição da libido','Ressecamento vaginal','Dor durante as relações','Problemas de memória','Dificuldade de concentração','Aumento de gordura abdominal','Dores articulares','Palpitações','Sensibilidade nos seios','Tristeza ou desânimo','Diminuição da massa muscular','Perda de densidade óssea conhecida'] },
+  areaM: { n:'Andropausa',                items:['Diminuição da libido','Disfunção erétil','Menos ereções matinais','Fadiga persistente','Falta de energia','Perda de força muscular','Perda de massa muscular','Aumento de gordura abdominal','Diminuição do desempenho físico','Falta de motivação','Irritabilidade','Mudanças de humor','Problemas de concentração','Problemas de memória','Alterações do sono','Ânimo baixo','Menor autoconfiança','Recuperação física mais lenta','Diminuição dos pelos corporais','Menor vitalidade geral'] }
 },
 
 /* ══════════════════════════════════════════════════════ FRANÇAIS */
@@ -178,10 +187,15 @@ fr: {
             legend1:'VOTRE CARTE SE DESSINE', legend2:'OÙ ÇA SE CONCENTRE' },
 
   intro:  { kicker:'Test de santé gratuit',
-            title:'Cartographions ce que votre corps vous dit.',
-            lead:'Dix-sept zones, un écran à la fois. Ne cochez que ce qui revient <em>régulièrement depuis 30 jours</em>. Cela prend environ deux minutes et ne coûte rien.',
+            title:'Est-ce que j’écoute mon corps ?',
+            lead:'COMMENCER LE TEST RAPIDE ET FACILE',
             honest:'Soyez honnête — personne d’autre que vous ne le voit.',
             start:'Commencer' },
+  mid:    { kicker:'À mi-parcours',
+            title:'Vous vous en sortez très bien.',
+            lead:'Dites-nous votre nom complet pour continuer.',
+            placeholder:'Nom complet',
+            cta:'Continuer' },
   ui:     { next:'Suivant', back:'Retour', of:'sur', skip:'Rien de tout cela',
             seeResult:'Voir mon résultat', restart:'Recommencer',
             areasFlagged:'zones avec quelque chose de coché' },
@@ -193,33 +207,26 @@ fr: {
             midText:'Assez de symptômes récurrents pour qu’une conversation en vaille la peine. Cela ne veut pas dire que quelque chose ne va pas : cela veut dire qu’il vaut la peine de comprendre pourquoi.',
             highText:'Plus de dix symptômes récurrents. Ce schéma se résout rarement tout seul, et c’est exactement à cela que sert un bilan complet.',
             symptoms:'symptômes cochés',
+            scoreWord:'Oh !',
             top:'Là où votre corps a le plus signalé',
-            cta:'Envoyer mon résultat et prendre rendez-vous',
+            cta:'VOIR LE RÉSULTAT',
             ctaNote:'Ouvre WhatsApp avec votre score déjà rédigé.',
             again:'Refaire le test',
             legal:'Ceci est un outil d’orientation, pas un diagnostic. Il ne remplace pas une consultation médicale, et aucun résultat obtenu ici ne doit servir à commencer, arrêter ou modifier un traitement.' },
   wa:     { line1:'Bonjour ! J’ai fait le test de santé sur le site.',
+            name:'Je m’appelle {name}.',
             score:'Mon score : {n} symptômes dans {a} zones.',
             line5:'Là où j’ai le plus coché :', line6:'Je souhaiterais prendre rendez-vous.' },
-  areas: [
-    { n:'Tube digestif',        items:['Sensation de ballonnement','Nausées ou vomissements','Douleurs d’estomac ou crampes','Brûlures d’estomac','Éructations','Gaz','Démangeaisons anales','Diarrhée','Constipation','Sang ou glaires dans les selles'] },
-    { n:'Poids',                items:['Surpoids','Difficulté à prendre du poids','Appétit compulsif','Peu d’appétit','Envies de sucre'] },
-    { n:'Thyroïde',             items:['Difficulté à perdre du poids','Sensibilité au froid','Chute de cheveux','Peau sèche'] },
-    { n:'Génito-urinaire',      items:['Infections fréquentes','Envie d’uriner urgente ou fréquente','Pertes génitales anormales','Démangeaisons génitales'] },
-    { n:'Articulations et muscles', items:['Douleurs ou gêne articulaire','Arthrose','Articulations gonflées','Douleur croissante dans les jambes'] },
-    { n:'Bouche et gorge',      items:['Toux chronique','Raclements de gorge','Mal de gorge','Aphtes douloureux','Langue chargée'] },
-    { n:'Cœur',                 items:['Battements irréguliers ou sautés','Cholestérol élevé','Douleur à la poitrine'] },
-    { n:'Dents',                items:['Gencives enflées ou qui saignent','Tartre','Tendance aux caries'] },
-    { n:'Peau',                 items:['Acné','Démangeaisons cutanées','Rougeurs ou bouffées de chaleur'] },
-    { n:'Oreilles',             items:['Douleur ou infection de l’oreille','Bourdonnements','Rougeur des oreilles','Perte d’audition'] },
-    { n:'Nez',                  items:['Nez bouché','Chroniquement rouge ou enflé','Problèmes de sinus','Crises d’éternuements','Excès de mucus'] },
-    { n:'Respiratoire',         items:['Congestion thoracique','Asthme','Essoufflement','Sifflements respiratoires','Toux persistante','Difficulté à respirer'] },
-    { n:'Yeux',                 items:['Larmoyants ou qui démangent','Paupières rouges','Yeux rouges','Poches ou cernes'] },
-    { n:'Tête',                 items:['Maux de tête','Étourdissements','Vertiges'] },
-    { n:'Esprit et émotions',   items:['Manque d’attention','Parole hachée ou bégaiement','Distraction facile','Mémoire défaillante','Difficulté à terminer ce qu’on commence','Difficulté avec les chiffres','Difficultés d’apprentissage','Baisse de rendement à l’école ou au travail','Difficulté à décider','Confusion','Sautes d’humeur','Anxiété','Colère','Frustration','Moral bas'] },
-    { n:'Énergie et sommeil',   items:['Apathie ou léthargie','Fatigue','Hyperactivité','Insomnie','Sommeil non réparateur','Mauvaise coordination physique'] },
-    { n:'Autre chose ?',        items:['Quelque chose qui n’entre dans aucune des catégories ci-dessus'] }
-  ]
+  areasCommon: [
+    { n:'Digestion et troubles gastriques', items:['Brûlures d’estomac','Reflux gastro-œsophagien','Brûlures gastriques','Lourdeur après les repas','Digestion lente','Sensation de nourriture bloquée dans l’estomac','Ballonnements abdominaux','Gaz fréquents','Éructations fréquentes','Nausées','Douleurs abdominales','Sensation d’inflammation abdominale','Constipation','Diarrhée','Alternance de constipation et de diarrhée','Mauvaise haleine','Satiété précoce','Intolérance aux aliments gras','Inconfort digestif fréquent'] },
+    { n:'Intolérances alimentaires',         items:['Ballonnements après les repas','Gaz après les repas','Fatigue après les repas','Somnolence après les repas','Brouillard mental après les repas','Maux de tête après certains aliments','Congestion nasale après les repas','Démangeaisons après les repas','Inconfort digestif avec certains aliments','Sensibilité à plusieurs aliments','Réactions fréquentes aux aliments','Aggravation des symptômes après les repas'] },
+    { n:'Microbiote intestinal (dysbiose)',  items:['Ballonnements abdominaux fréquents','Gaz excessifs','Constipation chronique','Diarrhée fréquente','Alternance de diarrhée et de constipation','Intolérances alimentaires','Mauvaise haleine persistante','Fatigue chronique','Brouillard mental','Infections récurrentes','Candidose récurrente','Problèmes de peau fréquents','Sensation d’inflammation intestinale','Défenses immunitaires faibles','Inconfort digestif persistant'] },
+    { n:'Stress oxydatif',                   items:['Fatigue persistante','Manque d’énergie','Faiblesse physique','Douleurs musculaires','Douleurs articulaires','Récupération lente après l’exercice','Brouillard mental','Difficulté à se concentrer','Problèmes de mémoire','Irritabilité','Anxiété','Stress persistant','Sommeil non réparateur','Insomnie','Chute de cheveux','Ongles cassants','Cicatrisation lente','Infections fréquentes','Vieillissement prématuré','Peau terne'] },
+    { n:'Thyroïde (hypothyroïdie)',          items:['Fatigue','Somnolence','Intolérance au froid','Mains et pieds froids','Prise de poids','Difficulté à perdre du poids','Rétention d’eau','Constipation','Peau sèche','Chute de cheveux','Cheveux secs','Ongles fragiles','Voix rauque','Lenteur mentale','Problèmes de mémoire','Manque de concentration','Moral bas','Baisse de la libido','Faiblesse musculaire','Gonflement du visage'] },
+    { n:'Troubles cognitifs',                items:['Problèmes de mémoire récente','Oublis fréquents','Difficulté à se concentrer','Brouillard mental','Lenteur mentale','Difficulté à trouver ses mots','Fatigue mentale','Manque d’attention','Baisse des performances intellectuelles','Sensation de confusion','Difficulté à apprendre de nouvelles informations','Diminution de la clarté mentale'] }
+  ],
+  areaF: { n:'Ménopause / Périménopause', items:['Cycles menstruels irréguliers','Bouffées de chaleur','Sueurs nocturnes','Insomnie','Sautes d’humeur','Irritabilité','Anxiété','Fatigue','Baisse de la libido','Sécheresse vaginale','Douleur pendant les rapports','Problèmes de mémoire','Difficulté à se concentrer','Augmentation de la graisse abdominale','Douleurs articulaires','Palpitations','Sensibilité mammaire','Tristesse ou déprime','Diminution de la masse musculaire','Perte de densité osseuse connue'] },
+  areaM: { n:'Andropause',                items:['Baisse de la libido','Dysfonction érectile','Moins d’érections matinales','Fatigue persistante','Manque d’énergie','Perte de force musculaire','Perte de masse musculaire','Augmentation de la graisse abdominale','Baisse des performances physiques','Manque de motivation','Irritabilité','Sautes d’humeur','Problèmes de concentration','Problèmes de mémoire','Troubles du sommeil','Moral bas','Confiance en soi diminuée','Récupération physique plus lente','Diminution de la pilosité corporelle','Baisse de la vitalité générale'] }
 },
 
 /* ══════════════════════════════════════════════════════ ITALIANO */
@@ -230,10 +237,15 @@ it: {
             legend1:'LA TUA MAPPA SI STA DISEGNANDO', legend2:'DOVE SI CONCENTRA' },
 
   intro:  { kicker:'Test di salute gratuito',
-            title:'Mappiamo quello che il tuo corpo ti sta dicendo.',
-            lead:'Diciassette aree, una schermata alla volta. Segna solo ciò che ti succede <em>in modo ricorrente negli ultimi 30 giorni</em>. Richiede circa due minuti e non costa nulla.',
+            title:'Sto ascoltando il mio corpo?',
+            lead:'INIZIA IL TEST RAPIDO E FACILE',
             honest:'Sii onesto — non lo vede nessuno tranne te.',
             start:'Inizia' },
+  mid:    { kicker:'A metà strada',
+            title:'Stai andando alla grande.',
+            lead:'Dicci il tuo nome e cognome per continuare.',
+            placeholder:'Nome e cognome',
+            cta:'Continua' },
   ui:     { next:'Avanti', back:'Indietro', of:'di', skip:'Niente di questo',
             seeResult:'Vedi il mio risultato', restart:'Ricomincia',
             areasFlagged:'aree con qualcosa segnato' },
@@ -245,33 +257,26 @@ it: {
             midText:'Sintomi ricorrenti sufficienti perché valga una conversazione. Non vuol dire che qualcosa non vada: vuol dire che vale la pena capire perché.',
             highText:'Più di dieci sintomi ricorrenti. Quel quadro raramente si risolve da solo, ed è esattamente a questo che serve una valutazione completa.',
             symptoms:'sintomi segnati',
+            scoreWord:'Oh!',
             top:'Dove il tuo corpo ha segnato di più',
-            cta:'Invia il mio risultato e prenota',
+            cta:'VEDI IL RISULTATO',
             ctaNote:'Apre WhatsApp con il tuo punteggio già scritto.',
             again:'Rifai il test',
             legal:'Questo è uno strumento di orientamento, non una diagnosi. Non sostituisce una visita medica, e nessun risultato ottenuto qui va usato per iniziare, sospendere o modificare una terapia.' },
   wa:     { line1:'Ciao! Ho fatto il test di salute sul sito.',
+            name:'Mi chiamo {name}.',
             score:'Il mio punteggio: {n} sintomi in {a} aree.',
             line5:'Dove ho segnato di più:', line6:'Vorrei prenotare una visita.' },
-  areas: [
-    { n:'Apparato digerente',   items:['Sensazione di gonfiore','Nausea o vomito','Dolore allo stomaco o crampi','Bruciore di stomaco','Eruttazioni','Gas intestinali','Prurito anale','Diarrea','Stitichezza','Sangue o muco nelle feci'] },
-    { n:'Peso',                 items:['Peso in eccesso','Difficoltà a prendere peso','Appetito compulsivo','Poco appetito','Voglia di dolci'] },
-    { n:'Tiroide',              items:['Difficoltà a dimagrire','Sensibilità al freddo','Caduta dei capelli','Pelle secca'] },
-    { n:'Genito-urinario',      items:['Infezioni frequenti','Bisogno di urinare urgente o frequente','Perdite genitali anomale','Prurito genitale'] },
-    { n:'Articolazioni e muscoli', items:['Dolore o fastidio articolare','Artrosi','Articolazioni gonfie','Dolore crescente alle gambe'] },
-    { n:'Bocca e gola',         items:['Tosse cronica','Raschiare la gola','Mal di gola','Afte dolorose','Lingua patinosa'] },
-    { n:'Cuore',                items:['Battiti irregolari o saltati','Colesterolo alto','Dolore al petto'] },
-    { n:'Denti',                items:['Gengive infiammate o sanguinanti','Tartaro','Tendenza alle carie'] },
-    { n:'Pelle',                items:['Acne','Prurito cutaneo','Rossori o vampate'] },
-    { n:'Orecchie',             items:['Dolore o infezione all’orecchio','Ronzio alle orecchie','Arrossamento delle orecchie','Perdita dell’udito'] },
-    { n:'Naso',                 items:['Naso chiuso','Cronicamente rosso o gonfio','Problemi ai seni nasali','Attacchi di starnuti','Eccesso di muco'] },
-    { n:'Respiratorio',         items:['Congestione al petto','Asma','Fiato corto','Respiro sibilante','Tosse persistente','Difficoltà a respirare'] },
-    { n:'Occhi',                items:['Lacrimazione o prurito','Palpebre arrossate','Occhi rossi','Borse o occhiaie'] },
-    { n:'Testa',                items:['Mal di testa','Capogiri','Vertigini'] },
-    { n:'Mente ed emozioni',    items:['Mancanza di attenzione','Parlata spezzata o balbuzie','Facile distrazione','Memoria debole','Difficoltà a finire ciò che si inizia','Difficoltà con i numeri','Difficoltà di apprendimento','Basso rendimento a scuola o al lavoro','Difficoltà a decidere','Confusione','Sbalzi d’umore','Ansia','Rabbia','Frustrazione','Umore basso'] },
-    { n:'Energia e sonno',      items:['Apatia o letargia','Stanchezza','Iperattività','Insonnia','Sonno che non riposa','Scarsa coordinazione fisica'] },
-    { n:'Qualcos’altro?',       items:['Qualcosa che non rientra in nessuna delle precedenti'] }
-  ]
+  areasCommon: [
+    { n:'Digestione e problemi gastrici', items:['Acidità','Reflusso gastroesofageo','Bruciore di stomaco','Pesantezza dopo i pasti','Digestione lenta','Sensazione di cibo fermo nello stomaco','Gonfiore addominale','Gas frequenti','Eruttazioni frequenti','Nausea','Dolore addominale','Sensazione di infiammazione addominale','Stitichezza','Diarrea','Alternanza tra stitichezza e diarrea','Alitosi','Sazietà precoce','Intolleranza ai cibi grassi','Disturbi digestivi frequenti'] },
+    { n:'Intolleranze alimentari',         items:['Gonfiore dopo i pasti','Gas dopo i pasti','Stanchezza dopo i pasti','Sonnolenza dopo i pasti','Nebbia mentale dopo i pasti','Mal di testa dopo certi cibi','Congestione nasale dopo i pasti','Prurito dopo i pasti','Disturbi digestivi con certi alimenti','Sensibilità a più alimenti','Reazioni frequenti al cibo','Peggioramento dei sintomi dopo i pasti'] },
+    { n:'Microbiota intestinale (disbiosi)', items:['Gonfiore addominale frequente','Gas eccessivi','Stitichezza cronica','Diarrea frequente','Alternanza tra diarrea e stitichezza','Intolleranze alimentari','Alitosi persistente','Stanchezza cronica','Nebbia mentale','Infezioni ricorrenti','Candidosi ricorrente','Problemi di pelle frequenti','Sensazione di infiammazione intestinale','Difese immunitarie basse','Disturbi digestivi persistenti'] },
+    { n:'Stress ossidativo',                items:['Stanchezza persistente','Mancanza di energia','Debolezza fisica','Dolori muscolari','Dolori articolari','Recupero lento dopo l’esercizio','Nebbia mentale','Difficoltà di concentrazione','Problemi di memoria','Irritabilità','Ansia','Stress persistente','Sonno non ristoratore','Insonnia','Caduta dei capelli','Unghie fragili','Guarigione lenta delle ferite','Infezioni frequenti','Invecchiamento precoce','Pelle spenta'] },
+    { n:'Tiroide (ipotiroidismo)',          items:['Stanchezza','Sonnolenza','Intolleranza al freddo','Mani e piedi freddi','Aumento di peso','Difficoltà a dimagrire','Ritenzione idrica','Stitichezza','Pelle secca','Caduta dei capelli','Capelli secchi','Unghie fragili','Voce rauca','Lentezza mentale','Problemi di memoria','Difficoltà di concentrazione','Umore basso','Calo della libido','Debolezza muscolare','Gonfiore al viso'] },
+    { n:'Problemi cognitivi',               items:['Problemi di memoria recente','Dimenticanze frequenti','Difficoltà di concentrazione','Nebbia mentale','Lentezza mentale','Difficoltà a trovare le parole','Fatica mentale','Mancanza di attenzione','Minor rendimento intellettivo','Sensazione di confusione','Difficoltà ad apprendere nuove informazioni','Riduzione della lucidità mentale'] }
+  ],
+  areaF: { n:'Menopausa / Perimenopausa', items:['Cicli mestruali irregolari','Vampate di calore','Sudorazioni notturne','Insonnia','Sbalzi d’umore','Irritabilità','Ansia','Stanchezza','Calo della libido','Secchezza vaginale','Dolore durante i rapporti','Problemi di memoria','Difficoltà di concentrazione','Aumento del grasso addominale','Dolori articolari','Palpitazioni','Sensibilità al seno','Tristezza o sconforto','Riduzione della massa muscolare','Perdita di densità ossea nota'] },
+  areaM: { n:'Andropausa',                items:['Calo della libido','Disfunzione erettile','Meno erezioni mattutine','Stanchezza persistente','Mancanza di energia','Perdita di forza muscolare','Perdita di massa muscolare','Aumento del grasso addominale','Calo delle prestazioni fisiche','Mancanza di motivazione','Irritabilità','Sbalzi d’umore','Problemi di concentrazione','Problemi di memoria','Disturbi del sonno','Umore basso','Minore autostima','Recupero fisico più lento','Riduzione della peluria corporea','Minore vitalità generale'] }
 },
 
 /* ═══════════════════════════════════════════════════════ DEUTSCH */
@@ -282,10 +287,15 @@ de: {
             legend1:'IHRE KARTE ENTSTEHT', legend2:'WO ES SICH BÜNDELT' },
 
   intro:  { kicker:'Kostenloser Gesundheitscheck',
-            title:'Bringen wir aufs Papier, was Ihr Körper sagt.',
-            lead:'Siebzehn Bereiche, einer pro Bildschirm. Kreuzen Sie nur an, was <em>in den letzten 30 Tagen regelmäßig</em> auftritt. Es dauert rund zwei Minuten und kostet nichts.',
+            title:'Höre ich auf meinen Körper?',
+            lead:'SCHNELLEN, EINFACHEN TEST STARTEN',
             honest:'Seien Sie ehrlich — das sieht niemand außer Ihnen.',
             start:'Starten' },
+  mid:    { kicker:'Auf halbem Weg',
+            title:'Sie machen das bisher sehr gut.',
+            lead:'Nennen Sie uns Ihren vollständigen Namen, um fortzufahren.',
+            placeholder:'Vollständiger Name',
+            cta:'Weiter' },
   ui:     { next:'Weiter', back:'Zurück', of:'von', skip:'Nichts davon',
             seeResult:'Mein Ergebnis ansehen', restart:'Neu beginnen',
             areasFlagged:'Bereiche mit Einträgen' },
@@ -297,33 +307,26 @@ de: {
             midText:'Genug wiederkehrende Beschwerden, dass sich ein Gespräch lohnt. Das heißt nicht, dass etwas nicht stimmt — es heißt, dass es sich lohnt herauszufinden, warum.',
             highText:'Mehr als zehn wiederkehrende Beschwerden. Dieses Muster löst sich selten von allein, und genau dafür ist eine vollständige Beurteilung da.',
             symptoms:'angekreuzte Beschwerden',
+            scoreWord:'Oh!',
             top:'Wo Ihr Körper am meisten gemeldet hat',
-            cta:'Ergebnis senden und Termin vereinbaren',
+            cta:'ERGEBNIS ANSEHEN',
             ctaNote:'Öffnet WhatsApp mit Ihrem Punktwert bereits im Text.',
             again:'Noch einmal machen',
             legal:'Dies ist ein Orientierungsinstrument und keine Diagnose. Es ersetzt keine ärztliche Beratung, und kein hier erzieltes Ergebnis darf genutzt werden, um eine Behandlung zu beginnen, abzusetzen oder zu verändern.' },
   wa:     { line1:'Hallo! Ich habe den Gesundheitscheck auf der Website gemacht.',
+            name:'Mein Name ist {name}.',
             score:'Mein Punktwert: {n} Beschwerden in {a} Bereichen.',
             line5:'Am meisten angekreuzt bei:', line6:'Ich würde gerne einen Termin vereinbaren.' },
-  areas: [
-    { n:'Verdauungstrakt',      items:['Blähgefühl','Übelkeit oder Erbrechen','Magenschmerzen oder Krämpfe','Sodbrennen','Aufstoßen','Blähungen','Juckreiz am After','Durchfall','Verstopfung','Blut oder Schleim im Stuhl'] },
-    { n:'Gewicht',              items:['Übergewicht','Schwierigkeiten zuzunehmen','Heißhunger','Wenig Appetit','Verlangen nach Süßem'] },
-    { n:'Schilddrüse',          items:['Schwierigkeiten abzunehmen','Kälteempfindlichkeit','Haarausfall','Trockene Haut'] },
-    { n:'Urogenital',           items:['Häufige Infektionen','Häufiger oder plötzlicher Harndrang','Ungewöhnlicher Ausfluss','Juckreiz im Genitalbereich'] },
-    { n:'Gelenke und Muskeln',  items:['Gelenkschmerzen oder Beschwerden','Arthrose','Geschwollene Gelenke','Zunehmende Beinschmerzen'] },
-    { n:'Mund und Rachen',      items:['Chronischer Husten','Räuspern','Halsschmerzen','Schmerzhafte Aphten','Belegte Zunge'] },
-    { n:'Herz',                 items:['Unregelmäßiger oder aussetzender Herzschlag','Erhöhtes Cholesterin','Brustschmerzen'] },
-    { n:'Zähne',                items:['Entzündetes oder blutendes Zahnfleisch','Zahnstein','Neigung zu Karies'] },
-    { n:'Haut',                 items:['Akne','Hautjucken','Rötungen oder Hitzewallungen'] },
-    { n:'Ohren',                items:['Ohrenschmerzen oder -entzündung','Ohrgeräusche','Gerötete Ohren','Hörverlust'] },
-    { n:'Nase',                 items:['Verstopfte Nase','Chronisch gerötet oder geschwollen','Nebenhöhlenprobleme','Niesanfälle','Übermäßiger Schleim'] },
-    { n:'Atemwege',             items:['Engegefühl in der Brust','Asthma','Kurzatmigkeit','Pfeifende Atmung','Anhaltender Husten','Atembeschwerden'] },
-    { n:'Augen',                items:['Tränend oder juckend','Gerötete Lider','Rote Augen','Tränensäcke oder Augenringe'] },
-    { n:'Kopf',                 items:['Kopfschmerzen','Benommenheit','Schwindel'] },
-    { n:'Geist und Gefühle',    items:['Konzentrationsmangel','Stockende Sprache oder Stottern','Leichte Ablenkbarkeit','Schlechtes Gedächtnis','Schwierigkeiten, Angefangenes zu beenden','Schwierigkeiten mit Zahlen','Lernschwierigkeiten','Nachlassende Leistung in Schule oder Beruf','Schwierigkeiten bei Entscheidungen','Verwirrtheit','Stimmungsschwankungen','Angespanntheit','Ärger','Frustration','Gedrückte Stimmung'] },
-    { n:'Energie und Schlaf',   items:['Antriebslosigkeit','Erschöpfung','Unruhe','Schlaflosigkeit','Schlaf ohne Erholung','Schlechte Körperkoordination'] },
-    { n:'Noch etwas?',          items:['Etwas, das in keinen der Bereiche oben passt'] }
-  ]
+  areasCommon: [
+    { n:'Verdauung und Magenprobleme',     items:['Sodbrennen','Gastroösophagealer Reflux','Magenbrennen','Völlegefühl nach dem Essen','Langsame Verdauung','Gefühl von im Magen stecken gebliebenem Essen','Blähbauch','Häufige Blähungen','Häufiges Aufstoßen','Übelkeit','Bauchschmerzen','Gefühl einer Bauchentzündung','Verstopfung','Durchfall','Wechsel zwischen Verstopfung und Durchfall','Mundgeruch','Frühes Sättigungsgefühl','Unverträglichkeit fettiger Speisen','Häufige Verdauungsbeschwerden'] },
+    { n:'Nahrungsmittelunverträglichkeiten', items:['Blähbauch nach dem Essen','Blähungen nach dem Essen','Müdigkeit nach dem Essen','Schläfrigkeit nach dem Essen','Gedankennebel nach dem Essen','Kopfschmerzen nach bestimmten Speisen','Verstopfte Nase nach dem Essen','Juckreiz nach dem Essen','Verdauungsbeschwerden bei bestimmten Lebensmitteln','Empfindlichkeit gegenüber mehreren Lebensmitteln','Häufige Reaktionen auf Nahrungsmittel','Verschlechterung der Beschwerden nach dem Essen'] },
+    { n:'Darmflora (Dysbiose)',             items:['Häufiger Blähbauch','Übermäßige Blähungen','Chronische Verstopfung','Häufiger Durchfall','Wechsel zwischen Durchfall und Verstopfung','Nahrungsmittelunverträglichkeiten','Anhaltender Mundgeruch','Chronische Müdigkeit','Gedankennebel','Wiederkehrende Infektionen','Wiederkehrende Candidose','Häufige Hautprobleme','Gefühl einer Darmentzündung','Geschwächte Abwehrkräfte','Anhaltende Verdauungsbeschwerden'] },
+    { n:'Oxidativer Stress',                items:['Anhaltende Müdigkeit','Energiemangel','Körperliche Schwäche','Muskelschmerzen','Gelenkschmerzen','Langsame Erholung nach dem Sport','Gedankennebel','Konzentrationsschwierigkeiten','Gedächtnisprobleme','Reizbarkeit','Angstgefühle','Anhaltender Stress','Nicht erholsamer Schlaf','Schlaflosigkeit','Haarausfall','Brüchige Nägel','Langsame Wundheilung','Häufige Infektionen','Vorzeitige Hautalterung','Fahle Haut'] },
+    { n:'Schilddrüse (Hypothyreose)',       items:['Müdigkeit','Schläfrigkeit','Kälteempfindlichkeit','Kalte Hände und Füße','Gewichtszunahme','Schwierigkeiten beim Abnehmen','Wassereinlagerungen','Verstopfung','Trockene Haut','Haarausfall','Trockenes Haar','Brüchige Nägel','Heisere Stimme','Geistige Verlangsamung','Gedächtnisprobleme','Konzentrationsmangel','Gedrückte Stimmung','Verminderte Libido','Muskelschwäche','Gesichtsschwellung'] },
+    { n:'Kognitive Probleme',               items:['Probleme mit dem Kurzzeitgedächtnis','Häufige Vergesslichkeit','Konzentrationsschwierigkeiten','Gedankennebel','Geistige Verlangsamung','Wortfindungsstörungen','Geistige Erschöpfung','Aufmerksamkeitsmangel','Verminderte geistige Leistungsfähigkeit','Verwirrtheitsgefühl','Schwierigkeiten, neue Informationen zu lernen','Verminderte geistige Klarheit'] }
+  ],
+  areaF: { n:'Menopause / Perimenopause', items:['Unregelmäßiger Menstruationszyklus','Hitzewallungen','Nächtliches Schwitzen','Schlaflosigkeit','Stimmungsschwankungen','Reizbarkeit','Angstgefühle','Müdigkeit','Verminderte Libido','Vaginale Trockenheit','Schmerzen beim Geschlechtsverkehr','Gedächtnisprobleme','Konzentrationsschwierigkeiten','Zunehmendes Bauchfett','Gelenkschmerzen','Herzklopfen','Brustspannen','Traurigkeit oder Niedergeschlagenheit','Abnehmende Muskelmasse','Bekannter Verlust der Knochendichte'] },
+  areaM: { n:'Andropause',                items:['Verminderte Libido','Erektile Dysfunktion','Weniger morgendliche Erektionen','Anhaltende Müdigkeit','Energiemangel','Verlust an Muskelkraft','Verlust an Muskelmasse','Zunehmendes Bauchfett','Nachlassende körperliche Leistungsfähigkeit','Mangelnde Motivation','Reizbarkeit','Stimmungsschwankungen','Konzentrationsprobleme','Gedächtnisprobleme','Schlafstörungen','Gedrückte Stimmung','Vermindertes Selbstvertrauen','Langsamere körperliche Erholung','Abnehmende Körperbehaarung','Verminderte allgemeine Vitalität'] }
 },
 
 /* ═══════════════════════════════════════════════════════ РУССКИЙ */
@@ -334,10 +337,15 @@ ru: {
             legend1:'ВАША КАРТА РИСУЕТСЯ', legend2:'ГДЕ СОСРЕДОТОЧЕНО' },
 
   intro:  { kicker:'Бесплатный тест здоровья',
-            title:'Составим карту того, о чём говорит ваш организм.',
-            lead:'Семнадцать областей, по одной на экран. Отмечайте только то, что повторяется <em>регулярно в последние 30 дней</em>. Займёт около двух минут и ничего не стоит.',
+            title:'Слушаю ли я своё тело?',
+            lead:'НАЧАТЬ БЫСТРЫЙ И ПРОСТОЙ ТЕСТ',
             honest:'Будьте честны — это не видит никто, кроме вас.',
             start:'Начать' },
+  mid:    { kicker:'На полпути',
+            title:'У вас отлично получается.',
+            lead:'Назовите, пожалуйста, ваше имя и фамилию, чтобы продолжить.',
+            placeholder:'Имя и фамилия',
+            cta:'Продолжить' },
   ui:     { next:'Далее', back:'Назад', of:'из', skip:'Ничего из этого',
             seeResult:'Посмотреть результат', restart:'Начать заново',
             areasFlagged:'областей с отметками' },
@@ -349,33 +357,26 @@ ru: {
             midText:'Достаточно повторяющихся симптомов, чтобы разговор был не лишним. Это не значит, что что-то не так, — это значит, что стоит выяснить почему.',
             highText:'Более десяти повторяющихся симптомов. Такая картина редко проходит сама, и именно для этого нужна полноценная оценка.',
             symptoms:'отмеченных симптомов',
+            scoreWord:'Ох!',
             top:'Где организм отметил больше всего',
-            cta:'Отправить результат и записаться',
+            cta:'ПОСМОТРЕТЬ РЕЗУЛЬТАТ',
             ctaNote:'Откроет WhatsApp с уже готовым текстом.',
             again:'Пройти заново',
             legal:'Это инструмент ориентации, а не диагноз. Он не заменяет консультацию врача, и ни один полученный здесь результат нельзя использовать, чтобы начать, отменить или изменить лечение.' },
   wa:     { line1:'Здравствуйте! Я прошёл тест здоровья на сайте.',
+            name:'Меня зовут {name}.',
             score:'Мой результат: {n} симптомов в {a} областях.',
             line5:'Больше всего отмечено:', line6:'Хотел бы записаться на приём.' },
-  areas: [
-    { n:'Пищеварение',          items:['Ощущение вздутия','Тошнота или рвота','Боль в желудке или спазмы','Изжога','Отрыжка','Газы','Зуд в области заднего прохода','Диарея','Запор','Кровь или слизь в стуле'] },
-    { n:'Вес',                  items:['Избыточный вес','Трудно набрать вес','Неконтролируемый аппетит','Плохой аппетит','Тяга к сладкому'] },
-    { n:'Щитовидная железа',    items:['Трудно сбросить вес','Чувствительность к холоду','Выпадение волос','Сухая кожа'] },
-    { n:'Мочеполовая система',  items:['Частые инфекции','Частые или внезапные позывы к мочеиспусканию','Необычные выделения','Зуд в половой области'] },
-    { n:'Суставы и мышцы',      items:['Боль или дискомфорт в суставах','Артроз','Отёкшие суставы','Нарастающая боль в ногах'] },
-    { n:'Рот и горло',          items:['Хронический кашель','Першение в горле','Боль в горле','Болезненные язвочки','Налёт на языке'] },
-    { n:'Сердце',               items:['Неровное сердцебиение или перебои','Повышенный холестерин','Боль в груди'] },
-    { n:'Зубы',                 items:['Воспалённые или кровоточащие дёсны','Зубной камень','Склонность к кариесу'] },
-    { n:'Кожа',                 items:['Акне','Зуд кожи','Покраснения или приливы'] },
-    { n:'Уши',                  items:['Боль или воспаление уха','Шум в ушах','Покраснение ушей','Снижение слуха'] },
-    { n:'Нос',                  items:['Заложенный нос','Постоянное покраснение или отёк','Проблемы с пазухами','Приступы чихания','Избыток слизи'] },
-    { n:'Дыхание',              items:['Заложенность в груди','Астма','Одышка','Свистящее дыхание','Затяжной кашель','Затруднённое дыхание'] },
-    { n:'Глаза',                items:['Слезятся или чешутся','Покрасневшие веки','Красные глаза','Мешки или тёмные круги'] },
-    { n:'Голова',               items:['Головные боли','Дурнота','Головокружение'] },
-    { n:'Ум и эмоции',          items:['Трудно сосредоточиться','Прерывистая речь или заикание','Легко отвлекаетесь','Плохая память','Трудно доводить начатое до конца','Трудности с числами','Трудности в обучении','Снижение успеваемости в учёбе или работе','Трудно принимать решения','Спутанность','Перепады настроения','Тревожность','Раздражительность','Разочарование','Подавленное настроение'] },
-    { n:'Энергия и сон',        items:['Апатия или вялость','Усталость','Перевозбуждение','Бессонница','Сон, не дающий отдыха','Плохая координация движений'] },
-    { n:'Что-то ещё?',          items:['То, что не подходит ни к одной из областей выше'] }
-  ]
+  areasCommon: [
+    { n:'Пищеварение и проблемы с желудком', items:['Изжога','Гастроэзофагеальный рефлюкс','Жжение в желудке','Тяжесть после еды','Медленное пищеварение','Ощущение застрявшей в желудке пищи','Вздутие живота','Частое газообразование','Частая отрыжка','Тошнота','Боль в животе','Ощущение воспаления в животе','Запор','Диарея','Чередование запора и диареи','Неприятный запах изо рта','Раннее насыщение','Непереносимость жирной пищи','Частый дискомфорт в пищеварении'] },
+    { n:'Пищевая непереносимость',           items:['Вздутие после еды','Газообразование после еды','Усталость после еды','Сонливость после еды','Туман в голове после еды','Головная боль после определённых продуктов','Заложенность носа после еды','Зуд после еды','Дискомфорт в пищеварении от определённых продуктов','Чувствительность к нескольким продуктам','Частые реакции на еду','Ухудшение симптомов после еды'] },
+    { n:'Кишечная микробиота (дисбиоз)',     items:['Частое вздутие живота','Избыточное газообразование','Хронический запор','Частая диарея','Чередование диареи и запора','Пищевая непереносимость','Стойкий неприятный запах изо рта','Хроническая усталость','Туман в голове','Рецидивирующие инфекции','Рецидивирующий кандидоз','Частые проблемы с кожей','Ощущение воспаления кишечника','Ослабленный иммунитет','Стойкий дискомфорт в пищеварении'] },
+    { n:'Окислительный стресс',              items:['Стойкая усталость','Нехватка энергии','Физическая слабость','Мышечные боли','Боли в суставах','Медленное восстановление после нагрузки','Туман в голове','Трудности с концентрацией','Проблемы с памятью','Раздражительность','Тревожность','Постоянный стресс','Сон, не приносящий отдыха','Бессонница','Выпадение волос','Ломкие ногти','Медленное заживление ран','Частые инфекции','Преждевременное старение','Тусклая кожа'] },
+    { n:'Щитовидная железа (гипотиреоз)',    items:['Усталость','Сонливость','Непереносимость холода','Холодные руки и ноги','Увеличение веса','Трудности со снижением веса','Задержка жидкости','Запор','Сухая кожа','Выпадение волос','Сухие волосы','Ломкие ногти','Осиплость голоса','Заторможенность мышления','Проблемы с памятью','Недостаток концентрации','Подавленное настроение','Снижение либидо','Мышечная слабость','Отёчность лица'] },
+    { n:'Когнитивные проблемы',              items:['Проблемы с кратковременной памятью','Частая забывчивость','Трудности с концентрацией','Туман в голове','Заторможенность мышления','Трудности с подбором слов','Умственная усталость','Недостаток внимания','Снижение интеллектуальной работоспособности','Чувство спутанности','Трудности с усвоением новой информации','Снижение ясности мышления'] }
+  ],
+  areaF: { n:'Менопауза / Перименопауза', items:['Нерегулярный менструальный цикл','Приливы','Ночная потливость','Бессонница','Перепады настроения','Раздражительность','Тревожность','Усталость','Снижение либидо','Сухость влагалища','Боль при половом акте','Проблемы с памятью','Трудности с концентрацией','Увеличение жира в области живота','Боли в суставах','Учащённое сердцебиение','Чувствительность груди','Грусть или подавленность','Снижение мышечной массы','Известная потеря плотности костной ткани'] },
+  areaM: { n:'Андропауза',                items:['Снижение либидо','Эректильная дисфункция','Меньше утренних эрекций','Стойкая усталость','Нехватка энергии','Потеря мышечной силы','Потеря мышечной массы','Увеличение жира в области живота','Снижение физической работоспособности','Отсутствие мотивации','Раздражительность','Перепады настроения','Проблемы с концентрацией','Проблемы с памятью','Нарушения сна','Подавленное настроение','Снижение уверенности в себе','Более медленное физическое восстановление','Уменьшение волосяного покрова тела','Снижение общей жизненной энергии'] }
 },
 
 /* ═════════════════════════════════════════════════ 繁體中文 (台灣) */
@@ -386,10 +387,15 @@ ru: {
             legend1:'您的地圖正在成形', legend2:'集中在哪裡' },
 
   intro:  { kicker:'免費健康檢測',
-            title:'一起把身體想說的話畫成地圖。',
-            lead:'十七個面向，一次一頁。只勾選<em>最近三十天內反覆出現</em>的狀況。大約兩分鐘，完全免費。',
+            title:'我有在聆聽自己的身體嗎？',
+            lead:'開始又快又簡單的測驗',
             honest:'請誠實作答 — 除了您沒有人看得到。',
             start:'開始' },
+  mid:    { kicker:'差不多到一半了',
+            title:'您做得很好。',
+            lead:'請告訴我們您的姓名以繼續。',
+            placeholder:'姓名',
+            cta:'繼續' },
   ui:     { next:'下一頁', back:'上一頁', of:'/', skip:'都沒有',
             seeResult:'查看我的結果', restart:'重新開始',
             areasFlagged:'個面向有勾選' },
@@ -401,33 +407,26 @@ ru: {
             midText:'反覆出現的症狀已經足以值得談一談。這不代表出了問題，而是值得弄清楚原因。',
             highText:'超過十項反覆出現的症狀。這樣的情況很少會自行改善，而這正是完整評估的意義所在。',
             symptoms:'項已勾選',
+            scoreWord:'喔！',
             top:'身體反應最多的地方',
-            cta:'傳送結果並預約',
+            cta:'查看結果',
             ctaNote:'會開啟 WhatsApp，訊息已經寫好。',
             again:'再做一次',
             legal:'這是輔助了解的工具，並非診斷。不能取代醫師的看診，此處的任何結果都不應作為開始、停止或調整治療的依據。' },
   wa:     { line1:'您好！我在網站上做了健康檢測。',
+            name:'我叫 {name}。',
             score:'我的分數：{n} 項症狀，分布於 {a} 個面向。',
             line5:'勾選最多的是：', line6:'我想預約看診。' },
-  areas: [
-    { n:'消化道',   items:['腹脹','噁心或嘔吐','胃痛或絞痛','胃食道逆流','打嗝','脹氣','肛門搔癢','腹瀉','便祕','糞便帶血或黏液'] },
-    { n:'體重',     items:['體重過重','不易增重','食慾難以控制','食慾不振','嗜甜'] },
-    { n:'甲狀腺',   items:['不易減重','怕冷','掉髮','皮膚乾燥'] },
-    { n:'泌尿生殖', items:['反覆感染','頻尿或急尿','異常分泌物','私密處搔癢'] },
-    { n:'關節與肌肉', items:['關節疼痛或不適','退化性關節炎','關節腫脹','腿部疼痛加劇'] },
-    { n:'口腔與咽喉', items:['慢性咳嗽','時常清喉嚨','喉嚨痛','疼痛的口瘡','舌苔厚'] },
-    { n:'心臟',     items:['心跳不規則或漏拍','膽固醇偏高','胸痛'] },
-    { n:'牙齒',     items:['牙齦發炎或流血','牙結石','容易蛀牙'] },
-    { n:'皮膚',     items:['痘痘','皮膚搔癢','泛紅或潮紅'] },
-    { n:'耳朵',     items:['耳痛或耳部感染','耳鳴','耳朵發紅','聽力下降'] },
-    { n:'鼻子',     items:['鼻塞','長期發紅或腫脹','鼻竇問題','連續打噴嚏','鼻涕過多'] },
-    { n:'呼吸',     items:['胸悶','氣喘','呼吸急促','呼吸有喘鳴聲','咳嗽不止','呼吸困難'] },
-    { n:'眼睛',     items:['流淚或發癢','眼瞼發紅','眼睛紅','眼袋或黑眼圈'] },
-    { n:'頭部',     items:['頭痛','頭暈','眩暈'] },
-    { n:'情緒與思緒', items:['注意力不集中','說話斷續或口吃','容易分心','記憶力差','難以完成已開始的事','對數字感到吃力','學習困難','課業或工作表現下降','難以做決定','思緒混亂','情緒起伏','焦慮','易怒','挫折感','情緒低落'] },
-    { n:'體力與睡眠', items:['提不起勁','疲倦','過度亢奮','失眠','睡了仍覺得累','肢體協調不佳'] },
-    { n:'還有其他嗎？', items:['以上都無法歸類的狀況'] }
-  ]
+  areasCommon: [
+    { n:'消化與腸胃問題',        items:['火燒心','胃食道逆流','胃部灼熱感','飯後脹重感','消化緩慢','食物卡在胃裡的感覺','腹脹','頻繁脹氣','頻繁打嗝','噁心','腹痛','腹部發炎的感覺','便祕','腹瀉','便祕與腹瀉交替','口臭','很快就有飽足感','對油膩食物不耐','經常消化不適'] },
+    { n:'食物不耐症',            items:['飯後脹氣','飯後排氣增多','飯後疲倦','飯後嗜睡','飯後腦霧','特定食物後頭痛','飯後鼻塞','飯後搔癢','特定食物引起消化不適','對多種食物敏感','經常對食物有反應','飯後症狀加重'] },
+    { n:'腸道菌叢（菌叢失衡）',   items:['經常腹脹','過度脹氣','慢性便祕','頻繁腹瀉','腹瀉與便祕交替','食物不耐','持續口臭','慢性疲勞','腦霧','反覆感染','反覆念珠菌感染','經常皮膚問題','腸道發炎的感覺','免疫力低下','持續消化不適'] },
+    { n:'氧化壓力',              items:['持續疲勞','缺乏活力','體力虛弱','肌肉痠痛','關節疼痛','運動後恢復緩慢','腦霧','難以專注','記憶力問題','易怒','焦慮','持續壓力','睡了仍不解乏','失眠','掉髮','指甲易斷','傷口癒合緩慢','經常感染','提早老化','皮膚黯淡'] },
+    { n:'甲狀腺（甲狀腺功能低下）', items:['疲勞','嗜睡','怕冷','手腳冰冷','體重增加','難以減重','水腫','便祕','皮膚乾燥','掉髮','頭髮乾燥','指甲易脆','聲音沙啞','思緒遲鈍','記憶力問題','難以專注','情緒低落','性慾降低','肌肉無力','臉部浮腫'] },
+    { n:'認知問題',              items:['短期記憶問題','經常忘東忘西','難以專注','腦霧','思緒遲鈍','想不起字詞','精神疲勞','注意力不足','智力表現下降','混亂感','難以學習新資訊','思緒清晰度下降'] }
+  ],
+  areaF: { n:'更年期／停經過渡期', items:['月經週期不規則','熱潮紅','夜間盜汗','失眠','情緒起伏','易怒','焦慮','疲勞','性慾降低','陰道乾澀','性交疼痛','記憶力問題','難以專注','腹部脂肪增加','關節疼痛','心悸','乳房脹痛','情緒低落或沮喪','肌肉量減少','已知骨密度流失'] },
+  areaM: { n:'男性更年期',        items:['性慾降低','勃起功能障礙','晨勃減少','持續疲勞','缺乏活力','肌力下降','肌肉量減少','腹部脂肪增加','體能表現下降','缺乏動力','易怒','情緒起伏','專注力問題','記憶力問題','睡眠障礙','情緒低落','自信心降低','體能恢復變慢','體毛減少','整體活力下降'] }
 },
 
 /* ═══════════════════════════════════════════════════════════ 한국어 */
@@ -438,10 +437,15 @@ ko: {
             legend1:'지도가 그려지고 있습니다', legend2:'어디에 몰려 있나' },
 
   intro:  { kicker:'무료 건강 검사',
-            title:'몸이 보내는 신호를 지도로 그려봅니다.',
-            lead:'열일곱 개 영역, 한 화면에 하나씩. <em>최근 30일 동안 반복해서</em> 나타난 것만 선택하세요. 약 2분이면 되고 비용은 없습니다.',
+            title:'나는 내 몸의 소리를 듣고 있을까?',
+            lead:'빠르고 쉬운 테스트 시작하기',
             honest:'솔직하게 답해 주세요 — 본인 외에는 아무도 보지 않습니다.',
             start:'시작하기' },
+  mid:    { kicker:'절반쯤 왔어요',
+            title:'아주 잘하고 계세요.',
+            lead:'계속하려면 성함을 알려주세요.',
+            placeholder:'성함',
+            cta:'계속하기' },
   ui:     { next:'다음', back:'이전', of:'/', skip:'해당 없음',
             seeResult:'결과 보기', restart:'다시 시작',
             areasFlagged:'개 영역에 표시됨' },
@@ -453,33 +457,26 @@ ko: {
             midText:'한번 이야기해 볼 만큼 반복되는 증상이 있습니다. 무언가 잘못되었다는 뜻이 아니라, 이유를 알아볼 가치가 있다는 뜻입니다.',
             highText:'반복되는 증상이 열 가지를 넘습니다. 이런 양상은 저절로 나아지는 경우가 드물며, 종합적인 평가가 필요한 이유가 바로 여기에 있습니다.',
             symptoms:'개 증상 선택',
+            scoreWord:'오!',
             top:'몸이 가장 많이 신호를 보낸 곳',
-            cta:'결과 보내고 예약하기',
+            cta:'결과 보기',
             ctaNote:'점수가 이미 적힌 상태로 WhatsApp이 열립니다.',
             again:'다시 하기',
             legal:'이 검사는 참고용 도구이며 진단이 아닙니다. 진료를 대신하지 않으며, 여기서 나온 결과를 근거로 치료를 시작하거나 중단하거나 변경해서는 안 됩니다.' },
   wa:     { line1:'안녕하세요! 웹사이트에서 건강 검사를 했습니다.',
+            name:'제 이름은 {name}입니다.',
             score:'제 점수: {n}개 증상, {a}개 영역.',
             line5:'가장 많이 표시된 곳:', line6:'진료 예약을 하고 싶습니다.' },
-  areas: [
-    { n:'소화기',   items:['더부룩함','메스꺼움 또는 구토','복통 또는 경련','속쓰림','트림','가스','항문 가려움','설사','변비','대변에 피나 점액'] },
-    { n:'체중',     items:['과체중','체중이 잘 늘지 않음','조절이 안 되는 식욕','식욕 부진','단것이 당김'] },
-    { n:'갑상선',   items:['체중이 잘 줄지 않음','추위를 많이 탐','탈모','피부 건조'] },
-    { n:'비뇨생식기', items:['잦은 감염','급하거나 잦은 소변','비정상적인 분비물','생식기 가려움'] },
-    { n:'관절과 근육', items:['관절 통증이나 불편','골관절염','관절 부종','점점 심해지는 다리 통증'] },
-    { n:'입과 목',  items:['만성 기침','목을 자주 가다듬음','인후통','통증 있는 구내염','설태'] },
-    { n:'심장',     items:['불규칙하거나 건너뛰는 박동','콜레스테롤 상승','가슴 통증'] },
-    { n:'치아',     items:['잇몸이 붓거나 피가 남','치석','충치가 잘 생김'] },
-    { n:'피부',     items:['여드름','피부 가려움','홍조 또는 붉어짐'] },
-    { n:'귀',       items:['귀 통증이나 염증','이명','귀가 붉어짐','청력 저하'] },
-    { n:'코',       items:['코막힘','만성적으로 붉거나 부음','부비동 문제','재채기 발작','과도한 콧물'] },
-    { n:'호흡기',   items:['가슴 답답함','천식','숨참','쌕쌕거림','지속되는 기침','호흡 곤란'] },
-    { n:'눈',       items:['눈물이 나거나 가려움','눈꺼풀이 붉음','충혈','눈밑 붓기나 다크서클'] },
-    { n:'머리',     items:['두통','어지러움','현기증'] },
-    { n:'마음과 감정', items:['집중이 안 됨','말이 끊기거나 더듬음','쉽게 산만해짐','기억력 저하','시작한 일을 끝내기 어려움','숫자를 다루기 어려움','학습의 어려움','학업이나 업무 성과 저하','결정하기 어려움','혼란스러움','기분 변화','불안','화가 남','좌절감','기분이 가라앉음'] },
-    { n:'기력과 수면', items:['무기력','피로','과도한 각성','불면','자도 개운하지 않음','몸의 협응이 잘 안 됨'] },
-    { n:'그 밖에 있나요?', items:['위 어느 항목에도 해당하지 않는 것'] }
-  ]
+  areasCommon: [
+    { n:'소화 및 위장 문제',          items:['속쓰림','위식도 역류','위 화끈거림','식후 더부룩함','소화가 느림','음식이 위에 걸린 듯한 느낌','복부 팽만','잦은 가스','잦은 트림','메스꺼움','복통','복부 염증 같은 느낌','변비','설사','변비와 설사가 번갈아 나타남','입 냄새','쉽게 배부름','기름진 음식에 대한 불내성','잦은 소화 불편'] },
+    { n:'음식 불내증',                items:['식후 더부룩함','식후 가스','식후 피로','식후 졸림','식후 브레인 포그(멍한 느낌)','특정 음식 후 두통','식후 코막힘','식후 가려움','특정 음식에 대한 소화 불편','여러 음식에 대한 민감성','잦은 음식 반응','식사 후 증상 악화'] },
+    { n:'장내 미생물총(장내세균 불균형)', items:['잦은 복부 팽만','과도한 가스','만성 변비','잦은 설사','설사와 변비 반복','음식 불내증','지속되는 입 냄새','만성 피로','브레인 포그','반복되는 감염','반복되는 칸디다증','잦은 피부 문제','장 염증 같은 느낌','낮은 면역력','지속되는 소화 불편'] },
+    { n:'산화 스트레스',              items:['지속되는 피로','활력 부족','신체 허약','근육통','관절통','운동 후 회복이 더딤','브레인 포그','집중 곤란','기억력 문제','과민함','불안','지속되는 스트레스','자도 개운하지 않은 잠','불면증','탈모','손발톱이 잘 부서짐','상처 치유가 더딤','잦은 감염','조기 노화','칙칙한 피부'] },
+    { n:'갑상선(갑상선 기능 저하증)', items:['피로','졸림','추위를 잘 탐','손발이 참','체중 증가','체중 감량이 어려움','체액 저류(붓기)','변비','피부 건조','탈모','머릿결 건조','손발톱이 약함','목소리가 쉼','정신적 둔함','기억력 문제','집중력 부족','기분이 가라앉음','성욕 감소','근력 저하','얼굴 부기'] },
+    { n:'인지 문제',                  items:['최근 기억력 문제','잦은 건망증','집중 곤란','브레인 포그','정신적 둔함','단어가 잘 떠오르지 않음','정신적 피로','주의력 부족','지적 수행 능력 저하','혼란스러운 느낌','새로운 정보를 배우기 어려움','정신적 명료함 저하'] }
+  ],
+  areaF: { n:'폐경기/폐경 전후기', items:['불규칙한 월경 주기','안면홍조(열감)','야간 발한','불면증','기분 변화','과민함','불안','피로','성욕 감소','질 건조증','성교 시 통증','기억력 문제','집중 곤란','복부 지방 증가','관절통','심계항진(두근거림)','유방 압통','슬픔 또는 우울감','근육량 감소','알려진 골밀도 감소'] },
+  areaM: { n:'남성 갱년기',         items:['성욕 감소','발기부전','아침 발기 감소','지속되는 피로','활력 부족','근력 저하','근육량 감소','복부 지방 증가','신체 능력 저하','의욕 저하','과민함','기분 변화','집중력 문제','기억력 문제','수면 장애','기분이 가라앉음','자신감 저하','신체 회복이 더딤','체모 감소','전반적인 활력 저하'] }
 }
 
 };

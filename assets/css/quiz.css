@@ -83,6 +83,30 @@
 }
 .qstart{ min-width:180px; justify-content:center; }
 
+/* ── llamado corto arriba del botón de arranque ───────────────
+   Reemplaza al párrafo largo: una línea, mayúsculas, directa. */
+.qcta{
+  font-family:var(--font-mono); font-weight:700; text-transform:uppercase;
+  letter-spacing:.1em; font-size:clamp(14px,1.6vw,17px);
+  color:var(--sand); margin:0 0 32px;
+}
+.qstart--big{
+  padding:24px 52px; font-size:18px; font-weight:500; min-width:260px;
+}
+
+/* ── interrupción de mitad de test: nombre y apellido ─────────
+   Único campo de texto del test. Barra inferior, sin caja: sigue
+   el mismo lenguaje minimal que el resto (nada de recuadros). */
+.ginput{
+  display:block; width:100%; max-width:420px;
+  background:transparent; border:none; border-bottom:1px solid var(--dark-20);
+  font-family:var(--font-display); font-size:clamp(20px,2.6vw,28px);
+  color:var(--light); padding:8px 2px; margin:8px 0 34px; outline:none;
+  transition:border-color .3s var(--expoOut);
+}
+.ginput::placeholder{ color:var(--light-40); }
+.ginput:focus{ border-color:var(--olive); }
+
 /* ── pregunta ───────────────────────────────────────────────── */
 /* ── íconos de área ─────────────────────────────────────────
    Trazo fino, un solo color, y un tinte propio por área: apenas
