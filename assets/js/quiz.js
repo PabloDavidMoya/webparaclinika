@@ -504,6 +504,31 @@
     } catch (e) {}
   }
 
+  /* Manda el detalle completo (nombre, WhatsApp y qué marcó en cada
+     área) apenas termina el test — la clínica lo pidió para no tener
+     que repreguntar todo de nuevo en la primera consulta. No depende
+     de que la persona toque el botón de WhatsApp. */
+  function sendResult(band, total) {
+    var name = null, phone = null;
+    try { name = localStorage.getItem('ns-name'); phone = localStorage.getItem('ns-phone'); } catch (e) {}
+    if (!name || !phone) return;
+
+    var areas = AREA
+      .map(function (a, i) { return { name: a.n, items: picked[i].map(function (idx) { return a.items[idx]; }) }; })
+      .filter(function (a) { return a.items.length; });
+
+    try {
+      fetch('/enviar-resultado.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name, phone: phone, locale: LANG, gender: kind,
+          band: band, total: total, areas: areas, url: location.href
+        })
+      });
+    } catch (e) {}
+  }
+
   /* ── resultado ────────────────────────────────────────────── */
   function finish() {
     show('result');
@@ -521,6 +546,7 @@
     var band = total <= 5 ? 'low' : (total <= 10 ? 'mid' : 'high');
     $('#rTitle').textContent = T.result[band];
     $('#rText').textContent  = T.result[band + 'Text'];
+    sendResult(band, total);
 
     /* barras: cada área, proporción marcada sobre el total del área */
     var rows = AREA.map(function (a, i) {

@@ -14,3 +14,7 @@ define('DB_PASS', 'REEMPLAZAR');
 // contacto en Brevo. Si se deja vacío, solo se guarda en la base local.
 define('BREVO_API_KEY', '');
 define('BREVO_LIST_ID', 0);
+
+// A dónde le llega el resultado completo del test al terminar (nombre,
+// WhatsApp y cada síntoma marcado). Requiere BREVO_API_KEY cargada.
+define('CLINIC_EMAIL', '');
