@@ -69,10 +69,14 @@ try {
 // Best-effort: si hay API key de Brevo cargada, además crear/actualizar
 // el contacto allá. Si falla, el lead ya quedó guardado en la base local
 // igual — esto nunca debe tirar abajo la respuesta.
+// Brevo identifica al contacto por "sms" (de primer nivel, no solo como
+// atributo) cuando no hay email — sin eso el alta no queda vinculada.
+$brevoDebug = null;
 if (defined('BREVO_API_KEY') && BREVO_API_KEY !== '') {
     try {
         $payload = [
-            'attributes'  => ['SMS' => $phoneDigits, 'PRENOM' => $name],
+            'sms'           => $phoneDigits,
+            'attributes'    => ['SMS' => $phoneDigits, 'PRENOM' => $name],
             'updateEnabled' => true,
         ];
         if (defined('BREVO_LIST_ID') && BREVO_LIST_ID) {
@@ -90,11 +94,26 @@ if (defined('BREVO_API_KEY') && BREVO_API_KEY !== '') {
             ],
             CURLOPT_POSTFIELDS => json_encode($payload),
         ]);
-        curl_exec($ch);
+        $resp = curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+
+        if ($code >= 200 && $code < 300) {
+            $upd = $pdo->prepare('UPDATE leads SET brevo_synced = 1 WHERE id = ?');
+            $upd->execute([$pdo->lastInsertId()]);
+        }
+        if (isset($_GET['debug'])) {
+            $brevoDebug = ['code' => $code, 'body' => $resp];
+        }
     } catch (Throwable $e) {
-        // se ignora a propósito: Brevo es un plus, no el registro principal
+        if (isset($_GET['debug'])) {
+            $brevoDebug = ['error' => $e->getMessage()];
+        }
     }
 }
 
-echo json_encode(['ok' => true]);
+$out = ['ok' => true];
+if ($brevoDebug !== null) {
+    $out['brevo'] = $brevoDebug;
+}
+echo json_encode($out);
