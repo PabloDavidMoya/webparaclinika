@@ -94,9 +94,9 @@
   padding:24px 52px; font-size:18px; font-weight:500; min-width:260px;
 }
 
-/* ── interrupción de mitad de test: nombre y apellido ─────────
-   Único campo de texto del test. Barra inferior, sin caja: sigue
-   el mismo lenguaje minimal que el resto (nada de recuadros). */
+/* ── interrupción de mitad de test: nombre y WhatsApp ─────────
+   Los dos únicos campos de texto del test. Barra inferior, sin
+   caja: sigue el mismo lenguaje minimal que el resto. */
 .ginput{
   display:block; width:100%; max-width:420px;
   background:transparent; border:none; border-bottom:1px solid var(--dark-20);

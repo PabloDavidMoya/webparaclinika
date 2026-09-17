@@ -2,6 +2,10 @@
 Thumbs.db
 node_modules/
 
+# Credenciales de la base de datos de leads: se suben a mano por el
+# Administrador de archivos de Hostinger, nunca por git (repo público).
+config.local.php
+
 # CV y documentos personales de los médicos: son datos de terceros y este
 # repo es público. No van al sitio ni al repo — el sitio no los referencia.
 assets/doctores/

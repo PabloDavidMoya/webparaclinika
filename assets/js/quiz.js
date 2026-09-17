@@ -254,6 +254,7 @@
     $('#gTitle').textContent   = T.mid.title;
     $('#gLead').textContent    = T.mid.lead;
     $('#gName').setAttribute('placeholder', T.mid.placeholder);
+    $('#gPhone').setAttribute('placeholder', T.mid.placeholderPhone);
     $('#gSubmit').textContent  = T.mid.cta;
     paintPick();
     document.title = T.intro.kicker + ' — NutriSlim';
@@ -485,6 +486,24 @@
     if (typeof window.nsTrack === 'function') window.nsTrack(ev);
   }
 
+  /* Nombre y WhatsApp del gate de mitad de test: se mandan aparte,
+     apenas los completa. No hay que esperar a que termine el test
+     ni a que toque el botón final — ese paso se pierde seguido, y
+     sin esto no queda ningún registro de esa persona. Se dispara
+     en paralelo, nunca bloquea ni rompe el avance del test. */
+  function saveLead(name, phone) {
+    try {
+      fetch('/guardar-lead.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name, phone: phone, locale: LANG,
+          url: location.href, stage: 'midgate'
+        })
+      });
+    } catch (e) {}
+  }
+
   /* ── resultado ────────────────────────────────────────────── */
   function finish() {
     show('result');
@@ -559,9 +578,13 @@
   });
   $('#gForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    var field = $('#gName'), name = field.value.trim();
-    if (!name) { field.focus(); return; }
+    var nameField = $('#gName'), name = nameField.value.trim();
+    if (!name) { nameField.focus(); return; }
+    var phoneField = $('#gPhone'), phone = phoneField.value.trim();
+    if (!phone) { phoneField.focus(); return; }
     try { localStorage.setItem('ns-name', name); } catch (e) {}
+    try { localStorage.setItem('ns-phone', phone); } catch (e) {}
+    saveLead(name, phone);
     nameCaptured = true;
     go(pendingStep);
   });
