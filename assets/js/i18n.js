@@ -40,7 +40,7 @@ window.NS_I18N = {
 
 /* ══════════════════════════════════════════════════════ ESPAÑOL */
 es: {
-  'p1.t':'El test gratuito', 'p1.d':'Diecisiete áreas del cuerpo, una lista de síntomas y un puntaje. Tres minutos, sin costo. Si supera las diez dolencias, conviene que hablemos.', 'p1.b':'Hacer el test',
+  'p1.t':'El test gratuito', 'p1.d':'Ocho áreas del cuerpo, una lista de síntomas y un puntaje. Dos minutos, sin costo. Si supera las diez dolencias, conviene que hablemos.', 'p1.b':'Hacer el test',
   'p2.t':'Escribinos directo', 'p2.d':'Dudas sobre tu caso, qué incluye una consulta o cómo agendar desde el exterior. Contesta alguien de la clínica.', 'p2.b':'Abrir WhatsApp',
   'talk.title':'Hablemos.', 'talk.b':'Hablemos de mi salud', 'cur.talk':'Hablar',
 
@@ -99,8 +99,8 @@ es: {
   'tech.foot':'Herramienta de evaluación complementaria. No constituye diagnóstico por sí sola.',
 
   'cta.eyebrow':'Empezá por acá',
-  'cta.title':'El test de salud es <em>gratuito</em> y toma tres minutos.',
-  'cta.lead':'Diecisiete áreas del cuerpo, una lista de síntomas y un puntaje. Si supera las diez dolencias, conviene que hablemos.',
+  'cta.title':'El test de salud es <em>gratuito</em> y toma dos minutos.',
+  'cta.lead':'Ocho áreas del cuerpo, una lista de síntomas y un puntaje. Si supera las diez dolencias, conviene que hablemos.',
   'cta.b1':'Hacer el test', 'cta.b2':'Escribir por WhatsApp',
 
   'foot.h1':'Áreas', 'foot.a1':'Metabolismo y obesidad', 'foot.a2':'Tiroides', 'foot.a3':'Diabetes',
@@ -118,7 +118,7 @@ es: {
 
 /* ══════════════════════════════════════════════════ PORTUGUÊS */
 pt: {
-  'p1.t':'O teste gratuito', 'p1.d':'Dezessete áreas do corpo, uma lista de sintomas e uma pontuação. Três minutos, sem custo. Se passar de dez queixas, vale a pena conversarmos.', 'p1.b':'Fazer o teste',
+  'p1.t':'O teste gratuito', 'p1.d':'Oito áreas do corpo, uma lista de sintomas e uma pontuação. Dois minutos, sem custo. Se passar de dez queixas, vale a pena conversarmos.', 'p1.b':'Fazer o teste',
   'p2.t':'Fale direto com a gente', 'p2.d':'Dúvidas sobre o seu caso, o que inclui uma consulta ou como agendar do exterior. Quem responde é alguém da clínica.', 'p2.b':'Abrir o WhatsApp',
   'talk.title':'Vamos conversar.', 'talk.b':'Vamos falar da minha saúde', 'cur.talk':'Falar',
 
@@ -177,8 +177,8 @@ pt: {
   'tech.foot':'Ferramenta de avaliação complementar. Não constitui diagnóstico por si só.',
 
   'cta.eyebrow':'Comece por aqui',
-  'cta.title':'O teste de saúde é <em>gratuito</em> e leva três minutos.',
-  'cta.lead':'Dezessete áreas do corpo, uma lista de sintomas e uma pontuação. Se passar de dez queixas, vale a pena conversarmos.',
+  'cta.title':'O teste de saúde é <em>gratuito</em> e leva dois minutos.',
+  'cta.lead':'Oito áreas do corpo, uma lista de sintomas e uma pontuação. Se passar de dez queixas, vale a pena conversarmos.',
   'cta.b1':'Fazer o teste', 'cta.b2':'Falar pelo WhatsApp',
 
   'foot.h1':'Áreas', 'foot.a1':'Metabolismo e obesidade', 'foot.a2':'Tireoide', 'foot.a3':'Diabetes',
@@ -196,7 +196,7 @@ pt: {
 
 /* ═══════════════════════════════════════════════════ FRANÇAIS */
 fr: {
-  'p1.t':'Le test gratuit', 'p1.d':'Dix-sept zones du corps, une liste de symptômes et un score. Trois minutes, sans frais. S’il dépasse dix troubles, il vaut mieux qu’on en parle.', 'p1.b':'Faire le test',
+  'p1.t':'Le test gratuit', 'p1.d':'Huit zones du corps, une liste de symptômes et un score. Deux minutes, sans frais. S’il dépasse dix troubles, il vaut mieux qu’on en parle.', 'p1.b':'Faire le test',
   'p2.t':'Écrivez-nous directement', 'p2.d':'Des questions sur votre cas, sur ce qu’inclut une consultation ou sur la prise de rendez-vous depuis l’étranger. Quelqu’un de la clinique répond.', 'p2.b':'Ouvrir WhatsApp',
   'talk.title':'Parlons-en.', 'talk.b':'Parlons de ma santé', 'cur.talk':'Parler',
 
@@ -255,8 +255,8 @@ fr: {
   'tech.foot':'Outil d’évaluation complémentaire. Ne constitue pas un diagnostic à lui seul.',
 
   'cta.eyebrow':'Commencez ici',
-  'cta.title':'Le test de santé est <em>gratuit</em> et prend trois minutes.',
-  'cta.lead':'Dix-sept zones du corps, une liste de symptômes et un score. S’il dépasse dix troubles, il vaut mieux qu’on en parle.',
+  'cta.title':'Le test de santé est <em>gratuit</em> et prend deux minutes.',
+  'cta.lead':'Huit zones du corps, une liste de symptômes et un score. S’il dépasse dix troubles, il vaut mieux qu’on en parle.',
   'cta.b1':'Faire le test', 'cta.b2':'Écrire sur WhatsApp',
 
   'foot.h1':'Domaines', 'foot.a1':'Métabolisme et obésité', 'foot.a2':'Thyroïde', 'foot.a3':'Diabète',
@@ -274,7 +274,7 @@ fr: {
 
 /* ═══════════════════════════════════════════════ 繁體中文 (台灣) */
 'zh-Hant': {
-  'p1.t':'免費健康檢測', 'p1.d':'身體十七個面向、一份症狀清單，還有一個分數。三分鐘，完全免費。如果超過十項，我們該談談。', 'p1.b':'開始檢測',
+  'p1.t':'免費健康檢測', 'p1.d':'身體八個面向、一份症狀清單，還有一個分數。兩分鐘，完全免費。如果超過十項，我們該談談。', 'p1.b':'開始檢測',
   'p2.t':'直接與我們聯絡', 'p2.d':'關於您的狀況、看診包含哪些項目，或如何從海外預約。由診所人員親自回覆。', 'p2.b':'開啟 WhatsApp',
   'talk.title':'聊聊吧。', 'talk.b':'聊聊我的健康', 'cur.talk':'聯繫',
 
@@ -333,8 +333,8 @@ fr: {
   'tech.foot':'輔助評估工具，單獨並不構成診斷。',
 
   'cta.eyebrow':'從這裡開始',
-  'cta.title':'健康檢測<em>免費</em>，只需三分鐘。',
-  'cta.lead':'身體十七個面向、一份症狀清單，還有一個分數。如果超過十項，我們該談談。',
+  'cta.title':'健康檢測<em>免費</em>，只需兩分鐘。',
+  'cta.lead':'身體八個面向、一份症狀清單，還有一個分數。如果超過十項，我們該談談。',
   'cta.b1':'開始檢測', 'cta.b2':'用 WhatsApp 聯絡',
 
   'foot.h1':'診療領域', 'foot.a1':'代謝與肥胖', 'foot.a2':'甲狀腺', 'foot.a3':'糖尿病',
@@ -352,7 +352,7 @@ fr: {
 
 /* ═══════════════════════════════════════════════════ ITALIANO */
 it: {
-  'p1.t':'Il test gratuito', 'p1.d':'Diciassette aree del corpo, un elenco di sintomi e un punteggio. Tre minuti, senza costi. Se supera i dieci disturbi, è il caso di parlarne.', 'p1.b':'Fai il test',
+  'p1.t':'Il test gratuito', 'p1.d':'Otto aree del corpo, un elenco di sintomi e un punteggio. Due minuti, senza costi. Se supera i dieci disturbi, è il caso di parlarne.', 'p1.b':'Fai il test',
   'p2.t':'Scrivici direttamente', 'p2.d':'Dubbi sul tuo caso, su cosa include una visita o su come prenotare dall’estero. Risponde qualcuno della clinica.', 'p2.b':'Apri WhatsApp',
   'talk.title':'Parliamone.', 'talk.b':'Parliamo della mia salute', 'cur.talk':'Parla',
 
@@ -411,8 +411,8 @@ it: {
   'tech.foot':'Strumento di valutazione complementare. Da solo non costituisce diagnosi.',
 
   'cta.eyebrow':'Inizia da qui',
-  'cta.title':'Il test di salute è <em>gratuito</em> e richiede tre minuti.',
-  'cta.lead':'Diciassette aree del corpo, un elenco di sintomi e un punteggio. Se supera i dieci disturbi, è il caso di parlarne.',
+  'cta.title':'Il test di salute è <em>gratuito</em> e richiede due minuti.',
+  'cta.lead':'Otto aree del corpo, un elenco di sintomi e un punteggio. Se supera i dieci disturbi, è il caso di parlarne.',
   'cta.b1':'Fai il test', 'cta.b2':'Scrivici su WhatsApp',
 
   'foot.h1':'Aree', 'foot.a1':'Metabolismo e obesità', 'foot.a2':'Tiroide', 'foot.a3':'Diabete',
@@ -430,7 +430,7 @@ it: {
 
 /* ═══════════════════════════════════════════════════ DEUTSCH */
 de: {
-  'p1.t':'Der kostenlose Test', 'p1.d':'Siebzehn Körperbereiche, eine Symptomliste und ein Punktwert. Drei Minuten, kostenfrei. Liegt er über zehn Beschwerden, sollten wir sprechen.', 'p1.b':'Test machen',
+  'p1.t':'Der kostenlose Test', 'p1.d':'Acht Körperbereiche, eine Symptomliste und ein Punktwert. Zwei Minuten, kostenfrei. Liegt er über zehn Beschwerden, sollten wir sprechen.', 'p1.b':'Test machen',
   'p2.t':'Schreiben Sie uns direkt', 'p2.d':'Fragen zu Ihrem Fall, zum Umfang einer Sprechstunde oder zur Terminvereinbarung aus dem Ausland. Es antwortet jemand aus der Praxis.', 'p2.b':'WhatsApp öffnen',
   'talk.title':'Sprechen wir.', 'talk.b':'Sprechen wir über meine Gesundheit', 'cur.talk':'Sprechen',
 
@@ -489,8 +489,8 @@ de: {
   'tech.foot':'Ergänzendes Beurteilungsinstrument. Für sich allein keine Diagnose.',
 
   'cta.eyebrow':'Hier beginnen',
-  'cta.title':'Der Gesundheitstest ist <em>kostenlos</em> und dauert drei Minuten.',
-  'cta.lead':'Siebzehn Körperbereiche, eine Symptomliste und ein Punktwert. Liegt er über zehn Beschwerden, sollten wir sprechen.',
+  'cta.title':'Der Gesundheitstest ist <em>kostenlos</em> und dauert zwei Minuten.',
+  'cta.lead':'Acht Körperbereiche, eine Symptomliste und ein Punktwert. Liegt er über zehn Beschwerden, sollten wir sprechen.',
   'cta.b1':'Test machen', 'cta.b2':'Über WhatsApp schreiben',
 
   'foot.h1':'Bereiche', 'foot.a1':'Stoffwechsel und Übergewicht', 'foot.a2':'Schilddrüse', 'foot.a3':'Diabetes',
@@ -508,7 +508,7 @@ de: {
 
 /* ═══════════════════════════════════════════════════ РУССКИЙ */
 ru: {
-  'p1.t':'Бесплатный тест', 'p1.d':'Семнадцать областей организма, список симптомов и балл. Три минуты, бесплатно. Если он выше десяти жалоб — нам стоит поговорить.', 'p1.b':'Пройти тест',
+  'p1.t':'Бесплатный тест', 'p1.d':'Восемь областей организма, список симптомов и балл. Две минуты, бесплатно. Если он выше десяти жалоб — нам стоит поговорить.', 'p1.b':'Пройти тест',
   'p2.t':'Напишите нам напрямую', 'p2.d':'Вопросы о вашем случае, о том, что входит в приём, или как записаться из-за рубежа. Отвечает сотрудник клиники.', 'p2.b':'Открыть WhatsApp',
   'talk.title':'Давайте поговорим.', 'talk.b':'Поговорим о моём здоровье', 'cur.talk':'Написать',
 
@@ -567,8 +567,8 @@ ru: {
   'tech.foot':'Вспомогательный инструмент оценки. Сам по себе не является диагнозом.',
 
   'cta.eyebrow':'Начните отсюда',
-  'cta.title':'Тест здоровья <em>бесплатный</em> и занимает три минуты.',
-  'cta.lead':'Семнадцать областей организма, список симптомов и балл. Если он выше десяти жалоб — нам стоит поговорить.',
+  'cta.title':'Тест здоровья <em>бесплатный</em> и занимает две минуты.',
+  'cta.lead':'Восемь областей организма, список симптомов и балл. Если он выше десяти жалоб — нам стоит поговорить.',
   'cta.b1':'Пройти тест', 'cta.b2':'Написать в WhatsApp',
 
   'foot.h1':'Направления', 'foot.a1':'Метаболизм и вес', 'foot.a2':'Щитовидная железа', 'foot.a3':'Диабет',
@@ -586,7 +586,7 @@ ru: {
 
 /* ═══════════════════════════════════════════════════════ 한국어 */
 ko: {
-  'p1.t':'무료 건강 검사', 'p1.d':'몸의 열일곱 개 영역, 증상 목록, 그리고 점수. 3분이면 되고 비용은 없습니다. 열 가지를 넘는다면 한번 이야기해 보는 게 좋습니다.', 'p1.b':'검사 받기',
+  'p1.t':'무료 건강 검사', 'p1.d':'몸의 여덟 개 영역, 증상 목록, 그리고 점수. 2분이면 되고 비용은 없습니다. 열 가지를 넘는다면 한번 이야기해 보는 게 좋습니다.', 'p1.b':'검사 받기',
   'p2.t':'바로 문의하기', 'p2.d':'본인의 상태, 진료에 포함되는 항목, 해외에서의 예약 방법에 대한 문의. 클리닉 담당자가 직접 답변합니다.', 'p2.b':'WhatsApp 열기',
   'talk.title':'이야기해요.', 'talk.b':'제 건강에 대해 이야기해요', 'cur.talk':'문의',
 
@@ -645,8 +645,8 @@ ko: {
   'tech.foot':'보조 평가 도구입니다. 그 자체로 진단이 되지는 않습니다.',
 
   'cta.eyebrow':'여기서 시작하세요',
-  'cta.title':'건강 검사는 <em>무료</em>이며 3분이면 됩니다.',
-  'cta.lead':'몸의 열일곱 개 영역, 증상 목록, 그리고 점수. 열 가지를 넘는다면 한번 이야기해 보는 게 좋습니다.',
+  'cta.title':'건강 검사는 <em>무료</em>이며 2분이면 됩니다.',
+  'cta.lead':'몸의 여덟 개 영역, 증상 목록, 그리고 점수. 열 가지를 넘는다면 한번 이야기해 보는 게 좋습니다.',
   'cta.b1':'검사 받기', 'cta.b2':'WhatsApp으로 문의',
 
   'foot.h1':'진료분야', 'foot.a1':'대사와 비만', 'foot.a2':'갑상선', 'foot.a3':'당뇨',
