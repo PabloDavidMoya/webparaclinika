@@ -32,9 +32,10 @@ $locale  = isset($data['locale'])  ? trim(mb_substr((string) $data['locale'], 0,
 $pageUrl = isset($data['url'])     ? trim(mb_substr((string) $data['url'], 0, 255))     : null;
 $stage   = isset($data['stage'])   ? trim(mb_substr((string) $data['stage'], 0, 20))    : 'midgate';
 
-// El teléfono llega tal cual lo escribió la persona (wa.me no exige un
-// formato estricto); solo se sacan espacios/símbolos que no aportan nada.
-$phoneDigits = preg_replace('/[^0-9+]/', '', $phone);
+// Solo dígitos, con código de país incluido, sin "+": ni wa.me ni la
+// API de Brevo lo aceptan adelante (Brevo devuelve "Invalid phone
+// number" si lo llega a tener).
+$phoneDigits = preg_replace('/[^0-9]/', '', $phone);
 
 if ($name === '' || $phoneDigits === '') {
     http_response_code(422);
