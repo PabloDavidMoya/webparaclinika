@@ -149,6 +149,11 @@
   });
 
   input.addEventListener("keydown", function (evento) {
+    // La página puede tener sus propios atajos de teclado (el test de salud
+    // avanza con Enter/flechas, por ejemplo). Lo que se escribe acá es texto
+    // del chat, nunca un atajo de la página — frenamos la propagación entera,
+    // no solo el Enter, así ninguna tecla se le escapa al resto del sitio.
+    evento.stopPropagation();
     if (evento.key === "Enter" && !evento.shiftKey) {
       evento.preventDefault();
       form.requestSubmit();
@@ -219,10 +224,24 @@
   // que la plantilla de apertura de WhatsApp. Solo queda "recordado" en el
   // historial del servidor para que, si la persona contesta, Amy sepa de
   // qué le está hablando.
+  // Junta hasta `limite` áreas en una frase ("tiroides (4) y digestión (3)").
+  // Van con el conteo real: eso es lo que después le permite a Amy contestar
+  // con soltura si le preguntan "¿y por qué tiroides?" sin inventar nada —
+  // este mismo texto queda sembrado como su primer mensaje.
+  function listaAreas(areas, limite) {
+    var top = areas.slice(0, limite || 3).map(function (a) {
+      return a.nombre.toLowerCase() + " (" + a.marcados + ")";
+    });
+    if (top.length <= 1) return top.join("");
+    return top.slice(0, -1).join(", ") + " y " + top[top.length - 1];
+  }
+
   function textoAperturaTest(detalle) {
     var nombre = (detalle.name || "").trim().split(" ")[0];
     var saludo = "¡Hola" + (nombre ? ", " + nombre : "") + "!";
-    var top = detalle.top1 || "";
+    var areas = Array.isArray(detalle.areas) ? detalle.areas : [];
+    var lista = listaAreas(areas, 3) || detalle.top1 || "";
+    var resto = areas.length > 3 ? ", entre otras" : "";
 
     if (!detalle.total) {
       return (
@@ -234,20 +253,20 @@
     if (detalle.band === "high") {
       return (
         saludo +
-        " Vi tu resultado — marcaste bastantes síntomas, sobre todo en " + top + ". " +
-        "Quiero ayudarte a entender qué puede estar pasando. ¿Me contás un poco más, o vemos directamente cuándo podés venir a la consulta?"
+        " Vi tu resultado — marcaste bastantes síntomas, sobre todo en " + lista + resto + ". " +
+        "Quiero ayudarte a entender qué puede estar pasando. ¿Me contás un poco más de cómo te sentís, o vemos directamente cuándo podés venir a la consulta?"
       );
     }
     if (detalle.band === "mid") {
       return (
         saludo +
-        " Vi tu resultado — tenés varias señales, principalmente en " + top + ". " +
-        "¿Querés que te cuente cómo trabajamos eso en la consulta?"
+        " Vi tu resultado — tenés varias señales, principalmente en " + lista + resto + ". " +
+        "¿Querés que te cuente cómo trabajamos eso en la consulta, o me contás un poco más primero?"
       );
     }
     return (
       saludo +
-      " Tu resultado salió bastante liviano, pero si " + top + " te viene molestando igual te puedo contar cómo lo revisamos. ¿Te interesa?"
+      " Tu resultado salió bastante liviano, pero si " + (lista || "algo") + " te viene molestando igual te puedo contar cómo lo revisamos. ¿Te interesa?"
     );
   }
 

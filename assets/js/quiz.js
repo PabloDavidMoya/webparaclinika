@@ -604,7 +604,12 @@
         name: name || '',
         total: total,
         band: band,
-        top1: rows.length && rows[0].hit ? rows[0].name : ''
+        top1: rows.length && rows[0].hit ? rows[0].name : '',
+        /* Todas las áreas con al menos un síntoma marcado, ya ordenadas de
+           mayor a menor — para que Amy pueda hablar del resultado completo,
+           no solo del área principal. */
+        areas: rows.filter(function (r) { return r.hit; })
+                    .map(function (r) { return { nombre: r.name, marcados: r.hit }; })
       }
     }));
   }
@@ -643,10 +648,11 @@
   });
 
   document.addEventListener('keydown', function (e) {
-    /* El campo de nombre es el único input real del test: mientras se
-       escribe ahí, las flechas y el Enter son para editar texto, no
-       para navegar entre áreas. */
-    if (e.target && e.target.tagName === 'INPUT') return;
+    /* El campo de nombre es el único input real del test, pero no el único
+       campo de texto de la página (el chat de Amy tiene el suyo): mientras
+       se escribe en cualquiera, las flechas y el Enter son para editar
+       texto, no para navegar entre áreas. */
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
     if (gateOpen) return;
     if (step < 0 && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(0); return; }
     if (step < 0 || step >= AREA.length) return;
