@@ -30,6 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css?v=70">
 <link rel="stylesheet" href="assets/css/quiz.css?v=71">
+<link rel="stylesheet" href="assets/css/amy-widget.css?v=1">
 </head>
 
 <body class="quiz-page">
@@ -254,5 +255,16 @@
 <script src="assets/js/consent.js?v=70"></script>
 <script src="assets/js/quiz-data.js?v=71"></script>
 <script src="assets/js/quiz.js?v=72"></script>
+
+<!-- Chat de Amy — habla directo con amy-agent, no pasa por WhatsApp/Meta.
+     Acá además se presenta sola apenas alguien termina el test
+     (ver evento "ns:quiz-result" que dispara quiz.js). -->
+<script>
+  window.AMY_CONFIG = {
+    apiBase: "https://mary-agent-vrba.onrender.com",
+    cliente: "nutrislim"
+  };
+</script>
+<script src="assets/js/amy-widget.js?v=1" defer></script>
 </body>
 </html>

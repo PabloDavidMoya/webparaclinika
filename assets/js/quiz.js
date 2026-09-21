@@ -595,6 +595,18 @@
 
     $('#rCta').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
     paintBody($('#bodyB'));
+
+    /* Le avisa al widget de Amy que alguien acaba de ver su resultado, para
+       que lo salude con eso en mente. Si el widget no está cargado en esta
+       página, nadie escucha el evento y no pasa nada. */
+    document.dispatchEvent(new CustomEvent('ns:quiz-result', {
+      detail: {
+        name: name || '',
+        total: total,
+        band: band,
+        top1: rows.length && rows[0].hit ? rows[0].name : ''
+      }
+    }));
   }
 
   /* ── controles ────────────────────────────────────────────── */
