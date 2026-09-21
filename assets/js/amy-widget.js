@@ -62,7 +62,26 @@
   raiz.innerHTML =
     '<button class="amy-boton" type="button" aria-label="Abrir chat con Amy" data-abierto="false">' +
     '  <span class="amy-punto"></span>' +
-    '  <svg class="amy-boton__chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>' +
+    '  <svg class="amy-boton__ojo" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">' +
+    "    <defs>" +
+    '      <radialGradient id="amyIris" cx="38%" cy="35%" r="65%">' +
+    '        <stop offset="0%" stop-color="#8fd3f4"/>' +
+    '        <stop offset="55%" stop-color="#3b9ae1"/>' +
+    '        <stop offset="100%" stop-color="#1c6fb0"/>' +
+    "      </radialGradient>" +
+    "    </defs>" +
+    '    <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round" opacity="0.85">' +
+    '      <path d="M9 14 L6.5 9"/>' +
+    '      <path d="M14.5 11 L12.5 5.5"/>' +
+    '      <path d="M20 9.8 L20 4"/>' +
+    '      <path d="M25.5 11 L27.5 5.5"/>' +
+    '      <path d="M31 14 L33.5 9"/>' +
+    "    </g>" +
+    '    <path d="M3.5 20.5C9 11 31 11 36.5 20.5 31 30 9 30 3.5 20.5Z" fill="var(--amy-ojo-fondo,#fff)" stroke="currentColor" stroke-width="1.6"/>' +
+    '    <circle cx="20" cy="20.5" r="7.6" fill="url(#amyIris)"/>' +
+    '    <circle cx="20" cy="20.5" r="3.3" fill="#132537"/>' +
+    '    <circle cx="17.6" cy="18" r="1.6" fill="#ffffff" opacity="0.9"/>' +
+    "  </svg>" +
     '  <svg class="amy-boton__cerrar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>' +
     "</button>" +
     '<section class="amy-panel" data-abierto="false" aria-hidden="true">' +
