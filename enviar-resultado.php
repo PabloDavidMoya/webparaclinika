@@ -22,6 +22,7 @@ if (!file_exists($configFile)) {
     exit;
 }
 require $configFile;
+require __DIR__ . '/capi.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -99,6 +100,17 @@ try {
     exit;
 }
 
+// Refuerzo server-side del Lead vía Conversions API. event_id lo manda
+// quiz.js — el mismo que usó fbq('track','Lead', ...) en el navegador,
+// para que Meta deduplique en vez de contar dos veces.
+if (!empty($data['event_id'])) {
+    ns_capi_send('Lead', substr((string) $data['event_id'], 0, 64), [
+        'phone' => $phone,
+        'fbp'   => isset($data['fbp']) ? trim((string) $data['fbp']) : null,
+        'fbc'   => isset($data['fbc']) ? trim((string) $data['fbc']) : null,
+    ], [], $pageUrl);
+}
+
 // El email es lo que de verdad pidió la clínica: que les llegue el
 // detalle completo para no repreguntar todo en la primera consulta.
 $emailed = false;
@@ -119,9 +131,14 @@ if (defined('BREVO_API_KEY') && BREVO_API_KEY !== '' && defined('CLINIC_EMAIL') 
             $html .= '<p>No marcó síntomas en ninguna área.</p>';
         }
 
+        $to = [['email' => CLINIC_EMAIL, 'name' => 'Policlínica Nutrislim']];
+        if (defined('CLINIC_EMAIL_2') && CLINIC_EMAIL_2 !== '') {
+            $to[] = ['email' => CLINIC_EMAIL_2, 'name' => 'Policlínica Nutrislim'];
+        }
+
         $payload = [
             'sender'      => ['name' => 'Test NutriSlim', 'email' => CLINIC_EMAIL],
-            'to'          => [['email' => CLINIC_EMAIL, 'name' => 'Policlínica Nutrislim']],
+            'to'          => $to,
             'subject'     => 'Test completado — ' . $name,
             'htmlContent' => $html,
         ];

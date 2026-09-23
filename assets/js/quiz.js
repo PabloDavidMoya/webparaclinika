@@ -482,8 +482,19 @@
      de salud y no sale de acá. consent.js decide si sale algo.
      Si el script no está (o el visitante dijo que no), esto no
      hace nada y el test sigue funcionando igual. */
-  function track(ev) {
-    if (typeof window.nsTrack === 'function') window.nsTrack(ev);
+  function track(ev, eventId) {
+    if (typeof window.nsTrack === 'function') window.nsTrack(ev, eventId);
+  }
+
+  /* id compartido entre el evento del navegador y el que sale por
+     Conversions API desde el backend, para que Meta los deduplique
+     en vez de contarlos dos veces. */
+  function genId() {
+    return 'ns_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+  }
+
+  function fbCookies() {
+    return (typeof window.nsFbCookies === 'function') ? window.nsFbCookies() : { fbp: null, fbc: null };
   }
 
   /* Nombre y WhatsApp del gate de mitad de test: se mandan aparte,
@@ -508,7 +519,7 @@
      área) apenas termina el test — la clínica lo pidió para no tener
      que repreguntar todo de nuevo en la primera consulta. No depende
      de que la persona toque el botón de WhatsApp. */
-  function sendResult(band, total) {
+  function sendResult(band, total, eventId) {
     var name = null, phone = null;
     try { name = localStorage.getItem('ns-name'); phone = localStorage.getItem('ns-phone'); } catch (e) {}
     if (!name || !phone) return;
@@ -517,13 +528,15 @@
       .map(function (a, i) { return { name: a.n, items: picked[i].map(function (idx) { return a.items[idx]; }) }; })
       .filter(function (a) { return a.items.length; });
 
+    var fbc = fbCookies();
     try {
       fetch('/enviar-resultado.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: name, phone: phone, locale: LANG, gender: kind,
-          band: band, total: total, areas: areas, url: location.href
+          band: band, total: total, areas: areas, url: location.href,
+          event_id: eventId, fbp: fbc.fbp, fbc: fbc.fbc
         })
       });
     } catch (e) {}
@@ -533,7 +546,8 @@
   function finish() {
     show('result');
     $('#qbar').classList.add('is-hidden');
-    track('Lead');
+    var leadEventId = genId();
+    track('Lead', leadEventId);
 
     var total = picked.reduce(function (s, p) { return s + p.length; }, 0);
     var areas = picked.filter(function (p) { return p.length; }).length;
@@ -546,7 +560,7 @@
     var band = total <= 5 ? 'low' : (total <= 10 ? 'mid' : 'high');
     $('#rTitle').textContent = T.result[band];
     $('#rText').textContent  = T.result[band + 'Text'];
-    sendResult(band, total);
+    sendResult(band, total, leadEventId);
 
     /* barras: cada área, proporción marcada sobre el total del área */
     var rows = AREA.map(function (a, i) {
@@ -623,7 +637,29 @@
      Es el equivalente en la web de la conversación que ya mide
      la campaña de click-to-WhatsApp, así que es el evento por
      el que conviene optimizar. */
-  $('#rCta').addEventListener('click', function () { track('Contact'); });
+  $('#rCta').addEventListener('click', function () {
+    var contactId = genId();
+    track('Contact', contactId);
+
+    /* Refuerzo server-side: sendBeacon no bloquea la navegación al
+       link de WhatsApp (a diferencia de fetch, que puede cortarse a
+       mitad si el navegador ya está saliendo de la página). Mismo
+       event_id que el fbq de arriba, para que Meta dedupe. */
+    try {
+      var phone = null;
+      try { phone = localStorage.getItem('ns-phone'); } catch (e) {}
+      var fbc = fbCookies();
+      var body = JSON.stringify({
+        event_id: contactId, phone: phone, url: location.href,
+        fbp: fbc.fbp, fbc: fbc.fbc
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/track-contact.php', new Blob([body], { type: 'application/json' }));
+      } else {
+        fetch('/track-contact.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true });
+      }
+    } catch (e) {}
+  });
 
   $('#rAgain').addEventListener('click', function () {
     picked = AREA.map(function () { return []; });

@@ -34,6 +34,18 @@
   function get(k)    { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
+  /* ── cookies del píxel ─────────────────────────────────────
+     _fbp/_fbc las pone fbevents.js solo. El backend las necesita
+     para el matching de Conversions API — por eso se exponen acá
+     en vez de que cada página tenga que leer document.cookie. */
+  function cookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+  window.nsFbCookies = function () {
+    return { fbp: cookie('_fbp'), fbc: cookie('_fbc') };
+  };
+
   /* ── idioma ────────────────────────────────────────────────
      Mismo criterio que el resto del sitio: lo que el visitante
      eligió, si no lo que trae el navegador, si no inglés. */
@@ -93,7 +105,10 @@
     set(KEY_AT, new Date().toISOString());
     loadPixel();
     ready = true;
-    queue.splice(0).forEach(function (ev) { window.fbq('track', ev); });
+    queue.splice(0).forEach(function (ev) {
+      if (ev[1]) window.fbq('track', ev[0], {}, { eventID: ev[1] });
+      else window.fbq('track', ev[0]);
+    });
   }
 
   function deny() {
@@ -104,13 +119,19 @@
   }
 
   /* ── API pública ───────────────────────────────────────────
-     window.nsTrack('Lead'). Si todavía no decidió, espera; si
-     dijo que no, se pierde en silencio, que es lo que queremos. */
-  window.nsTrack = function (name) {
+     window.nsTrack('Lead', eventId). eventId es opcional: solo
+     hace falta cuando el mismo evento también sale por Conversions
+     API (server-side) y hay que dedupelo contra este. Si todavía
+     no decidió, espera; si dijo que no, se pierde en silencio. */
+  window.nsTrack = function (name, eventId) {
     if (!name) return;
-    if (ready && window.fbq) { window.fbq('track', name); return; }
+    if (ready && window.fbq) {
+      if (eventId) window.fbq('track', name, {}, { eventID: eventId });
+      else window.fbq('track', name);
+      return;
+    }
     if (get(KEY) === 'denied') return;
-    if (queue.length < 20) queue.push(name);
+    if (queue.length < 20) queue.push([name, eventId]);
   };
 
   window.nsConsentRevoke = function () {
